@@ -35,5 +35,6 @@ class DatabaseConnection
       '`DatabaseConnection.connect` in your app.rb file (or in your tests spec_helper.rb)?'
     end
     @connection.exec_params(query, params)
+    
   end
 end
