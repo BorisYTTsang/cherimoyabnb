@@ -1,0 +1,16 @@
+<html>
+  <head></head>
+  <body>
+    <h1>Login</h1>
+    <p style="color:red;"><%=@check_login%></p>
+    <form action="/login" method="POST">
+      <p>Username</p>
+        <input type="text" name="username">
+      <p>Password</p>
+  <input type="text" name="password">
+      <p> </p>
+      <input type="submit" value="Submit the form">
+    </form>
+    <p><a href="/signup">Sign-up</a>
+  </body>
+</html>
