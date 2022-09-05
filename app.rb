@@ -1,4 +1,4 @@
-#Add this above any route class
+# Add this above any route class
 
 require 'sinatra/base'
 require 'sinatra/reloader'
