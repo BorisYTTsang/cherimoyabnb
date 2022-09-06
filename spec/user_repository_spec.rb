@@ -22,15 +22,14 @@ describe '# all' do
         users.length # =>  2
 
         expect(users[0].id).to eq 1
-        expect(users[0].name).to eq 'David'
-        expect(users[0].email).to eq 'April 2022'
-        expect(users[0].password).to eq 'April 2022'
-
+        expect(users[0].name).to eq 'Joe'
+        expect(users[0].email).to eq 'joe@example.com'
+        expect(users[0].password).to eq 'password123'
 
         expect(users[1].id).to eq 2
-        expect(users[1].name).to eq 'Anna'
-        expect(users[1].email).to eq 'May 2022'
-        expect(users[1].password).to eq 'May 2022'
+        expect(users[1].name).to eq 'Sarah'
+        expect(users[1].email).to eq 'saarah777@example.com'
+        expect(users[1].password).to eq 'pass90@!'
     end
 end
 
@@ -44,9 +43,20 @@ describe '# find' do
         user = repo.find(1)
 
         expect(user.id).to eq 1
-        expect(user.name).to eq 'David'
-        expect(user.email).to eq 'April 2022'
-        expect(user.password).to eq 'April 2022'
+        expect(user.name).to eq 'Joe'
+        expect(user.email).to eq 'joe@example.com'
+        expect(user.password).to eq 'password123'
+    end
+    it 'returns user with id 5' do
+
+        repo = UserRepository.new
+
+        user = repo.find(5)
+
+        expect(user.id).to eq 5
+        expect(user.name).to eq 'Gurpreet'
+        expect(user.email).to eq 'gurpreet.singh@example.com'
+        expect(user.password).to eq 'chrysanthemum1'
     end
 end 
 
