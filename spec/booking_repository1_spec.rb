@@ -41,24 +41,50 @@ RSpec.describe BookingRepository do
           expect(bookings.last.booker_id).to eq 6
         end
     end
+    describe '#find' do
+        it 'finds and returns a single booking' do
+            repo = BookingRepository.new
 
+            booking = repo.find(1)
 
-#     # 2
-#     # Get a single booking
-#     describe '#find' do
-#         it 'finds and returns a single booking' do
-#             repo = bookingRepository.new
+            expect(booking.id).to eq 1
+            expect(booking.space_id).to eq 1
+            expect(booking.unavailable_from).to eq '2022-09-10'
+            expect(booking.unavailable_to).to eq '2022-09-20'
+            expect(booking.reason).to eq 'booking'
+            expect(booking.booker_id).to eq 1
+        end
+    end
+    describe '#find_by_space' do
+      it 'finds and returns one bookings matching the space_id 3' do
+          repo = BookingRepository.new
 
-#             booking = repo.find(1)
+          bookings = repo.find_by_space(3)
 
-#             (booking.id).to eq 1
-#             (booking.namspace_id).to eq 'David'
-#             (booking.unavailable_from).to eq 'April 2022'
-#             (booking.unavailable_to).to eq 'April 2022'
-#             (booking.reason).to eq 'April 2022'
-#             (booking.owner_id).to eq 'April 2022'
-#         end
-#     end
+          expect(bookings[0].id).to eq 2
+          expect(bookings[0].space_id).to eq 3
+          expect(bookings[0].unavailable_from).to eq '2022-10-10'
+          expect(bookings[0].unavailable_to).to eq '2022-10-14'
+          expect(bookings[0].reason).to eq 'booking'
+          expect(bookings[0].booker_id).to eq 3
+      end
+      it 'finds and returns two bookings matching the space_id 1' do
+        repo = BookingRepository.new
+
+        bookings = repo.find_by_space(1)
+
+        expect(bookings.length).to eq 2
+
+        expect(bookings[0].id).to eq 1
+        expect(bookings[0].space_id).to eq 1
+        expect(bookings[0].unavailable_from).to eq '2022-09-10'
+        expect(bookings[0].unavailable_to).to eq '2022-09-20'
+        expect(bookings[0].reason).to eq 'booking'
+        expect(bookings[0].booker_id).to eq 1
+
+        expect(bookings[1].booker_id).to eq 6
+    end
+  end
 
 #     describe '#create' do
 #         it 'creates a new booking' do

@@ -9,23 +9,23 @@ class BookingRepository
     sql = 'SELECT * FROM bookings;'
     result = DatabaseConnection.exec_params(sql,[])
 
-    return create_booking_object_from_table(result)
+    return create_booking_objects_from_table(result)
   end
 
-  # Gets a single record by its ID
-  # One argument: the id (number)
   def find(id)
-    # Executes the SQL query:
-    # SELECT * FROM bookings WHERE id = $1;
+    sql = 'SELECT * FROM bookings WHERE id = $1;'
+    params = [id]
+    result = DatabaseConnection.exec_params(sql, params)
 
-    # Returns a single booking object.
+    return create_booking_objects_from_table(result)[0]
   end
 
   def find_by_space(space_id)
-    # Executes the SQL query:
-    # SELECT * FROM bookings WHERE space_id = $1;
+    sql = 'SELECT * FROM bookings WHERE space_id = $1;'
+    params = [space_id]
+    result = DatabaseConnection.exec_params(sql, params)
 
-    # Returns any bookings with the matching space_id
+    return create_booking_objects_from_table(result)
   end
 
   # Add more methods below for each operation you'd like to implement.
@@ -48,7 +48,7 @@ class BookingRepository
   # end
 
   private
-  def create_booking_object_from_table(result)
+  def create_booking_objects_from_table(result)
     bookings = []
     result.each do |record|
       booking = Booking.new
