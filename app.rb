@@ -24,7 +24,8 @@ class Application < Sinatra::Base
     also_reload 'lib/user_repository'
     
   end
-
+  
+  # This is for changing the /views folder location from default to /lib/routes/views
   set :root,  File.dirname(__FILE__)
   set :views, Proc.new { File.join(root, 'lib', 'routes', 'views') }
 
