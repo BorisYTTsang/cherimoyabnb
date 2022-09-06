@@ -19,12 +19,15 @@ class Application < Sinatra::Base
   post "/login" do
     email = params[:email]
     password = params[:password]
-
-    if password
-
-    session[:user_id] = nil
-    session[:user_name] = nil
-  
+    users_repo = UserRepository.new
+    user = users_repo.find_by_email(email)
+    if !user.nil? && user.password == password
+      session[:user_id] = user.id
+      session[:user_name] = user.name
+      return login_success.erb
+    else
+      redirect "/" # should return login_failure.erb
+    end
   end
 
 end
