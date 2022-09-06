@@ -1,40 +1,46 @@
-# require 'booking_repository'
+require 'booking_repository'
 
-# def reset_bookings_table
-#     seed_sql = File.read('spec/seeds_bookings.sql')
-#     connection = PG.connect({ host: '127.0.0.1', dbname: 'bookings' })
-#     connection.exec(seed_sql)
-# end
+def reset_bookings_table
+    seed_sql = File.read('spec/seeds/bookings_seed.sql')
+    connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
+    connection.exec(seed_sql)
+end
   
-# RSpec.describe BookingRepository do
-#     before(:each) do 
-#       reset_bookings_table
-#     end
+RSpec.describe BookingRepository do
+    before(:each) do 
+      reset_bookings_table
+    end
 
-#     describe '# GET' do
-#         it 'gets all bookings' do
+    describe '# GET' do
+        it 'gets all bookings' do
+          repo = BookingRepository.new
+          bookings = repo.all
 
-#             repo = bookingRepository.new
+          expect(bookings.length).to eq 5
 
-#             bookings = repo.all
+          expect(bookings[0].id).to eq 1
+          expect(bookings[0].space_id).to eq 1
+          expect(bookings[0].unavailable_from).to eq '2022-09-10'
+          expect(bookings[0].unavailable_to).to eq '2022-09-20'
+          expect(bookings[0].reason).to eq 'booking'
+          expect(bookings[0].booker_id).to eq 1
 
-#             bookings.length # =>  2
 
-#             (bookings[0].id).to eq 1
-#             (bookings[0].space_id).to eq 'David'
-#             (bookings[0].unavailable_from).to eq 'April 2022'
-#             (bookings[0].unavailable_to).to eq 'April 2022'
-#             (bookings[0].reason).to eq 'April 2022'
-#             (bookings[0].owner_id).to eq 'April 2022'
+          expect(bookings[1].id).to eq 2
+          expect(bookings[1].space_id).to eq 3
+          expect(bookings[1].unavailable_from).to eq '2022-10-10'
+          expect(bookings[1].unavailable_to).to eq '2022-10-14'
+          expect(bookings[1].reason).to eq 'booking'
+          expect(bookings[1].booker_id).to eq 3
 
-#             (bookings[1].id).to eq 2
-#             (bookings[1].space_id).to eq 'Anna'
-#             (bookings[1].unavailable_from).to eq 'May 2022'
-#             (bookings[1].unavailable_to).to eq 'May 2022'
-#             (bookings[1].reason).to eq 'May 2022'
-#             (bookings[1].owner_id).to eq 'May 2022'
-#         end
-#     end
+          expect(bookings.last.id).to eq 5
+          expect(bookings.last.space_id).to eq 1
+          expect(bookings.last.unavailable_from).to eq '2022-09-22'
+          expect(bookings.last.unavailable_to).to eq '2022-09-25'
+          expect(bookings.last.reason).to eq 'booking'
+          expect(bookings.last.booker_id).to eq 6
+        end
+    end
 
 
 #     # 2
@@ -80,4 +86,4 @@
 #         expect(booking.owner_id).to eq '3'
 #         end
 #     end
-# end
+end

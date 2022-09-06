@@ -173,27 +173,40 @@ bookings = repo.all
 bookings.length # =>  2
 
 bookings[0].id # =>  1
-bookings[0].name # =>  'David'
-bookings[0].email # =>  'April 2022'
-bookings[0].password # =>  'April 2022'
+bookings[0].space_id # =>  1
+bookings[0].unavailable_from # =>  '2022-09-10'
+bookings[0].unavailable_to # =>  '2022-09-20'
+bookings[0].reason # => 'booking'
+bookings[0].booking_id # => 1
 
 
 bookings[1].id # =>  2
-bookings[1].name # =>  'Anna'
-bookings[1].email # =>  'May 2022'
-bookings[1].password # =>  'May 2022'
+bookings[1].space_id # =>  3
+bookings[1].unavailable_from # =>  '2022-10-10'
+bookings[1].unavailable_to # =>  '2022-10-14'
+bookings[1].reason # => 'booking'
+bookings[1].booker_id # => 3
+
+bookings.last.id # =>  5
+bookings.last.space_id # =>  1
+bookings.last.unavailable_from # =>  '2022-09-22'
+bookings.last.unavailable_to # =>  '2022-09-25'
+bookings.last.reason # => 'booking'
+bookings.last.booker_id # => 6
 
 # 2
 # Get a single booking
 
-repo = bookingRepository.new
+repo = BookingRepository.new
 
 booking = repo.find(1)
 
 booking.id # =>  1
-booking.name # =>  'David'
-booking.email # =>  'April 2022'
-booking.password # =>  'April 2022'
+booking.space_id # =>  1
+booking.unavailable_from # =>  '2022-09-10'
+booking.unavailable_to # =>  '2022-09-20'
+booking.reason # => 'booking'
+booking.booking_id # => 1
 
 # Add more examples for each method
 
