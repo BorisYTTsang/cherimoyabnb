@@ -1,5 +1,6 @@
 require_relative './booking.rb'
 require_relative './database_connection.rb'
+require_relative './space_repository.rb'
 
 class BookingRepository
 
@@ -28,7 +29,9 @@ class BookingRepository
     return create_booking_objects_from_table(result)
   end
 
-  def create(booking)
+  def create(booking) #returns true is a space is created, false if not
+    space_repo = SpaceRepository.new
+    return false if space_repo.find(booking.space_id).nil?
     return false if overlaps_existing_booking?(booking)
 
     sql = 'INSERT INTO bookings (space_id, unavailable_from, unavailable_to, reason, booker_id) VALUES ($1, $2, $3, $4, $5);'
