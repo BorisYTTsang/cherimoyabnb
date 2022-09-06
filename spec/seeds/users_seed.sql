@@ -1,4 +1,5 @@
-TRUNCATE TABLE users, spaces RESTART IDENTITY
+TRUNCATE TABLE "public"."users" RESTART IDENTITY CASCADE;
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
 
 INSERT INTO "public"."users" ("name", "email", "password") VALUES
 ('Joe', 'joe@example.com', 'password123'),
