@@ -9,4 +9,11 @@ class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+
+  enable :sessions
+
+  get "/" do
+    return erb(:login)
+  end
+
 end

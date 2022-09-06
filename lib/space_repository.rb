@@ -45,9 +45,8 @@ class SpaceRepository
     
     def delete(id)
 
-        # sql = 'SELECT id, name, description, price_per_night, owner_id FROM spaces WHERE id = $1;'
-        # params = [id]
-        result_set1 = find(id)
+        # find record to be deleted first so it can be returned
+        result_set1 = find(id) 
         
         sql = 'DELETE FROM spaces WHERE id = $1;'
         params = [id]
