@@ -1,10 +1,9 @@
 require 'space_repository'
-require 'simplecov'
 
 def reset_spaces_table
     seed_sql = File.read('spec/spaces_seed.sql')
     connection = PG.connect ({ host: '127.0.0.1', dbname: 'cherimoyabnb_test'})
-    connection.exec(seeq_sql)
+    connection.exec(seed_sql)
 end
 
 describe SpaceRepository do
@@ -15,20 +14,20 @@ describe SpaceRepository do
     describe '#all' do
         it 'returns array with all records' do
             spaces_repo = SpaceRepository.new
-            expect(space_repo.all.size).to eq 11    
-            expect(space_repo.all.first.name).to eq('Beautiful Seaside Cottage in Hastings')
-            expect(space_repo.all.first.id).to eq(1)
+            expect(spaces_repo.all.size).to eq 11    
+            expect(spaces_repo.all.first.name).to eq('Beautiful Seaside Cottage in Hastings')
+            expect(spaces_repo.all.first.id).to eq(1)
         end    
     end
         
     describe '#find' do
         it 'finds a space' do
           spaces_repo = SpaceRepository.new
-          
           finder = spaces_repo.find(3)
           
+          expect(finder.name).to eq("meep")
           expect(finder.name).to eq('3 Bedroom Flat located in Central London. ')
-          expect(finder.id).to eq(3)
+          expect(finder.id).to eq('3')
           
       end 
     end
