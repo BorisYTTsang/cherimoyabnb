@@ -92,4 +92,19 @@ end
             expect(all_users.last.password).to eq 'password1'
         end
     end 
+
+# 4
+# Finds a user by email
+    describe '#find_by_email' do
+        it 'finds and returns a user by email' do
+            repo = UserRepository.new
+            expect(repo.find_by_email('y957yeet@example.com').name).to eq 'Dave'
+            expect(repo.find_by_email('Kyriakos.legend765@example.com').name).to eq 'Cyr'
+        end
+
+        it 'returns nil when email is not found' do
+            repo = UserRepository.new
+            expect(repo.find_by_email('justin@example.com')).to eq nil
+        end
+    end 
 end

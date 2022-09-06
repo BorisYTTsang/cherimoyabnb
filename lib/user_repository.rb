@@ -24,6 +24,16 @@ class UserRepository
     return nil
   end
 
+  def find_by_email(email)
+    sql = "SELECT * FROM users WHERE email = $1;"
+    result = DatabaseConnection.exec_params(sql, [email])
+
+    users = all # call #all method for any? method below
+    return nil unless users.any? { |user| user.email == email }
+
+    return create_user_object_from_table(result)[0]
+  end
+
   private
   def create_user_object_from_table(result)
     users = []
