@@ -1,16 +1,23 @@
 require 'user_repository'
 def reset_users_table
-    seed_sql = File.read('spec/seeds_users.sql')
+    seed_sql = File.read('spec/users_seed.sql')
     connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
     connection.exec(seed_sql)
-  end
+end
+
+def reset_spaces_table
+    seed_sql = File.read('spec/seeds/spaces_seed.sql')
+    connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
+    connection.exec(seed_sql)
+end
   
-  RSpec.describe UserRepository do
+RSpec.describe UserRepository do
     before(:each) do 
       reset_users_table
+      reset_spaces_table
     end
   
-describe '# all' do
+    describe '# all' do
 
 # 1
 # Get all users

@@ -1,4 +1,4 @@
-TRUNCATE TABLE "public"."users" ON DELETE CASCADE
+TRUNCATE TABLE users, spaces RESTART IDENTITY
 
 INSERT INTO "public"."users" ("name", "email", "password") VALUES
 ('Joe', 'joe@example.com', 'password123'),
