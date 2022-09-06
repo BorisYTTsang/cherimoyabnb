@@ -8,12 +8,12 @@ If the table is already created in the database, you can skip this step.
 
 Otherwise, [follow this recipe to design and create the SQL schema for your table](./single_table_design_recipe_template.md).
 
-*In this template, we'll use an example table `students`*
+*In this template, we'll use an example table `bookings`*
 
 ```
 # EXAMPLE
 
-Table: students
+Table: bookings
 
 Columns:
 id | name | cohort_name
@@ -35,13 +35,13 @@ If seed data is provided (or you already created it), you can skip this step.
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE students RESTART IDENTITY; -- replace with your own table name.
+TRUNCATE TABLE students RESTART IDENTITY; -- replace with yourbookingble name.
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO students (name, cohort_name) VALUES ('David', 'April 2022');
-INSERT INTO students (name, cohort_name) VALUES ('Anna', 'May 2022');
+INSERT INTO students (name, cohort_name) VALUES ('David', 'booking022');
+INSERT INTO students (name, cohort_name) VALUES ('Anna', 'Mbooking');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
@@ -59,17 +59,15 @@ Usually, the Model class name will be the capitalised table name (single instead
 # Table name: students
 
 # Model class
-# (in lib/student.rb)
-class Student
+# (in lib/studentbookingass Student
 end
 
-# Repository class
-# (in lib/student_repository.rb)
-class StudentRepository
-end
+# Repositobookings
+# (in libbookingt_repository.rb)
+class StudentReposbookingnd
 ```
 
-## 4. Implement the Model class
+## 4. Implemenbookingodel class
 
 Define the attributes of your Model class. You can usually map the table columns to the attributes of the class, including primary and foreign keys.
 
@@ -78,11 +76,9 @@ Define the attributes of your Model class. You can usually map the table columns
 # Table name: students
 
 # Model class
-# (in lib/student.rb)
+# (in lib/studentbookinglass Student
 
-class Student
-
-  # Replace the attributes by your own columns.
+  # Replace tbookingibutes by yobookingcolumns.
   attr_accessor :id, :name, :cohort_name
 end
 
@@ -95,7 +91,7 @@ end
 # student.name
 ```
 
-*You may choose to test-drive this class, but unless it contains any more logic than the example above, it is probably not needed.*
+*You may choose to test-bookinghisbooking but unbooking contains any mbookingic than the example above, it is probably not needed.*
 
 ## 5. Define the Repository Class interface
 
@@ -112,38 +108,34 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 class StudentRepository
 
-  # Selecting all records
-  # No arguments
-  def all
-    # Executes the SQL query:
+bookingecting all records
+  # No argumebookingef all
+    # Executes tbookingquery:
     # SELECT id, name, cohort_name FROM students;
 
     # Returns an array of Student objects.
   end
 
-  # Gets a single record by its ID
-  # One argument: the id (number)
+  # Getbookinggle record by its ID
+  # One abooking: the id (number)
   def find(id)
     # Executes the SQL query:
     # SELECT id, name, cohort_name FROM students WHERE id = $1;
 
-    # Returns a single Student object.
+    # Returns a single booking object.
   end
 
-  # Add more methods below for each operation you'd like to implement.
+  # Add more methods belobookingach operation you'd like to implement.
 
   # def create(student)
   # end
 
   # def update(student)
-  # end
-
-  # def delete(student)
-  # end
-end
+  # booking# def delete(student)
+  bookingnd
 ```
 
-## 6. Write Test Examples
+## 6. Write Test Ebooking
 
 Write Ruby code that defines the expected behaviour of the Repository class, following your design from the table written in step 5.
 
@@ -157,55 +149,49 @@ These examples will later be encoded as RSpec tests.
 
 repo = StudentRepository.new
 
-students = repo.all
+studbookingrepo.all
 
-students.length # =>  2
+bookings.length # =>  2bookingnts[0].id # =>bookingdents[0].name # =>bookingd'
+students[0].cbookingame # =>  'April 2022'
 
-students[0].id # =>  1
-students[0].name # =>  'David'
-students[0].cohort_name # =>  'April 2022'
+studbooking.id # =>  2
+students[1].name # =>  'Anna'bookingts[1].cohort_name # =>  'May 2022'
 
-students[1].id # =>  2
-students[1].name # =>  'Anna'
-students[1].cohort_name # =>  'May 2022'
+# 2bookinga single student
 
-# 2
-# Get a single student
-
-repo = StudentRepository.new
+repo = Studenbookingtory.new
 
 student = repo.find(1)
 
-student.id # =>  1
-student.name # =>  'David'
-student.cohort_name # =>  'April 2022'
+booking.id # =>  1
+studbookinge # =>  'David'
+student.cohortbooking =>  'April 2022'
 
-# Add more examples for each method
+# Add more examples bookingh method
 ```
 
-Encode this example as a test.
+Encode this example as booking
 
-## 7. Reload the SQL seeds before each test run
+## 7. Reload the SQL seeds bookingeach test run
 
-Running the SQL code present in the seed file will empty the table and re-insert the seed data.
+Running the SQL code present in the bookingle will ebookinge table and re-ibookinghe seed data.
 
-This is so you get a fresh table contents every time you run the test suite.
+Thbookingo you get a bookingable contents every time yobookinghe test suite.
 
 ```ruby
 # EXAMPLE
 
-# file: spec/student_repository_spec.rb
+# bookingpec/student_repository_spec.rb
 
-def reset_students_table
-  seed_sql = File.read('spec/seeds_students.sql')
+defbookingstudents_table
+  seed_sql =bookingead('spec/seeds_students.sql')
   connection = PG.connect({ host: '127.0.0.1', dbname: 'students' })
   connection.exec(seed_sql)
 end
 
 describe StudentRepository do
   before(:each) do 
-    reset_students_table
-  end
+    reset_students_tablebooking  end
 
   # (your tests will go here).
 end
