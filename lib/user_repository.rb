@@ -17,9 +17,9 @@ class UserRepository
     return create_user_object_from_table(result)[0]
   end
 
-  def find(username)
-    sql = 'SELECT * FROM users WHERE id = $1;'
-    params = [username]
+  def find_by_name(name)
+    sql = 'SELECT * FROM users WHERE name = $1;'
+    params = [name]
     result = DatabaseConnection.exec_params(sql, params)
 
     return create_user_object_from_table(result)[0]
