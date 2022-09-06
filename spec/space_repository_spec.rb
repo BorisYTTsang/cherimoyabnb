@@ -25,7 +25,7 @@ describe SpaceRepository do
           spaces_repo = SpaceRepository.new
           finder = spaces_repo.find(3)
           
-          expect(finder.name).to eq("meep")
+          expect(finder.all.name).to eq("meep")
           expect(finder.name).to eq('3 Bedroom Flat located in Central London. ')
           expect(finder.id).to eq('3')
           
