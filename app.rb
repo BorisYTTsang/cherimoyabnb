@@ -11,6 +11,8 @@ require_relative 'lib/user_repository'
 
 require_relative 'lib/routes/login'
 
+DatabaseConnection.connect
+
 class Application < Sinatra::Base
   # This allows the app code to refresh
   # without having to restart the server.
@@ -23,24 +25,15 @@ class Application < Sinatra::Base
     
   end
 
+  set :root,  File.dirname(__FILE__)
+  set :views, Proc.new { File.join(root, 'lib', 'routes', 'views') }
+
   enable :sessions
 
   get "/" do
-    return erb(:login)
+    redirect "/login"
   end
 
-  post "/login" do
-    email = params[:email]
-    password = params[:password]
-    users_repo = UserRepository.new
-    user = users_repo.find_by_email(email)
-    if !user.nil? && user.password == password
-      session[:user_id] = user.id
-      session[:user_name] = user.name
-      return login_success.erb
-    else
-      redirect "/" # should return login_failure.erb
-    end
-  end
+  # subsequent routes can be found in /lib/routes files
 
 end
