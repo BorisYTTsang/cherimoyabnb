@@ -86,30 +86,28 @@ RSpec.describe BookingRepository do
     end
   end
 
-#     describe '#create' do
-#         it 'creates a new booking' do
-#         repo = BookingRepository.new
+  describe '#create' do
+      it 'creates a new booking' do
+        repo = BookingRepository.new
 
-#         new_booking = Booking.new
+        new_booking = Booking.new
 
-#         new_booking.name # => 'John'
-#         new_booking.space_id # => 'York'
-#         new_booking.unavailable_from # => '12/09/2022'
-#         new_booking.unavailable_to # => '26/09/2022'
-#         new_booking.reason # => 'Rented out'
-#         new_booking.space_id # => '3'
+        new_booking.space_id = 1
+        new_booking.unavailable_from = '2022-09-19'
+        new_booking.unavailable_to = '2022-09-22'
+        new_booking.reason = 'booking'
+        new_booking.booker_id = 3
 
 
-#         repo.create(new_booking)
+        repo.create(new_booking)
 
-#         booking = repo.all.last
-
-#         expect(booking.name).to eq 'John'
-#         expect(booking.space_id).to eq 'York'
-#         expect(booking.unavailable_from).to eq '12/09/2022'
-#         expect(booking.unavailable_to).to eq '26/09/2022'
-#         expect(booking.reason).to eq 'Rented out'
-#         expect(booking.owner_id).to eq '3'
-#         end
-#     end
+        all_bookings = repo.all
+        booking = all_bookings.last
+        expect(booking.space_id).to eq 1
+        expect(booking.unavailable_from).to eq '2022-09-19'
+        expect(booking.unavailable_to).to eq '2022-09-22'
+        expect(booking.reason).to eq 'booking'
+        expect(booking.booker_id).to eq 3
+      end
+  end
 end

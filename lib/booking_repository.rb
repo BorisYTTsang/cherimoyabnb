@@ -31,8 +31,10 @@ class BookingRepository
   # Add more methods below for each operation you'd like to implement.
 
   def create(booking)
-    # INSERT INTO bookings (name, email, password) VALUES ($1, $2, $3);
-    # returns nothing
+    sql = 'INSERT INTO bookings (space_id, unavailable_from, unavailable_to, reason, booker_id) VALUES ($1, $2, $3, $4, $5);'
+    params = [booking.space_id, booking.unavailable_from, booking.unavailable_to, booking.reason, booking.booker_id]
+    DatabaseConnection.exec_params(sql, params)
+    return nil
   end
 
   def check_for_overlap(booking)
