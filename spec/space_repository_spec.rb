@@ -1,7 +1,7 @@
 require 'space_repository'
 
 def reset_spaces_table
-    seed_sql = File.read('spec/spaces_seed.sql')
+    seed_sql = File.read('spec/seeds/spaces_seed.sql')
     connection = PG.connect ({ host: '127.0.0.1', dbname: 'cherimoyabnb_test'})
     connection.exec(seed_sql)
 end

@@ -4,39 +4,36 @@ require_relative './database_connection.rb'
 class UserRepository
   def all
     sql = 'SELECT * FROM users;'
-    result = DatabaseConnection.exec_param(sql,[])
+    result = DatabaseConnection.exec_params(sql,[])
 
-    users = []
-
-    result.each do |record|
-      user = User.new
-      user.id = record['id']
-      user.name = record['name']
-      user.email = record['email']
-      user.password = record['password']
-      users << user
-    end
-
-    return users
+    return create_user_object_from_table(result)
   end
 
   def find(id)
-    # Executes the SQL query:
-    # SELECT * FROM users WHERE id = $1;
+    sql = 'SELECT * FROM users WHERE id = $1;'
+    params = [id]
+    result = DatabaseConnection.exec_params(sql, params)
 
-    # Returns a single user object.
+    return create_user_object_from_table(result)[0]
   end
-
-  # Add more methods below for each operation you'd like to implement.
-
+  
   def create(user)
     # INSERT INTO users (name, email, password) VALUES ($1, $2, $3);
     # returns nothing
   end
 
-  # def update(user)
-  # end
+  private
+  def create_user_object_from_table(result)
+    users = []
+    result.each do |record|
+      user = User.new
+      user.id = record['id'].to_i
+      user.name = record['name']
+      user.email = record['email']
+      user.password = record['password']
+      users << user
+    end
+    return users
+  end
 
-  # def delete(user)
-  # end
 end

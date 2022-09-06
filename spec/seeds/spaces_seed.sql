@@ -1,4 +1,4 @@
-TRUNCATE TABLE “public”.“spaces” RESTART IDENTITY CASCADE;
+TRUNCATE TABLE "public"."spaces" RESTART IDENTITY CASCADE;
 ALTER SEQUENCE spaces_id_seq RESTART WITH 1;
 
 INSERT INTO "public"."spaces" ("name", "description", "price_per_night", "owner_id") VALUES
@@ -13,3 +13,4 @@ INSERT INTO "public"."spaces" ("name", "description", "price_per_night", "owner_
 ('Apartment minutes from Manchester Arndale', 'Convenient location located within minutes from Manchester City Centre and 20 minutes from Trafford Shopping Centre and Old Trafford. Open-plan kitchen/lounge area, contemporary look, balcony overlooking bustling street. Perfect for exploring what Manchester has to offer!', 50, 3),
 ('Guest House in Oxfordshire', 'Located in the beautiful countryside in Oxfordshire. Spacious, tranquil and clean. Open-plan kitchen connecting with living room area, cute exterior with parking spaces at the front. Broadband internet available.', 69, 1),
 ('Scenic Guest suite in Kingston Vale', 'Beautiful guest suite with traditional decor and furnishings. Luscious garden and scenery, perfect for those looking for a peaceful weekend holiday.', 38, 6);
+  

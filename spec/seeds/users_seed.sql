@@ -1,4 +1,4 @@
-TRUNCATE TABLE “public”.“users” RESTART IDENTITY CASCADE;
+TRUNCATE TABLE "public"."users" RESTART IDENTITY CASCADE;
 ALTER SEQUENCE users_id_seq RESTART WITH 1;
 
 INSERT INTO "public"."users" ("name", "email", "password") VALUES
@@ -8,4 +8,3 @@ INSERT INTO "public"."users" ("name", "email", "password") VALUES
 ('Minho', 'massivelykinjang@example.com', 'd@d@!123'),
 ('Gurpreet', 'gurpreet.singh@example.com', 'chrysanthemum1'),
 ('Cyr', 'Kyriakos.legend765@example.com', '@reyoucyrious$$');
-

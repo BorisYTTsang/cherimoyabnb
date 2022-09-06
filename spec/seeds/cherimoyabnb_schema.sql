@@ -35,7 +35,8 @@ CREATE TABLE "public"."spaces" (
     "description" text,
     "price_per_night" int4,
     "owner_id" int4,
-        constraint fkey_user_6 foreign key(owner_id)
+        -- constraint fkey_user_6 
+        foreign key(owner_id)
       references users(id)
       on delete cascade,
     PRIMARY KEY ("id")
@@ -51,14 +52,16 @@ CREATE SEQUENCE IF NOT EXISTS bookings_id_seq;
 CREATE TABLE "public"."bookings" (
     "id" int4 NOT NULL DEFAULT nextval('bookings_id_seq'::regclass),
     "space_id" int4,
-    constraint fkey_user_1 foreign key(space_id)
+    -- constraint fkey_user_1 
+    foreign key(space_id)
       references spaces(id)
       on delete cascade,
     "unavailable_from" date,
     "unavailable_to" date,
     "reason" text,
     "booker_id" int4,
-    constraint fkey_user_2 foreign key(booker_id)
+    -- constraint fkey_user_2 
+    foreign key(booker_id)
       references users(id)
       on delete cascade,
     PRIMARY KEY ("id")
@@ -74,15 +77,18 @@ CREATE SEQUENCE IF NOT EXISTS requests_id_seq;
 CREATE TABLE "public"."requests" (
     "id" int4 NOT NULL DEFAULT nextval('requests_id_seq'::regclass),
     "space_id" int4,
-        constraint fkey_user_3 foreign key(space_id)
+        -- constraint fkey_user_3 
+        foreign key(space_id)
       references spaces(id)
       on delete cascade,
     "owner_id" int4,
-        constraint fkey_user_4 foreign key(owner_id)
+        -- constraint fkey_user_4 
+        foreign key(owner_id)
       references users(id)
       on delete cascade,
     "booker_id" int4,
-        constraint fkey_user_5 foreign key(booker_id)
+        -- constraint fkey_user_5 
+        foreign key(booker_id)
       references users(id)
       on delete cascade,
     "booked?" bool,
