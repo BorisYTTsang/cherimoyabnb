@@ -42,6 +42,27 @@ describe Application do
     end
   end
 
+  describe "/signup" do
+    it "GET /signup" do
+        response = get("/signup")
+
+        expect(response.status).to eq(200)
+    end
+
+    it "POST /signup" do
+      response = post("/signup")
+      expect(response.status).to eq(200)
+
+      response = post("/signup",name:"meep1",email:"meep2",password:"meep3")
+    
+      repo = UserRepository.new
+      users = repo.all
+      expect(users[-1].name).to eq("meep1")
+      expect(users[-1].email).to eq("meep2")
+      expect(users[-1].password).to eq("meep3")
+    end
+  end
+  
   context "POST /login" do
     it "logs registered user in" do
       response = post("/login", email: "joe@example.com", password: "password123")
