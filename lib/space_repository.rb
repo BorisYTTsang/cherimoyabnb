@@ -25,9 +25,8 @@ class SpaceRepository
     def find(id)
         sql = 'SELECT * FROM spaces WHERE id = $1;'
         params = [id]
-        result_set = DatabaseConnection.exec_params(sql, params)
+        result_set = DatabaseConnection.exec_params(sql, params)[0]
         space = Space.new
-        return result_set
         space.id = result_set['id']
         space.name = result_set['name']
         space.description = result_set['description']
@@ -46,9 +45,9 @@ class SpaceRepository
     
     def delete(id)
 
-        sql = 'SELECT id, name, description, price_per_night, owner_id FROM spaces WHERE id = $1;'
-        params = [id]
-        result_set1 = DatabaseConnection.exec_params(sql, params)
+        # sql = 'SELECT id, name, description, price_per_night, owner_id FROM spaces WHERE id = $1;'
+        # params = [id]
+        result_set1 = find(id)
         
         sql = 'DELETE FROM spaces WHERE id = $1;'
         params = [id]
