@@ -20,7 +20,7 @@ describe SpaceRepository do
     end
 
     describe '#find' do
-        it 'finds a space'
+        it 'finds a space' do
             
         end
         
