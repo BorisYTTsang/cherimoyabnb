@@ -1,4 +1,5 @@
 require 'booking_repository'
+require 'booking'
 
 def reset_bookings_table
     seed_sql = File.read('spec/seeds_bookings.sql')
@@ -6,7 +7,7 @@ def reset_bookings_table
     connection.exec(seed_sql)
   end
   
-  RSpec.describe bookingRepository do
+  RSpec.describe BookingRepository do
     before(:each) do 
       reset_bookings_table
     end
@@ -16,11 +17,11 @@ def reset_bookings_table
 describe '# GET' do
     it 'gets all bookings' do
 
-        repo = bookingRepository.new
+        repo = BookingRepository.new
 
         bookings = repo.all
 
-        bookings.length # =>  2
+        expect(bookings.length).to eq 2
 
         (bookings[0].id).to eq 1
         (bookings[0].space_id).to eq 'David'
@@ -81,5 +82,3 @@ describe '#create' do
     end
 end
 
-# Add more examples for each method
-end
