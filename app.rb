@@ -16,4 +16,15 @@ class Application < Sinatra::Base
     return erb(:login)
   end
 
+  post "/login" do
+    email = params[:email]
+    password = params[:password]
+
+    if password
+
+    session[:user_id] = nil
+    session[:user_name] = nil
+  
+  end
+
 end
