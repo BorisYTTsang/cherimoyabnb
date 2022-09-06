@@ -23,8 +23,7 @@ class DatabaseConnection
     end
     @connection = PG.connect({ host: '127.0.0.1', dbname: database_name })
   end
-  end
-
+  
   # This method executes an SQL query 
   # on the database, providing some optional parameters
   # (you will learn a bit later about when to provide these parameters).
