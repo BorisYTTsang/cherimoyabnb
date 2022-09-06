@@ -58,6 +58,7 @@ class BookingRepository
       booking.booker_id = record['booker_id'].to_i
       bookings << booking
     end
+    
     return bookings
   end
 
