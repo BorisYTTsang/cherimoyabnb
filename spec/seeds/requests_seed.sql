@@ -1,3 +1,6 @@
+TRUNCATE TABLE "public"."requests" RESTART IDENTITY CASCADE;
+ALTER SEQUENCE requests_id_seq RESTART WITH 1;
+
 INSERT INTO "public"."requests" ("space_id", "owner_id", "booker_id", "booked?") VALUES
 (2, 1, 4, 'f'),
 (8, 3, 2, 'f'),
