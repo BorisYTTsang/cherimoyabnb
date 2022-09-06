@@ -6,7 +6,7 @@ def reset_requests_table
     connection.exec(seed_sql)
   end
   
-  RSpec.describe requestRepository do
+  RSpec.describe RequestRepository do
     before(:each) do 
       reset_requests_table
     end
@@ -16,7 +16,7 @@ def reset_requests_table
 describe '# get' do
     it 'gets all request' do
 
-        repo = requestRepository.new
+        repo = RequestRepository.new
 
         requests = repo.all
 
@@ -24,15 +24,15 @@ describe '# get' do
 
         expect(requests[0].id).to eq 1
         expect(requests[0].space_id).to eq 'David'
-        expect(requests[0].user_id.).to eq 'April 2022'
-        expect(requests[0].booker_id.).to eq 'April 2022'
-        expect(requests[0].booked?_id.).to eq 'April 2022'
+        expect(requests[0].user_id).to eq 'April 2022'
+        expect(requests[0].booker_id).to eq 'April 2022'
+        expect(requests[0].booked?_id).to eq 'April 2022'
 
         expect(requests[1].id).to eq 2
         expect(requests[1].space_id).to eq 'Anna'
-        expect(requests[1].user_id.).to eq 'May 2022'
-        expect(requests[1].booker_id.).to eq 'April 2022'
-        expect(requests[1].booked?_id.).to eq 'April 2022'
+        expect(requests[1].user_id).to eq 'May 2022'
+        expect(requests[1].booker_id).to eq 'April 2022'
+        expect(requests[1].booked?_id).to eq 'April 2022'
     end
 end
 
