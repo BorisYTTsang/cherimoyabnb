@@ -48,7 +48,7 @@ describe '#find' do
         booking = repo.find(1)
 
         (booking.id).to eq 1
-        (booking.namspace_id).to eq 'David'
+        (booking.space_id).to eq 'David'
         (booking.unavailable_from).to eq 'April 2022'
         (booking.unavailable_to).to eq 'April 2022'
         (booking.reason).to eq 'April 2022'
@@ -62,7 +62,6 @@ describe '#create' do
 
     new_booking = Booking.new
 
-    new_booking.name # => 'John'
     new_booking.space_id # => 'York'
     new_booking.unavailable_from # => '12/09/2022'
     new_booking.unavailable_to # => '26/09/2022'
@@ -74,7 +73,6 @@ describe '#create' do
 
     booking = repo.all.last
 
-    expect(booking.name).to eq 'John'
     expect(booking.space_id).to eq 'York'
     expect(booking.unavailable_from).to eq '12/09/2022'
     expect(booking.unavailable_to).to eq '26/09/2022'

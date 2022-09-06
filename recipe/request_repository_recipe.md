@@ -8,15 +8,15 @@ If the table is already created in the database, you can skip this step.
 
 Otherwise, [follow this recipe to design and create the SQL schema for your table](./single_table_design_recipe_template.md).
 
-*In this template, we'll use an example table `students`*
+*In this template, we'll use an example table `requests`*
 
 ```
 # EXAMPLE
 
-Table: students
+Table: requests
 
 Columns:
-id | name | cohort_name
+id | space_id | user_id | booker_id | booked?
 ```
 
 ## 2. Create Test SQL seeds
@@ -35,13 +35,13 @@ If seed data is provided (or you already created it), you can skip this step.
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE students RESTART IDENTITY; -- replace with your own table name.
+TRUNCATE TABLE requests RESTART IDENTITY; -- replace with your own table name.
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO students (name, cohort_name) VALUES ('David', 'April 2022');
-INSERT INTO students (name, cohort_name) VALUES ('Anna', 'May 2022');
+INSERT INTO requests (name, cohort_name) VALUES ('David', 'April 2022');
+INSERT INTO requests (name, cohort_name) VALUES ('Anna', 'May 2022');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
@@ -50,22 +50,26 @@ Run this SQL file on the database to truncate (empty) the table, and insert the 
 psql -h 127.0.0.1 your_database_name < seeds_{table_name}.sql
 ```
 
+```bash
+psql -h 127.0.0.1 cherimoyabnb < seeds_{table_name}.sql
+```
+
 ## 3. Define the class names
 
 Usually, the Model class name will be the capitalised table name (single instead of plural). The same name is then suffixed by `Repository` for the Repository class name.
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: requests
 
 # Model class
-# (in lib/student.rb)
-class Student
+# (in lib/request.rb)
+class Request
 end
 
 # Repository class
-# (in lib/student_repository.rb)
-class StudentRepository
+# (in lib/request_repository.rb)
+class RquestRepository
 end
 ```
 
@@ -75,24 +79,24 @@ Define the attributes of your Model class. You can usually map the table columns
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: requests
 
 # Model class
-# (in lib/student.rb)
+# (in lib/request.rb)
 
-class Student
+class Request
 
   # Replace the attributes by your own columns.
-  attr_accessor :id, :name, :cohort_name
+  attr_accessor :id, :space_id, :user_id, :booker_id, :booked?
 end
 
 # The keyword attr_accessor is a special Ruby feature
 # which allows us to set and get attributes on an object,
 # here's an example:
 #
-# student = Student.new
-# student.name = 'Jo'
-# student.name
+# request = request.new
+# request.name = 'Jo'
+# request.name
 ```
 
 *You may choose to test-drive this class, but unless it contains any more logic than the example above, it is probably not needed.*
@@ -105,40 +109,40 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: requests
 
 # Repository class
-# (in lib/student_repository.rb)
+# (in lib/request_repository.rb)
 
-class StudentRepository
+class requestRepository
 
   # Selecting all records
   # No arguments
   def all
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students;
+    # SELECT * FROM requests;
 
-    # Returns an array of Student objects.
+    # Returns an array of request objects.
   end
 
   # Gets a single record by its ID
   # One argument: the id (number)
   def find(id)
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students WHERE id = $1;
+    # SELECT * requests WHERE id = $1;
 
-    # Returns a single Student object.
+    # Returns a single request object.
   end
 
   # Add more methods below for each operation you'd like to implement.
 
-  # def create(student)
+  def create(request)
+  end
+
+  # def update(request)
   # end
 
-  # def update(student)
-  # end
-
-  # def delete(student)
+  # def delete(request)
   # end
 end
 ```
@@ -153,32 +157,32 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all students
+# Get all requests
 
-repo = StudentRepository.new
+repo = requestRepository.new
 
-students = repo.all
+requests = repo.all
 
-students.length # =>  2
+requests.length # =>  2
 
-students[0].id # =>  1
-students[0].name # =>  'David'
-students[0].cohort_name # =>  'April 2022'
+requests[0].id # =>  1
+requests[0].name # =>  'David'
+requests[0].cohort_name # =>  'April 2022'
 
-students[1].id # =>  2
-students[1].name # =>  'Anna'
-students[1].cohort_name # =>  'May 2022'
+requests[1].id # =>  2
+requests[1].name # =>  'Anna'
+requests[1].cohort_name # =>  'May 2022'
 
 # 2
-# Get a single student
+# Get a single request
 
-repo = StudentRepository.new
+repo = requestRepository.new
 
-student = repo.find(1)
+request = repo.find(1)
 
-student.id # =>  1
-student.name # =>  'David'
-student.cohort_name # =>  'April 2022'
+request.id # =>  1
+request.name # =>  'David'
+request.cohort_name # =>  'April 2022'
 
 # Add more examples for each method
 ```
@@ -194,17 +198,17 @@ This is so you get a fresh table contents every time you run the test suite.
 ```ruby
 # EXAMPLE
 
-# file: spec/student_repository_spec.rb
+# file: spec/request_repository_spec.rb
 
-def reset_students_table
-  seed_sql = File.read('spec/seeds_students.sql')
-  connection = PG.connect({ host: '127.0.0.1', dbname: 'students' })
+def reset_requests_table
+  seed_sql = File.read('spec/seeds_requests.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'requests' })
   connection.exec(seed_sql)
 end
 
-describe StudentRepository do
+describe requestRepository do
   before(:each) do 
-    reset_students_table
+    reset_requests_table
   end
 
   # (your tests will go here).
