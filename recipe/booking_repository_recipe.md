@@ -13,10 +13,8 @@ Otherwise, [follow this recipe to design and create the SQL schema for your tabl
 ```
 # EXAMPLE
 
-Table: bookings
-
 Columns:
-id | name | cohort_name
+id | space_id | unavailable_from | unavailable_to | reason | booker_id
 ```
 
 ## 2. Create Test SQL seeds
@@ -35,19 +33,23 @@ If seed data is provided (or you already created it), you can skip this step.
 -- so we can start with a fresh state.
 -- (RESTART IDENTITY resets the primary key)
 
-TRUNCATE TABLE students RESTART IDENTITY; -- replace with yourbookingble name.
+TRUNCATE TABLE bookings RESTART IDENTITY; -- replace with your own table name.
 
 -- Below this line there should only be `INSERT` statements.
 -- Replace these statements with your own seed data.
 
-INSERT INTO students (name, cohort_name) VALUES ('David', 'booking022');
-INSERT INTO students (name, cohort_name) VALUES ('Anna', 'Mbooking');
+INSERT INTO bookings (name, cohort_name) VALUES ('David', 'April 2022');
+INSERT INTO bookings (name, cohort_name) VALUES ('Anna', 'May 2022');
 ```
 
 Run this SQL file on the database to truncate (empty) the table, and insert the seed data. Be mindful of the fact any existing records in the table will be deleted.
 
 ```bash
-psql -h 127.0.0.1 your_database_name < seeds_{table_name}.sql
+psql -h 127.0.0.1 cherimoyabnb < seeds_{table_name}.sql
+```
+
+```bash
+psql -h 127.0.0.1 cherimoyabnb_test < seeds_{table_name}.sql
 ```
 
 ## 3. Define the class names
@@ -56,42 +58,44 @@ Usually, the Model class name will be the capitalised table name (single instead
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: bookings
 
 # Model class
-# (in lib/studentbookingass Student
+# (in lib/booking.rb)
+class Booking
 end
 
-# Repositobookings
-# (in libbookingt_repository.rb)
-class StudentReposbookingnd
+# Repository class
+# (in lib/booking_repository.rb)
+class BookingRepository
+end
 ```
 
-## 4. Implemenbookingodel class
+## 4. Implement the Model class
 
 Define the attributes of your Model class. You can usually map the table columns to the attributes of the class, including primary and foreign keys.
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: bookings
 
 # Model class
-# (in lib/studentbookinglass Student
+# (in lib/booking.rb)
 
-  # Replace tbookingibutes by yobookingcolumns.
-  attr_accessor :id, :name, :cohort_name
+class Booking
+  attr_accessor :id, :space_id, :unavailable_from, :unavailable_to, :reason, :booker_id
 end
 
 # The keyword attr_accessor is a special Ruby feature
 # which allows us to set and get attributes on an object,
 # here's an example:
 #
-# student = Student.new
-# student.name = 'Jo'
-# student.name
+# booking = booking.new
+# booking.name = 'Jo'
+# booking.name
 ```
 
-*You may choose to test-bookinghisbooking but unbooking contains any mbookingic than the example above, it is probably not needed.*
+*You may choose to test-drive this class, but unless it contains any more logic than the example above, it is probably not needed.*
 
 ## 5. Define the Repository Class interface
 
@@ -101,41 +105,56 @@ Using comments, define the method signatures (arguments and return value) and wh
 
 ```ruby
 # EXAMPLE
-# Table name: students
+# Table name: bookings
 
 # Repository class
-# (in lib/student_repository.rb)
+# (in lib/booking_repository.rb)
 
-class StudentRepository
+class BookingRepository
 
-bookingecting all records
-  # No argumebookingef all
-    # Executes tbookingquery:
-    # SELECT id, name, cohort_name FROM students;
-
-    # Returns an array of Student objects.
+  # Selecting all records
+  # No arguments
+  def all
+    # SELECT * FROM bookings;
   end
 
-  # Getbookinggle record by its ID
-  # One abooking: the id (number)
+  # Gets a single record by its ID
+  # One argument: the id (number)
   def find(id)
     # Executes the SQL query:
-    # SELECT id, name, cohort_name FROM students WHERE id = $1;
+    # SELECT * FROM bookings WHERE id = $1;
 
     # Returns a single booking object.
   end
 
-  # Add more methods belobookingach operation you'd like to implement.
+  def find_by_space(space_id)
+    # Executes the SQL query:
+    # SELECT * FROM bookings WHERE space_id = $1;
 
-  # def create(student)
+    # Returns any bookings with the matching space_id
+  end
+
+  # Add more methods below for each operation you'd like to implement.
+
+  def create(booking)
+    # INSERT INTO bookings (name, email, password) VALUES ($1, $2, $3);
+    # returns nothing
+  end
+
+  def check_for_overlap(booking)
+    #Takes booking object as input
+    #Checks for any overlap between the new booking and existing bookings
+    #Returns true or false
+
+  # def update(booking)
   # end
 
-  # def update(student)
-  # booking# def delete(student)
-  bookingnd
+  # def delete(booking)
+  # end
+end
 ```
 
-## 6. Write Test Ebooking
+## 6. Write Test Examples
 
 Write Ruby code that defines the expected behaviour of the Repository class, following your design from the table written in step 5.
 
@@ -145,53 +164,83 @@ These examples will later be encoded as RSpec tests.
 # EXAMPLES
 
 # 1
-# Get all students
+# Get all bookings
 
-repo = StudentRepository.new
+repo = bookingRepository.new
 
-studbookingrepo.all
+bookings = repo.all
 
-bookings.length # =>  2bookingnts[0].id # =>bookingdents[0].name # =>bookingd'
-students[0].cbookingame # =>  'April 2022'
+bookings.length # =>  2
 
-studbooking.id # =>  2
-students[1].name # =>  'Anna'bookingts[1].cohort_name # =>  'May 2022'
+bookings[0].id # =>  1
+bookings[0].name # =>  'David'
+bookings[0].email # =>  'April 2022'
+bookings[0].password # =>  'April 2022'
 
-# 2bookinga single student
 
-repo = Studenbookingtory.new
+bookings[1].id # =>  2
+bookings[1].name # =>  'Anna'
+bookings[1].email # =>  'May 2022'
+bookings[1].password # =>  'May 2022'
 
-student = repo.find(1)
+# 2
+# Get a single booking
+
+repo = bookingRepository.new
+
+booking = repo.find(1)
 
 booking.id # =>  1
-studbookinge # =>  'David'
-student.cohortbooking =>  'April 2022'
+booking.name # =>  'David'
+booking.email # =>  'April 2022'
+booking.password # =>  'April 2022'
 
-# Add more examples bookingh method
+# Add more examples for each method
+
+# 3 
+# Creates a new booking
+
+repo = bookingRepository.new
+
+
+new_booking = booking.new
+
+new_booking.name # => 'John'
+new_booking.email # => 'john@email.com'
+new_booking.password # => 'password1'
+
+repo.create(new_booking)
+
+booking = repo.all.last
+
+booking.name # => 'John'
+booking.email # => 'john@email.com'
+booking.password # => 'password1'
 ```
 
-Encode this example as booking
+Encode this example as a test.
 
-## 7. Reload the SQL seeds bookingeach test run
+## 7. Reload the SQL seeds before each test run
 
-Running the SQL code present in the bookingle will ebookinge table and re-ibookinghe seed data.
+Running the SQL code present in the seed file will empty the table and re-insert the seed data.
 
-Thbookingo you get a bookingable contents every time yobookinghe test suite.
+This is so you get a fresh table contents every time you run the test suite.
 
 ```ruby
 # EXAMPLE
 
-# bookingpec/student_repository_spec.rb
+# file: spec/booking_repository_spec.rb
 
-defbookingstudents_table
-  seed_sql =bookingead('spec/seeds_students.sql')
-  connection = PG.connect({ host: '127.0.0.1', dbname: 'students' })
+def reset_bookings_table
+  seed_sql = File.read('spec/seeds_bookings.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'bookings' })
   connection.exec(seed_sql)
 end
 
-describe StudentRepository do
+describe bookingRepository do
   before(:each) do 
-    reset_students_tablebooking  end
+    reset_bookings_table
+  end
 
   # (your tests will go here).
 end
