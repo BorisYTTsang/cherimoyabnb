@@ -32,6 +32,7 @@ CREATE SEQUENCE IF NOT EXISTS spaces_id_seq;
 CREATE TABLE "public"."spaces" (
     "id" int4 NOT NULL DEFAULT nextval('spaces_id_seq'::regclass),
     "name" text,
+    "description" text,
     "price_per_night" int4,
     "owner_id" int4,
         constraint fkey_user_6 foreign key(owner_id)
