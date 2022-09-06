@@ -19,59 +19,64 @@ RSpec.describe UserRepository do
     end
   
     describe '# all' do
+        it 'Get all users and checks for id one and two' do
+            repo = UserRepository.new
 
-# 1
-# Get all users
-    it 'Get all users and checks for id one and two' do
-        repo = UserRepository.new
+            users = repo.all
 
-        users = repo.all
+            expect(users.length).to eq 6
 
-        users.length # =>  2
+            expect(users[0].id).to eq 1
+            expect(users[0].name).to eq 'Joe'
+            expect(users[0].email).to eq 'joe@example.com'
+            expect(users[0].password).to eq 'password123'
 
-        expect(users[0].id).to eq 1
-        expect(users[0].name).to eq 'Joe'
-        expect(users[0].email).to eq 'joe@example.com'
-        expect(users[0].password).to eq 'password123'
-
-        expect(users[1].id).to eq 2
-        expect(users[1].name).to eq 'Sarah'
-        expect(users[1].email).to eq 'saarah777@example.com'
-        expect(users[1].password).to eq 'pass90@!'
+            expect(users[1].id).to eq 2
+            expect(users[1].name).to eq 'Sarah'
+            expect(users[1].email).to eq 'saarah777@example.com'
+            expect(users[1].password).to eq 'pass90@!'
+        end
     end
-end
 
-# 2
-# Get a single user
-describe '# find' do
-    it 'returns user with id one' do
+    describe '# find' do
+        it 'returns user with id one' do
 
-        repo = UserRepository.new
+            repo = UserRepository.new
 
-        user = repo.find(1)
+            user = repo.find(1)
 
-        expect(user.id).to eq 1
-        expect(user.name).to eq 'Joe'
-        expect(user.email).to eq 'joe@example.com'
-        expect(user.password).to eq 'password123'
+            expect(user.id).to eq 1
+            expect(user.name).to eq 'Joe'
+            expect(user.email).to eq 'joe@example.com'
+            expect(user.password).to eq 'password123'
+        end
+        it 'returns user with id 5' do
+            repo = UserRepository.new
+
+            user = repo.find(5)
+
+            expect(user.id).to eq 5
+            expect(user.name).to eq 'Gurpreet'
+            expect(user.email).to eq 'gurpreet.singh@example.com'
+            expect(user.password).to eq 'chrysanthemum1'
+        end
+    end 
+
+    describe '#find_by_name' do
+        it 'Finds by username Joe' do
+            repo = UserRepository.new
+
+            user = repo.find_by_name('Joe')
+
+            expect(user.id).to eq 1
+            expect(user.name).to eq 'Joe'
+            expect(user.email).to eq 'joe@example.com'
+            expect(user.password).to eq 'password123'
+        end
     end
-    it 'returns user with id 5' do
 
-        repo = UserRepository.new
 
-        user = repo.find(5)
 
-        expect(user.id).to eq 5
-        expect(user.name).to eq 'Gurpreet'
-        expect(user.email).to eq 'gurpreet.singh@example.com'
-        expect(user.password).to eq 'chrysanthemum1'
-    end
-end 
-
-# Add more examples for each method
-
-# 3 
-# Creates a new user
     describe '#create' do
         it 'creates a new user' do
 
