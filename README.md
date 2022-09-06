@@ -23,3 +23,10 @@ https://trello.com/b/FBn2NBU7/cherimoyabnb
 ### Miro board
 
 https://miro.com/app/board/uXjVPafjTVs=/
+
+### Prerequisites
+Gem packages to install:
+- 
+
+### How to run the file:
+
