@@ -37,11 +37,17 @@ class BookingRepository
     return nil
   end
 
-  def check_for_overlap(booking)
-    #Takes booking object as input
-    #Checks for any overlap between the new booking and existing bookings
-    #Returns true or false
+  def overlaps_existing_booking?(new_booking)
+    existing_bookings = find_by_space(new_booking.space_id)
+
+    existing_bookings.each do |existing_booking|
+      return true if check_for_overlap(existing_booking, new_booking)
+    end
+
+    return false
   end
+
+  ''
 
   # def update(booking)
   # end
@@ -50,6 +56,7 @@ class BookingRepository
   # end
 
   private
+
   def create_booking_objects_from_table(result)
     bookings = []
     result.each do |record|
@@ -63,5 +70,23 @@ class BookingRepository
       bookings << booking
     end
     return bookings
+  end
+
+  def check_for_overlap(existing_booking, new_booking)
+    t1_from = existing_booking.unavailable_from
+    t1_to = existing_booking.unavailable_to
+    t2_from = new_booking.unavailable_from
+    t2_to = new_booking.unavailable_to
+    if  t1_from >= t2_from && t1_from <= t2_to #If 'from' date is inside of the existing booking range
+      return true
+    elsif t1_to >= t2_from && t1_to <= t2_to #If 'to' date is inside of the existing booking range
+      return true
+    elsif t1_from <= t2_from && t1_to >= t2_to #If the booking is longer than the existing booking and completely overlaps it
+      return true
+    elsif t1_from >= t2_from && t1_to <= t2_to #If the booking is shorter than the existing booking and would exist completely within it
+      return true
+    else
+      return false
+    end
   end
 end
