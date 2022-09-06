@@ -1,4 +1,5 @@
 require 'user_repository'
+
 def reset_users_table
     seed_sql = File.read('spec/seeds/users_seed.sql')
     connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
@@ -71,26 +72,24 @@ end
 
 # 3 
 # Creates a new user
-describe '#create' do
-    it 'creates a new user' do
+    describe '#create' do
+        it 'creates a new user' do
 
-        repo = UserRepository.new
+            repo = UserRepository.new
 
 
-        new_user = User.new
+            new_user = User.new
+            new_user.name = 'John'
+            new_user.email = 'john@example.com'
+            new_user.password = 'password1'
 
-        new_user.name # => 'John'
-        new_user.email # => 'john@email.com'
-        new_user.password # => 'password1'
+            repo.create(new_user)
 
-        repo.create(new_user)
+            all_users = repo.all
 
-        user = repo.all.last
-
-        expect(user.name).to eq 'John'
-        expect(user.email).to eq 'john@email.com'
-        expect(user.password).to eq 'password1'
-    end
-end 
-
+            expect(all_users.last.name).to eq 'John'
+            expect(all_users.last.email).to eq 'john@example.com'
+            expect(all_users.last.password).to eq 'password1'
+        end
+    end 
 end

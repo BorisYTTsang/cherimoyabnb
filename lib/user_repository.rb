@@ -16,10 +16,12 @@ class UserRepository
 
     return create_user_object_from_table(result)[0]
   end
-  
+
   def create(user)
-    # INSERT INTO users (name, email, password) VALUES ($1, $2, $3);
-    # returns nothing
+    sql = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3);'
+    params = [user.name, user.email, user.password]
+    DatabaseConnection.exec_params(sql, params)
+    return nil
   end
 
   private
