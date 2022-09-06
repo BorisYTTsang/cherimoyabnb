@@ -17,14 +17,24 @@ class UserRepository
     return create_user_object_from_table(result)[0]
   end
 
+  def find(username)
+    sql = 'SELECT * FROM users WHERE id = $1;'
+    params = [username]
+    result = DatabaseConnection.exec_params(sql, params)
+
+    return create_user_object_from_table(result)[0]
+  end
+
   def create(user)
     sql = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3);'
     params = [user.name, user.email, user.password]
     DatabaseConnection.exec_params(sql, params)
+
     return nil
   end
 
   private
+
   def create_user_object_from_table(result)
     users = []
     result.each do |record|
