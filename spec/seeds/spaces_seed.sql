@@ -1,3 +1,6 @@
+TRUNCATE TABLE “public”.“spaces” RESTART IDENTITY CASCADE;
+ALTER SEQUENCE spaces_id_seq RESTART WITH 1;
+
 INSERT INTO "public"."spaces" ("name", "description", "price_per_night", "owner_id") VALUES
 ('Beautiful Seaside Cottage in Hastings', 'Located 15 minutes from the St Leonards-on-Sea seafront. A beautiful seaside residence with open-plan kitchen, oak wooden floors, and charming garden. Excellent for a relaxing seaside retreat.', 40, 3),
 ('Villa Adjacent to Lake in Porthcurno', 'A large veranda and decking area with two hammocks, perfect for relaxing. Open plan lounge and kitchen with fridge-freezer. Two bedrooms, two bathrooms. Parking spaces available.', 32, 1),
