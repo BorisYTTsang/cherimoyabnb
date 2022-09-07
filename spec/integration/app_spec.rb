@@ -1,5 +1,8 @@
+ENV['APP_ENV'] = 'test'
+
 require "spec_helper"
 require "rack/test"
+require 'test/unit'
 require_relative "../../app"
 
 def reset_users_table
@@ -89,6 +92,18 @@ describe Application do
       response = post("/login")
       expect(response.status).to eq 200
       expect(response.body).to include('<h1>Login Failure!</h1>')
+    end
+  end
+
+  context "GET /createlisting" do
+    xit 'returns the create listing page with input form' do
+
+      browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
+      response = browser.get("/createlisting")
+      
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Name of property:'
+      expect(response.body).to include 'action="/createlisting" method="POST"'
     end
   end
 end
