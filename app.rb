@@ -12,6 +12,9 @@ require_relative 'lib/user_repository'
 # require all route classes in /routes folder here:
 require_relative 'lib/routes/login'
 require_relative 'lib/routes/signup' 
+require_relative 'lib/routes/createlisting' 
+require_relative 'lib/routes/makebooking.rb'
+
 require_relative 'lib/routes/dashboard' 
 require_relative 'lib/routes/logout' 
 

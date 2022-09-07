@@ -1,5 +1,8 @@
+ENV['APP_ENV'] = 'test'
+
 require "spec_helper"
 require "rack/test"
+require 'test/unit'
 require_relative "../../app"
 
 def reset_users_table
@@ -97,6 +100,43 @@ describe Application do
       response = post("/login")
       expect(response.status).to eq 200
       expect(response.body).to include('<h1>Login Failure!</h1>')
+    end
+  end
+
+  context "GET /createlisting" do
+    it 'returns the create listing page with input form' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get("/createlisting")
+      
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Name of property:'
+      expect(response.body).to include 'action="/createlisting" method="POST"'
+    end
+  end
+
+  context "POST /createlisting" do
+    it 'creates a listing if the listing does not already exist' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = post("/createlisting", name: "Lovely place", description: "Has a roof", price_per_night: 68, owner_id: 3)
+      expect(response.status).to eq 200
+      expect(response.body).to include "Your space has been successfully added as a listing"
+    end
+    it 'adds space to database' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = post("/createlisting", name: "Lovely place", description: "Has a roof", price_per_night: 68, owner_id: 3)
+      expect(response.status).to eq 200
+      expect(response.body).to include "Your space has been successfully added as a listing"
+      space_repo = SpaceRepository.new
+      expect(space_repo.all.last.name).to eq "Lovely place"
+    end
+  end
+
+  context "GET /makebooking" do
+    it 'Returns the make booking page' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get("/makebooking")
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Submit a new booking request'
     end
   end
 
