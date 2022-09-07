@@ -26,4 +26,5 @@ class Application < Sinatra::Base
 
     return erb(:dashboard)
   end
+  
 end
