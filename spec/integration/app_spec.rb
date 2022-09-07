@@ -105,6 +105,7 @@ describe Application do
       expect(response.body).to include 'action="/createlisting" method="POST"'
     end
   end
+
   context "POST /createlisting" do
     it 'creates a listing if the listing does not already exist' do
       response = post("/login", email: "joe@example.com", password: "password123")
@@ -119,6 +120,15 @@ describe Application do
       expect(response.body).to include "Your space has been successfully added as a listing"
       space_repo = SpaceRepository.new
       expect(space_repo.all.last.name).to eq "Lovely place"
+    end
+  end
+
+  context "GET /makebooking" do
+    it 'Returns the make booking page' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get("/makebooking")
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Submit a new booking request'
     end
   end
 end
