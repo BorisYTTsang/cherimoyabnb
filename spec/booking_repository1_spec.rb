@@ -85,83 +85,106 @@ RSpec.describe BookingRepository do
         expect(bookings[1].booker_id).to eq 6
     end
   end
+  context 'Creating a new booking'
+    describe '#create' do
+      it 'creates a new booking' do
+        repo = BookingRepository.new
 
-  describe '#create' do
-    it 'creates a new booking' do
-      repo = BookingRepository.new
+        new_booking = Booking.new
 
-      new_booking = Booking.new
-
-      new_booking.space_id = 1
-      new_booking.unavailable_from = '2023-04-22'
-      new_booking.unavailable_to = '2023-09-22'
-      new_booking.reason = 'booking'
-      new_booking.booker_id = 3
+        new_booking.space_id = 1
+        new_booking.unavailable_from = '2023-04-22'
+        new_booking.unavailable_to = '2023-09-22'
+        new_booking.reason = 'booking'
+        new_booking.booker_id = 3
 
 
-      repo.create(new_booking)
+        repo.create(new_booking)
 
-      all_bookings = repo.all
-      booking = all_bookings[-1]
-      expect(booking.space_id).to eq 1
-      expect(booking.unavailable_from).to eq '2023-04-22'
-      expect(booking.unavailable_to).to eq '2023-09-22'
-      expect(booking.reason).to eq 'booking'
-      expect(booking.booker_id).to eq 3
+        all_bookings = repo.all
+        booking = all_bookings[-1]
+        expect(booking.space_id).to eq 1
+        expect(booking.unavailable_from).to eq '2023-04-22'
+        expect(booking.unavailable_to).to eq '2023-09-22'
+        expect(booking.reason).to eq 'booking'
+        expect(booking.booker_id).to eq 3
+        expect(repo.create(new_booking)).to eq false
+      end
+      it 'does not create a booking if the space does not exist' do
+        repo = BookingRepository.new
+
+        new_booking = Booking.new
+
+        new_booking.space_id = 15
+        new_booking.unavailable_from = '2023-04-22'
+        new_booking.unavailable_to = '2023-09-22'
+        new_booking.reason = 'booking'
+        new_booking.booker_id = 3
+
+
+        repo.create(new_booking)
+
+        all_bookings = repo.all
+        booking = all_bookings[-1]
+        expect(booking.space_id).to eq 1
+        expect(booking.unavailable_from).to eq '2022-09-22'
+        expect(booking.unavailable_to).to eq '2022-09-25'
+        expect(booking.reason).to eq 'booking'
+        expect(booking.booker_id).to eq 6
     end
-  end
-  describe '#overlaps_existing_booking?' do
-    it 'returns true if a new booking date overlaps the unavailable_to for an existing booking' do
-      repo = BookingRepository.new
+    describe '#overlaps_existing_booking?' do
+      it 'returns true if a new booking date overlaps the unavailable_to for an existing booking' do
+        repo = BookingRepository.new
 
-      new_booking = Booking.new
+        new_booking = Booking.new
 
-      new_booking.space_id = 1
-      new_booking.unavailable_from = '2022-09-19'
-      new_booking.unavailable_to = '2022-09-22'
-      new_booking.reason = 'booking'
-      new_booking.booker_id = 1
+        new_booking.space_id = 1
+        new_booking.unavailable_from = '2022-09-19'
+        new_booking.unavailable_to = '2022-09-22'
+        new_booking.reason = 'booking'
+        new_booking.booker_id = 1
 
-      expect(repo.send(:overlaps_existing_booking?, new_booking)).to eq true
-    end
-    it 'returns true if a new booking date overlaps the unavailable_from for an existing booking' do
-      repo = BookingRepository.new
+        expect(repo.send(:overlaps_existing_booking?, new_booking)).to eq true
+      end
+      it 'returns true if a new booking date overlaps the unavailable_from for an existing booking' do
+        repo = BookingRepository.new
 
-      new_booking = Booking.new
+        new_booking = Booking.new
 
-      new_booking.space_id = 1
-      new_booking.unavailable_from = '2022-09-06'
-      new_booking.unavailable_to = '2022-09-11'
-      new_booking.reason = 'booking'
-      new_booking.booker_id = 1
+        new_booking.space_id = 1
+        new_booking.unavailable_from = '2022-09-06'
+        new_booking.unavailable_to = '2022-09-11'
+        new_booking.reason = 'booking'
+        new_booking.booker_id = 1
 
-      expect(repo.send(:overlaps_existing_booking?, new_booking)).to eq true
-    end
-    it 'returns true if a new booking date unavailable_from equals unavailable_to for an existing booking' do
-      repo = BookingRepository.new
+        expect(repo.send(:overlaps_existing_booking?, new_booking)).to eq true
+      end
+      it 'returns true if a new booking date unavailable_from equals unavailable_to for an existing booking' do
+        repo = BookingRepository.new
 
-      new_booking = Booking.new
+        new_booking = Booking.new
 
-      new_booking.space_id = 1
-      new_booking.unavailable_from = '2022-09-20'
-      new_booking.unavailable_to = '2022-09-22'
-      new_booking.reason = 'booking'
-      new_booking.booker_id = 1
+        new_booking.space_id = 1
+        new_booking.unavailable_from = '2022-09-20'
+        new_booking.unavailable_to = '2022-09-22'
+        new_booking.reason = 'booking'
+        new_booking.booker_id = 1
 
-      expect(repo.send(:overlaps_existing_booking?, new_booking)).to eq true
-    end
-    it 'returns false if no overlap' do
-      repo = BookingRepository.new
+        expect(repo.send(:overlaps_existing_booking?, new_booking)).to eq true
+      end
+      it 'returns false if no overlap' do
+        repo = BookingRepository.new
 
-      new_booking = Booking.new
+        new_booking = Booking.new
 
-      new_booking.space_id = 1
-      new_booking.unavailable_from = '2022-09-27'
-      new_booking.unavailable_to = '2022-09-28'
-      new_booking.reason = 'booking'
-      new_booking.booker_id = 1
+        new_booking.space_id = 1
+        new_booking.unavailable_from = '2022-09-27'
+        new_booking.unavailable_to = '2022-09-28'
+        new_booking.reason = 'booking'
+        new_booking.booker_id = 1
 
-      expect(repo.send(:overlaps_existing_booking?, new_booking)).to eq false
+        expect(repo.send(:overlaps_existing_booking?, new_booking)).to eq false
+      end
     end
   end
 end

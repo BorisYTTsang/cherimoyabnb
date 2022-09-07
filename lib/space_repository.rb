@@ -25,15 +25,11 @@ class SpaceRepository
     def find(id)
         sql = 'SELECT * FROM spaces WHERE id = $1;'
         params = [id]
-        result_set = DatabaseConnection.exec_params(sql, params)[0]
-        space = Space.new
-        space.id = result_set['id']
-        space.name = result_set['name']
-        space.description = result_set['description']
-        space.price_per_night = result_set['price_per_night']
-        space.owner_id = result_set['owner_id']
+        result_set = DatabaseConnection.exec_params(sql, params)
+        
+        spaces = create_space_object_from_table(result_set)
 
-        return space
+        return spaces[0]
     end
 
     def create(space)
@@ -54,4 +50,20 @@ class SpaceRepository
 
         return result_set1
     end
+
+    private
+
+    def create_space_object_from_table(result)
+        spaces = []
+        result.each do |record|
+            space = Space.new
+            space.id = record['id']
+            space.name = record['name']
+            space.description = record['description']
+            space.price_per_night = record['price_per_night']
+            space.owner_id = record['owner_id']
+            spaces << space
+        end
+        return spaces
+      end
 end
