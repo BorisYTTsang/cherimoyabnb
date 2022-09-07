@@ -8,18 +8,28 @@
       <p>Available:
       </p>
       <div>Filter:<form action="/dashboard" method="POST">
-  Available from:<input type="text" name="available_from">
-          Available to:<input type="text" name="available_to">
-    Maximum price per night:<input type="text" name="max_price">
+                    Available from:<input type="text" name="available_from">
+                            Available to:<input type="text" name="available_to">
+                      Maximum price per night:<input type="text" name="max_price">
 
-  <input type="submit" value="Filter">
-</form></div>
+                    <input type="submit" value="Filter">
+                  </form></div>
       <p> </p>
-    <%@spaces.map do |space|%>
-      <div><%=space.name%>
-          <p>Price per night:<%=space.price_per_night%></p>
-          <a href="/makebooking">Book</a></div>
-    <%end%>
-
+      <%if not @spaces.nil?%>
+        <%@spaces.map do |space|%>
+          <div><%=space.name%>
+              <p>Price per night: £<%=space.price_per_night%></p>
+              <a href="/makebooking">Book</a></div>
+        <%end%>
+      <%end%>
+      <%if not @filtered_spaces.nil?%>
+        <%@filtered_spaces.map do |space|%>
+          <div><%=space.name%>
+              <p>Price per night: £<%=space.price_per_night%></p>
+              <a href="/makebooking">Book</a></div>
+        <%end%>
+      <%else%>
+        <h1>There are no properties available to book</h1>
+      <%end%>
   </body>
 </html>
