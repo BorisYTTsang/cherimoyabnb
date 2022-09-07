@@ -5,9 +5,9 @@
     <p style="color:red;"><%=@check_login%></p>
     <form action="/login" method="POST">
       <p>Email</p>
-        <input type="text" name="email">
+        <input type="text" name="email" required/>
       <p>Password</p>
-  <input type="text" name="password">
+  <input type="text" name="password" required/>
       <p> </p>
       <input type="submit" value="Log in">
     </form>
