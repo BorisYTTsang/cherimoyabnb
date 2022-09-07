@@ -14,12 +14,13 @@ class Application < Sinatra::Base
       new_booking.space_id = session[:space_id]
       new_booking.unavailable_from = params[:date_from]
       new_booking.unavailable_to = params[:date_to]
-      new_booking.reason = params[:reason]
+      new_booking.reason = 'booking'
       new_booking.booker_id = session[:user_id]
       if repo.create(new_booking)
-        return erb(:makebookingsuccess)
+        @success = true
       else
-        return erb(:makebookingfailure)
+        @success = false
       end
+      return erb(:makebooking)
   end
 end

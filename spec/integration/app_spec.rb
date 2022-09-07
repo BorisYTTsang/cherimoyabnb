@@ -172,4 +172,22 @@ describe Application do
       expect(response.body).to include "Villa Adjacent to Lake in Porthcurno"
     end
   end
+
+  context "POST /makebooking" do
+    it 'Returns the makebooking page after a booking' do
+      response = post("/makebooking", space_id: 1, unavailable_from: '2022-01-01', unavailable_to: '2022-01-02', booker_id: 3)
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Submit a new booking request'
+    end
+    xit 'Returns the makebooking page with a success prompt after a booking request' do
+      response = post("/makebooking", space_id: 1, unavailable_from: '2022-01-01', unavailable_to: '2022-01-02', booker_id: 3)
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Your booking request was sent!'
+    end
+    xit 'Returns the makebooking page with a failure prompt after a booking request' do
+      response = post("/makebooking", space_id: 1, unavailable_from: '2022-01-01', unavailable_to: '2022-01-02', booker_id: 3)
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Your booking request failed, the booking overlaps an existing booking. Please try again.'
+    end
+  end
 end
