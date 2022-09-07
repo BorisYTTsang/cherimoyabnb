@@ -190,4 +190,12 @@ describe Application do
       expect(response.body).to include 'Your booking request failed, the booking overlaps an existing booking. Please try again.'
     end
   end
+
+  context "GET /requests" do
+    it 'Returns the requests page' do
+      response = get('/requests')
+      expect(response.status).to eq 200
+      expect(response.body).to include "Requests I've made"
+    end
+  end
 end
