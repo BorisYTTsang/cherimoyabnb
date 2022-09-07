@@ -1,8 +1,9 @@
 require 'request_repository'
+require 'request'
 
 def reset_requests_table
-    seed_sql = File.read('spec/seeds_requests.sql')
-    connection = PG.connect({ host: '127.0.0.1', dbname: 'requests' })
+    seed_sql = File.read('spec/seeds/requests_seed.sql')
+    connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
     connection.exec(seed_sql)
   end
   
@@ -20,19 +21,19 @@ RSpec.describe RequestRepository do
 
             requests = repo.all
 
-            requests.length # =>  2
+            expect(requests.length).to eq 7
 
             expect(requests[0].id).to eq 1
-            expect(requests[0].space_id).to eq 'David'
-            expect(requests[0].user_id).to eq 'April 2022'
-            expect(requests[0].booker_id).to eq 'April 2022'
-            expect(requests[0].booked?_id).to eq 'April 2022'
+            expect(requests[0].space_id).to eq '2'
+            expect(requests[0].owner_id).to eq '1'
+            expect(requests[0].booker_id).to eq '4'
+            expect(requests[0].booked).to eq 'f'
 
             expect(requests[1].id).to eq 2
-            expect(requests[1].space_id).to eq 'Anna'
-            expect(requests[1].user_id).to eq 'May 2022'
-            expect(requests[1].booker_id).to eq 'April 2022'
-            expect(requests[1].booked?_id).to eq 'April 2022'
+            expect(requests[1].space_id).to eq '8'
+            expect(requests[1].owner_id).to eq '3'
+            expect(requests[1].booker_id).to eq '2'
+            expect(requests[1].booked).to eq 'f'
         end
     end
 
@@ -45,10 +46,10 @@ RSpec.describe RequestRepository do
             request = repo.find(1)
 
             expect(request.id).to eq 1
-            expect(request.space_id).to eq 'David'
-            expect(request.user_id).to eq 'April 2022'
-            expect(request.booker_id).to eq 'April 2022'
-            expect(request.booked).to eq 'April 2022'
+            expect(request.space_id).to eq '2'
+            expect(request.owner_id).to eq '1'
+            expect(request.booker_id).to eq '4'
+            expect(request.booked).to eq 'f'
         end
     end
 
@@ -56,22 +57,23 @@ RSpec.describe RequestRepository do
     # create a new request
     describe '#create' do
         it 'creates a new request' do
-            new_requests = Request.new
+            new_request = Request.new
+            repo = RequestRepository.new
 
-            new_request.space_id # => 'York'
-            new_request.user_id # => '12/09/2022'
-            new_request.booker_id # => '26/09/2022'
-            new_request.booked? # => 'Rented out'
+            new_request.space_id = 18
+            new_request.owner_id = 19
+            new_request.booker_id = 20
+            new_request.booked = 'f'
 
 
             repo.create(new_request)
 
             request = repo.all.last
 
-            expect(request.space_id).to eq 'York'
-            expect(request.user_id).to eq '12/09/2022'
-            expect(request.booker_id).to eq '26/09/2022'
-            expect(request.booked?).to eq 'Rented out'
+            expect(request.space_id).to eq '9'
+            expect(request.owner_id).to eq '3'
+            expect(request.booker_id).to eq '4'
+            expect(request.booked?).to eq 'f'
         end
     end
 
