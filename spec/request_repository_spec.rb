@@ -26,13 +26,13 @@ RSpec.describe RequestRepository do
             expect(requests[0].space_id).to eq 'David'
             expect(requests[0].user_id).to eq 'April 2022'
             expect(requests[0].booker_id).to eq 'April 2022'
-            expect(requests[0].booked?_id).to eq 'April 2022'
+            expect(requests[0].booked_id).to eq 'April 2022'
 
             expect(requests[1].id).to eq 2
             expect(requests[1].space_id).to eq 'Anna'
             expect(requests[1].user_id).to eq 'May 2022'
             expect(requests[1].booker_id).to eq 'April 2022'
-            expect(requests[1].booked?_id).to eq 'April 2022'
+            expect(requests[1].booked_id).to eq 'April 2022'
         end
     end
 
@@ -61,7 +61,7 @@ RSpec.describe RequestRepository do
             new_request.space_id # => 'York'
             new_request.user_id # => '12/09/2022'
             new_request.booker_id # => '26/09/2022'
-            new_request.booked? # => 'Rented out'
+            new_request.booked # => 'Rented out'
 
 
             repo.create(new_request)
@@ -71,7 +71,7 @@ RSpec.describe RequestRepository do
             expect(request.space_id).to eq 'York'
             expect(request.user_id).to eq '12/09/2022'
             expect(request.booker_id).to eq '26/09/2022'
-            expect(request.booked?).to eq 'Rented out'
+            expect(request.booked).to eq 'Rented out'
         end
     end
 

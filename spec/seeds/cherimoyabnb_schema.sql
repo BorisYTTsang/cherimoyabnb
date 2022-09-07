@@ -91,6 +91,6 @@ CREATE TABLE "public"."requests" (
         foreign key(booker_id)
       references users(id)
       on delete cascade,
-    "booked?" bool,
+    "booked" bool,
     PRIMARY KEY ("id")
 );
