@@ -31,9 +31,17 @@ describe Application do
   end
 
   context "GET /" do
-    it "redirects to login page" do
+    it "redirects to login page when not logged in" do
       response = get("/")
       expect(response.status).to eq 302
+      expect(response.header['Location']).to include('/login')
+    end
+    
+    it "redirects to dashboard when logged in" do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get("/")
+      expect(response.status).to eq 302
+      expect(response.header['Location']).to include('dashboard')
     end
   end
 
@@ -129,6 +137,31 @@ describe Application do
       response = get("/makebooking")
       expect(response.status).to eq 200
       expect(response.body).to include 'Submit a new booking request'
+    end
+  end
+
+  context "GET /logout" do
+    it "logs user out of session and redirects to /" do
+      response = get("/logout")
+      expect(response.status).to eq 302
+      expect(response.header["Location"]).to eq "http://example.org/"
+      response = get("/dashboard")
+      expect(response.status).to eq 302
+    end
+  end
+  
+  context "GET /dashboard" do
+    it "returns dashboard when logged in" do
+      post("/login", email: "massivelykinjang@example.com", password: "d@d@!123")
+      response = get("/dashboard")
+      expect(response.status).to eq 200
+      expect(response.body).to include('<h1>Dashboard</h1>')
+    end
+
+    it "redirects to /login when not logged in" do
+      response = get("/dashboard")
+      expect(response.status).to eq 302
+      expect(response.header['Location']).to include('/login')
     end
   end
 end

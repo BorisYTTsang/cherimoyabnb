@@ -53,4 +53,81 @@ describe SpaceRepository do
         end
     end
 
+    describe '#filter' do
+        context "if max price is £35, then £70" do
+            it 'returns an array of 2, then 8 records respectively' do
+                  spaces_repo = SpaceRepository.new
+                  expect(spaces_repo.filter("2022-01-01", "2022-01-02", "35").size).to eq 2
+                  expect(spaces_repo.filter("2022-01-01", "2022-01-02", "70").size).to eq 8
+            end
+        end
+       
+        context 'if filter min and max days do not coincide with any unavailable dates, and max price £300' do
+            it 'returns array with all spaces (size 11)' do
+                spaces_repo = SpaceRepository.new
+                new_book = Booking.new
+                bookings = BookingRepository.new
+                result = spaces_repo.filter("2022-01-03","2022-08-15","300")
+                expect(result.size).to eq 11
+                expect(result[0].name).to eq("Beautiful Seaside Cottage in Hastings")
+            end
+        end
+       
+        context 'if min_date = ' do
+            it 'not overlapping' do
+                spaces_repo = SpaceRepository.new
+                new_book = Booking.new
+                bookings = BookingRepository.new
+
+                new_book.space_id = 1
+                new_book.unavailable_from = "2022-01-01"
+                new_book.unavailable_to = "2022-01-02"
+                new_book.reason = "meep"
+                new_book.booker_id = 1
+                expect(spaces_repo.filter("2022-01-03","2022-02-01","45")[0].name).to eq("Beautiful Seaside Cottage in Hastings")
+            end
+        end
+       
+        # context 'if filter does not overlap other bookings' do
+        #     it 'not overlapping' do
+        #         spaces_repo = SpaceRepository.new
+        #         new_book = Booking.new
+        #         bookings = BookingRepository.new
+
+        #         new_book.space_id = 1
+        #         new_book.unavailable_from = "2022-01-01"
+        #         new_book.unavailable_to = "2022-01-02"
+        #         new_book.reason = "meep"
+        #         new_book.booker_id = 1
+        #         expect(spaces_repo.filter("2022-01-03","2022-02-01","45")[0].name).to eq("Beautiful Seaside Cottage in Hastings")
+        #     end
+        # end
+
+        context 'if min_date is 2022-09-01 and max_date is 2022-09-30, max price £300 ' do
+            it 'returns an array with 10 records (despite one space having two consecutive bookings)' do
+                spaces_repo = SpaceRepository.new
+                new_book = Booking.new
+                bookings = BookingRepository.new
+                # result = spaces_repo.filter("2022-09-01","2022-09-30","300")
+                result = spaces_repo.filter("2022-10-01","2022-10-30","300")
+                expect(result.size).to eq 10
+            end
+        end
+
+        # context 'if filter does overlap other bookings' do
+        #     it 'overlapping' do
+        #         spaces_repo = SpaceRepository.new
+        #         new_book = Booking.new
+        #         bookings = BookingRepository.new
+
+        #         new_book.space_id = 1
+        #         new_book.unavailable_from = "2022-01-01"
+        #         new_book.unavailable_to = "2022-01-05"
+        #         new_book.reason = "meep"
+        #         new_book.booker_id = 1
+        #         expect(spaces_repo.filter("2022-01-03","2022-02-01","45")[0].name).to eq("Villa Adjacent to Lake in Porthcurno")
+        #     end
+        # end
+    end
+
 end

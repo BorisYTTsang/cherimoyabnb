@@ -9,11 +9,14 @@ require_relative 'lib/request_repository'
 require_relative 'lib/space_repository'
 require_relative 'lib/user_repository'
 
+# require all route classes in /routes folder here:
 require_relative 'lib/routes/login'
 require_relative 'lib/routes/signup' 
 require_relative 'lib/routes/createlisting' 
 require_relative 'lib/routes/makebooking.rb'
 
+require_relative 'lib/routes/dashboard' 
+require_relative 'lib/routes/logout' 
 
 DatabaseConnection.connect
 
@@ -36,7 +39,11 @@ class Application < Sinatra::Base
   enable :sessions
 
   get "/" do
-    redirect "/login"
+    if session[:user_id].nil?
+      redirect "/login"
+    else
+      redirect "/dashboard"
+    end
   end
 
   # subsequent routes can be found in /lib/routes files

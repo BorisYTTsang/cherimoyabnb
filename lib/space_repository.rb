@@ -1,4 +1,5 @@
 require_relative 'space.rb'
+require_relative 'booking_repository.rb'
 
 class SpaceRepository
 
@@ -62,6 +63,28 @@ class SpaceRepository
         return result_set1
     end
 
+    def filter(min_date,max_date,max_price)
+        all_spaces = self.all # => array of spaces
+        valid_spaces = all_spaces.select{|space| space.price_per_night.to_i < max_price.to_i}
+        
+        #booking check
+        spaces_to_show = []
+        valid_spaces.each do |space|
+            
+            potential_booking = Booking.new
+            potential_booking.unavailable_from = min_date
+            potential_booking.unavailable_to = max_date
+            potential_booking.space_id = space.id
+
+            bookings = BookingRepository.new
+
+            unless bookings.overlaps_existing_booking?(potential_booking)
+                spaces_to_show << space
+            end 
+        end
+        return spaces_to_show
+    end
+
     private
 
     def create_space_object_from_table(result)
@@ -76,5 +99,6 @@ class SpaceRepository
             spaces << space
         end
         return spaces
-      end
+    end
+      
 end

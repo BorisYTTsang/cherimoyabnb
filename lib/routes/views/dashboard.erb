@@ -1,15 +1,10 @@
 <html>
   <head></head>
   <body>
+    <h1>Welcome, <%= @user_name %>!</h1>
     <h1>Dashboard</h1>
-    <p><a href="/login">Log out</a> | <a href="/requests">Requests</a> | <a href="/listings">Listings</a> </p>
+    <p><a href="/logout">Log out</a> | <a href="/requests">Requests</a> | <a href="/listings">Listings</a> </p>
 
-    <div>Booked:</div>
-    <p></p>
-          <%@spaces_booked.map do |space|%>
-        <div><%=space.name%></div>
-          <a href="/booking">Check booking</a>
-    <%end%>
       <p>Available:
       </p>
       <div>Filter:<form action="/dashboard" method="POST">
@@ -22,8 +17,8 @@
       <p> </p>
     <%@spaces.map do |space|%>
       <div><%=space.name%>
-          <p>Price per night:<%=space.price%></p>
-          <a href="/space">Book</a></div>
+          <p>Price per night:<%=space.price_per_night%></p>
+          <a href="/makebooking">Book</a></div>
     <%end%>
 
   </body>
