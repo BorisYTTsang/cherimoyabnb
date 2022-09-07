@@ -20,5 +20,6 @@ class Application < Sinatra::Base
         return erb(:makebookingsuccess)
       else
         return erb(:makebookingfailure)
+      end
   end
 end
