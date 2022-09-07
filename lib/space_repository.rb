@@ -64,10 +64,9 @@ class SpaceRepository
     end
 
     def filter(min_date,max_date,max_price)
-        all_spaces = self.all # => array of spaces
+        all_spaces = self.all 
         valid_spaces = all_spaces.select{|space| space.price_per_night.to_i < max_price.to_i}
-        
-        #booking check
+
         spaces_to_show = []
         valid_spaces.each do |space|
             
@@ -80,7 +79,7 @@ class SpaceRepository
 
             unless bookings.overlaps_existing_booking?(potential_booking)
                 spaces_to_show << space
-            end 
+            end     
         end
         return spaces_to_show
     end

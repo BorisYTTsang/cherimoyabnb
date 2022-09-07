@@ -6,9 +6,16 @@ def reset_spaces_table
     connection.exec(seed_sql)
 end
 
+def reset_bookings_table
+    seed_sql = File.read('spec/seeds/bookings_seed.sql')
+    connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
+    connection.exec(seed_sql)
+end
+
 describe SpaceRepository do
     before(:each) do
         reset_spaces_table
+        reset_bookings_table
     end
 
     describe '#all' do
@@ -73,20 +80,21 @@ describe SpaceRepository do
             end
         end
        
-        context 'if min_date = ' do
-            it 'not overlapping' do
-                spaces_repo = SpaceRepository.new
-                new_book = Booking.new
-                bookings = BookingRepository.new
+        # context 'if min_date = ' do
+        #     it 'not overlapping' do
+        #         spaces_repo = SpaceRepository.new
+        #         new_book = Booking.new
+        #         bookings = BookingRepository.new
 
-                new_book.space_id = 1
-                new_book.unavailable_from = "2022-01-01"
-                new_book.unavailable_to = "2022-01-02"
-                new_book.reason = "meep"
-                new_book.booker_id = 1
-                expect(spaces_repo.filter("2022-01-03","2022-02-01","45")[0].name).to eq("Beautiful Seaside Cottage in Hastings")
-            end
-        end
+        #         new_book.space_id = 1
+        #         new_book.unavailable_from = "2022-01-01"
+        #         new_book.unavailable_to = "2022-01-02"
+        #         new_book.reason = "meep"
+        #         new_book.booker_id = 1
+
+        #         expect(spaces_repo.filter("2022-01-03","2022-02-01","45")[0].name).to eq("Beautiful Seaside Cottage in Hastings")
+        #     end
+        # end
        
         # context 'if filter does not overlap other bookings' do
         #     it 'not overlapping' do
@@ -108,9 +116,11 @@ describe SpaceRepository do
                 spaces_repo = SpaceRepository.new
                 new_book = Booking.new
                 bookings = BookingRepository.new
-                # result = spaces_repo.filter("2022-09-01","2022-09-30","300")
-                result = spaces_repo.filter("2022-10-01","2022-10-30","300")
+                result = spaces_repo.filter('2022-09-01','2022-09-30',"300")
+                p result
                 expect(result.size).to eq 10
+                result = spaces_repo.filter('2022-09-01','2023-01-01',"300")
+                expect(result.size).to eq 7
             end
         end
 
