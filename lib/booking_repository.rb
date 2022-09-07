@@ -25,7 +25,7 @@ class BookingRepository
     sql = 'SELECT * FROM bookings WHERE space_id = $1;'
     params = [space_id]
     result = DatabaseConnection.exec_params(sql, params)
-
+    p create_booking_objects_from_table(result)
     return create_booking_objects_from_table(result)
   end
 
@@ -43,8 +43,9 @@ class BookingRepository
   end
 
   def overlaps_existing_booking?(new_booking)
+    p new_booking.space_id
     existing_bookings = find_by_space(new_booking.space_id)
-
+    p existing_bookings
     existing_bookings.each do |existing_booking|
       return true if overlaps?(existing_booking, new_booking)
     end
