@@ -19,6 +19,7 @@ CREATE TABLE "public"."users" (
     "name" text,
     "email" text,
     "password" text,
+    "mobile" int,
     PRIMARY KEY ("id")
 );
 
