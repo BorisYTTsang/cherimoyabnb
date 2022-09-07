@@ -42,6 +42,15 @@ class BookingRepository
     return true
   end
 
+  def overlaps_existing_booking?(new_booking)
+    existing_bookings = find_by_space(new_booking.space_id)
+
+    existing_bookings.each do |existing_booking|
+      return true if overlaps?(existing_booking, new_booking)
+    end
+
+    return false
+  end
 
 
   private
@@ -60,16 +69,6 @@ class BookingRepository
     end
     
     return bookings
-  end
-
-  def overlaps_existing_booking?(new_booking)
-    existing_bookings = find_by_space(new_booking.space_id)
-
-    existing_bookings.each do |existing_booking|
-      return true if overlaps?(existing_booking, new_booking)
-    end
-
-    return false
   end
 
   def overlaps?(existing_booking, new_booking)
