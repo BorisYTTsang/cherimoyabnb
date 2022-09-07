@@ -5,7 +5,7 @@ class Application < Sinatra::Base
     space_repo = SpaceRepository.new
     @user = user_repo.find(session[:user_id])
     @space = space_repo.find(session[:space_id])
-    return erb(:createlisting)
+    return erb(:makebooking)
   end
 
   # post "/makebooking" do
