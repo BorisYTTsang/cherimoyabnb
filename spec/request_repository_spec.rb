@@ -5,7 +5,7 @@ def reset_requests_table
     seed_sql = File.read('spec/seeds/requests_seed.sql')
     connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
     connection.exec(seed_sql)
-  end
+end
   
 RSpec.describe RequestRepository do
     before(:each) do 
