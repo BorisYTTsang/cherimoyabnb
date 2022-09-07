@@ -112,5 +112,13 @@ describe Application do
       expect(response.status).to eq 200
       expect(response.body).to include "Your space has been successfully added as a listing"
     end
+    it 'adds space to database' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = post("/createlisting", name: "Lovely place", description: "Has a roof", price_per_night: 68, owner_id: 3)
+      expect(response.status).to eq 200
+      expect(response.body).to include "Your space has been successfully added as a listing"
+      space_repo = SpaceRepository.new
+      expect(space_repo.all.last.name).to eq "Lovely place"
+    end
   end
 end
