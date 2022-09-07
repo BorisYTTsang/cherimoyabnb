@@ -164,4 +164,12 @@ describe Application do
       expect(response.header['Location']).to include('/login')
     end
   end
+  context "POST /dashboard" do
+    it "Returns a filtered list of properties when dates and price entered" do
+      post("/login", email: "massivelykinjang@example.com", password: "d@d@!123")
+      response = post("/dashboard", available_from: "2022-01-01", available_to: "2022-01-02", max_price: "70")
+      expect(response.status).to eq 200
+      expect(response.body).to include "Villa Adjacent to Lake in Porthcurno"
+    end
+  end
 end
