@@ -15,7 +15,7 @@ RSpec.describe RequestRepository do
     # 1
     # Get all requests
     describe '# get' do
-        xit 'gets all request' do
+        it 'gets all request' do
 
             repo = RequestRepository.new
 
@@ -27,20 +27,20 @@ RSpec.describe RequestRepository do
             expect(requests[0].space_id).to eq '2'
             expect(requests[0].owner_id).to eq '1'
             expect(requests[0].booker_id).to eq '4'
-            expect(requests[0].booked).to eq 'f'
+            expect(requests[0].booked).to eq 'false'
 
             expect(requests[1].id).to eq 2
             expect(requests[1].space_id).to eq '8'
             expect(requests[1].owner_id).to eq '3'
             expect(requests[1].booker_id).to eq '2'
-            expect(requests[1].booked).to eq 'f'
+            expect(requests[1].booked).to eq 'false'
         end
     end
 
     # 2
     # Get a single request
     describe '# find' do
-        xit 'finds and returns a single request' do
+        it 'finds and returns a single request' do
             repo = RequestRepository.new
 
             request = repo.find(1)
@@ -49,7 +49,7 @@ RSpec.describe RequestRepository do
             expect(request.space_id).to eq '2'
             expect(request.owner_id).to eq '1'
             expect(request.booker_id).to eq '4'
-            expect(request.booked).to eq 'f'
+            expect(request.booked).to eq 'false'
         end
     end
 
@@ -60,10 +60,10 @@ RSpec.describe RequestRepository do
             new_request = Request.new
             repo = RequestRepository.new
 
-            new_request.space_id = 18
-            new_request.owner_id = 19
-            new_request.booker_id = 20
-            new_request.booked = 'f'
+            new_request.space_id = '9'
+            new_request.owner_id = '3'
+            new_request.booker_id = '4'
+            new_request.booked = 'false'
 
 
             repo.create(new_request)
@@ -73,7 +73,7 @@ RSpec.describe RequestRepository do
             expect(request.space_id).to eq '9'
             expect(request.owner_id).to eq '3'
             expect(request.booker_id).to eq '4'
-            expect(request.booked?).to eq 'f'
+            expect(request.booked).to eq 'false'
         end
     end
 
