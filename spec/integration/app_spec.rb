@@ -96,14 +96,21 @@ describe Application do
   end
 
   context "GET /createlisting" do
-    xit 'returns the create listing page with input form' do
-
-      browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
-      response = browser.get("/createlisting")
+    it 'returns the create listing page with input form' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get("/createlisting")
       
       expect(response.status).to eq 200
       expect(response.body).to include 'Name of property:'
       expect(response.body).to include 'action="/createlisting" method="POST"'
+    end
+  end
+  context "POST /createlisting" do
+    it 'creates a listing if the listing does not already exist' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = post("/createlisting", name: "Lovely place", description: "Has a roof", price_per_night: 68, owner_id: 3)
+      expect(response.status).to eq 200
+      expect(response.body).to include "Your space has been successfully added as a listing"
     end
   end
 end

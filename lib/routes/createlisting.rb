@@ -7,15 +7,16 @@ class Application < Sinatra::Base
     return erb(:createlisting)
   end
 
-  # post "/signup" do
+  post "/createlisting" do
 
-  #     repo = UserRepository.new
-  #     new_user = User.new
-  #     new_user.name = params[:name]
-  #     new_user.email = params[:email]
-  #     new_user.password = params[:password]
-  #     repo.create(new_user)
-  #     return erb(:login)
+      repo = SpaceRepository.new
+      new_space = Space.new
+      new_space.name = params[:name]
+      new_space.description = params[:description]
+      new_space.price_per_night = params[:price_per_night]
+      new_space.owner_id = params[:owner_id]
+      repo.create(new_space)
+      return erb(:createlistingsuccess)
 
-  # end
+  end
 end
