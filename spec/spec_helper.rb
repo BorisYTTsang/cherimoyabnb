@@ -6,6 +6,7 @@ ENV['ENV'] = 'test'
 
 DatabaseConnection.connect
 
+
 require 'simplecov'
 require 'simplecov-console'
 
