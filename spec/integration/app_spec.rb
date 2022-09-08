@@ -210,9 +210,17 @@ describe Application do
 
   context "route: GET /requests" do
     it 'Returns the requests page' do
+      response = post("/login", email: "joe@example.com", password: "password123")
       response = get('/requests')
       expect(response.status).to eq 200
       expect(response.body).to include "Requests I've received"
+    end
+
+    it 'Returns the requests page for Joe, showing a received request' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get('/requests')
+      expect(response.status).to eq 200
+      expect(response.body).to include "2022-11-01"
     end
   end
 end

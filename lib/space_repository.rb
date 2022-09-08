@@ -34,7 +34,7 @@ class SpaceRepository
     end
 
     def find_by_name(name)
-        sql = 'SELECT * FROM spaces WHERE id = $1;'
+        sql = 'SELECT * FROM spaces WHERE name = $1;'
         params = [name]
         result_set = DatabaseConnection.exec_params(sql, params)
         
