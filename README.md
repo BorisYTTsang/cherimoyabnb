@@ -27,7 +27,7 @@ A functional AirBnB analogue site created using Ruby, PostgreSQL and Heroku.
 </details>
 
 ### Installation/Usage
-Install Sinatra ruby gem - https://sinatrarb.com/
+Install Sinatra ruby gem - https://sinatrarb.com/<br>
 Install PG gem - https://github.com/ged/ruby-pg
 
 ### Group Resources

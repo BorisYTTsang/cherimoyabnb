@@ -1,45 +1,54 @@
 <html>
-  <head></head>
-  <body>
-    <h1>Welcome, <%= @user_name %>!</h1>
-    <h1>Dashboard</h1>
-    <p><a href="/logout">Log out</a> | <a href="/requests">Requests</a> | <a href="/createlisting">Create a listing</a> </p>
+  <head>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+  </head>
 
-      <p>Available:</p>
-      <div>Filter:<form action="/dashboard" method="POST">
-                    Available from:<input type="text" name="available_from">
-                    Available to:<input type="text" name="available_to">
-                    Maximum price per night:<input type="text" name="max_price">
+  <body class="dashboard">
+  <div class="logo">
+  <img class="dashboard" src="/images/cherimoya.png">
+  </div>
+    <h1>Welcome back to CherimoyaBnB, <%= @user_name %>!</h1>
+    <p>&ensp;<a href="/logout">Log out</a> &ensp;|&ensp; <a href="/requests">Requests</a> &ensp;|&ensp; <a href="/createlisting">Create a listing</a> </p>
 
-                    <input type="submit" value="Filter">
-                  </form>
-      </div>
-      
-      <br>
-      
+     <!-- <p>Available:</p> -->
+      <div class="filter"><form action="/dashboard" method="POST">
+        Available from:<input type="text" name="available_from">
+        Available to:<input type="text" name="available_to">
+        Maximum price per night:<input type="text" name="max_price">
+
+  <input type="submit" value="Filter">
+</form></div>
+      <p> </p>
       <%if not @spaces.nil?%>
-        <%@spaces.map do |space|%>
-          <div><%=space.name%>
-              <p>Price per night: £<%=space.price_per_night%></p>
-              <form action="/makebooking" method="GET">
+        <% @spaces.map do |space| %>
+          <div class="space_wrapper">
+          <!-- <span class="link"></span> -->
+            <p class="space_name"><%= space.name %></p>
+            <p class="space_name">Price per night: £<%= space.price_per_night %></p>
+            <form action="/makebooking" method="GET">
                 <input type='hidden' name='space_id' value='<%=space.id%>'/>
                 <input type='submit' value='Book now'/>
-              </form>
+            </form>
           </div>
         <%end%>
       <%end%>
 
       <%if not @filtered_spaces.nil?%>
         <%@filtered_spaces.map do |space|%>
-          <div><%=space.name%>
-              <p>Price per night: £<%=space.price_per_night%></p>
+          <div class="space_wrapper">
+          <span class="link"></span>
+              <p class="space_name"><%= space.name %></p>
+              <p class="space_name">Price per night: £<%= space.price_per_night %></p>
+
               <form action="/makebooking" method="GET">
                 <input type='hidden' name='space_id' value='<%=space.id%>'/>
                 <input type='submit' value='Book now'/>
               </form>
+
           </div>
         <%end%>
       <%end%>
-
+  <div class="pages_scroller"><h4 style="text-align: center;">Page 1 / 1</h4></div>
   </body>
 </html>

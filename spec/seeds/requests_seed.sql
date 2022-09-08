@@ -1,3 +1,5 @@
+SET client_min_messages = error;
+
 TRUNCATE TABLE "public"."requests" RESTART IDENTITY CASCADE;
 ALTER SEQUENCE requests_id_seq RESTART WITH 1;
 

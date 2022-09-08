@@ -1,0 +1,183 @@
+/* Style credential (sign-up, log-in) input fields */
+input.credentials {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+/* Style form submit buttons */
+input[type=submit] {
+  background-color: #5fd2ae;
+  color: white;
+}
+
+/* Styling for input containers */
+.container {
+  background-color: #f1f1f1;
+}
+
+/* Sign-Up page Cherimoya image */
+.signup-header-img {
+  width: 100%;
+  height: 80px;
+  object-fit: scale-down;
+  background: url('/images/cherimoya.png');
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: 0% 50%;
+}
+
+/* Log-In page Triple L's image */
+.login-header-img {
+  width: 100%;
+  height: 80px;
+  object-fit: scale-down;
+  background: url('/images/login-logo.png');
+  background-repeat: no-repeat;
+  background-size: 135.75px;
+  background-position: -1.75% 50%;
+}
+
+/* Dashboard Cherimoya icon sizing */
+img.dashboard {
+  width: 80px;
+  height: 80px;
+}
+
+/* Container for dashboard cherimoya (to crop) */
+.logo {
+  height: 70px;
+}
+
+/* Body styling for login and signup pages */
+body.credentials {
+  background-color: #f1f1f1;
+  /* padding: 50px; */
+  padding-top: 2%;
+}
+
+/* Body styling for dashboard and other pages */
+body.dashboard {
+  background-color: #f1f1f1;
+}
+
+/* Styling for h1 text */
+h1 {
+  font-family:'Trebuchet MS', 'sans-serif';
+  overflow-wrap: break-word;
+}
+
+/* Styling for p space_name class */
+p.space_name {
+  font-family: 'Haettenschweiler', 'Arial Narrow Bold', 'sans-serif';
+}
+
+/* Container for each space on dashboard */
+.space_wrapper {
+  border: 1px solid rgb(174, 174, 174);
+  border-radius: 4px;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-bottom: -10px;
+  width: 1000px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  background: url('/images/example-house.jpeg');
+  background-repeat: no-repeat;
+  background-size: 600px;
+  background-position: 100% 50%;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Makes spaces on dashboard clickable */
+.link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* Container for dashboard pages scroller */
+.pages_scroller {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  width: 1000px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+/* Style the container for date/max price filter */
+.filter {
+  /* background-color: #f1f1f1; */
+  border: 1px solid rgb(174, 174, 174);
+  border-radius: 4px;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-bottom: -10px;
+  width: 1000px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  background-color: #5fd2ae;
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  margin-top: 10px;
+}
+
+/* Password prerequisites text styling */
+#message p {
+  padding: 10px 35px;
+  font-size: 14.25px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+
+/* These four are for removing formatting (i.e underlines) from hyperlinked text */
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}

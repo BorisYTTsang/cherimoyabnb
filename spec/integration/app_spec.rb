@@ -30,7 +30,7 @@ describe Application do
     reset_spaces_table
   end
 
-  context "GET /" do
+  context "route: GET /" do
     it "redirects to login page when not logged in" do
       response = get("/")
       expect(response.status).to eq 302
@@ -45,7 +45,7 @@ describe Application do
     end
   end
 
-  context "GET /login" do
+  context "route: GET /login" do
     it "goes to login page" do
       response = get("/login")
       expect(response.status).to eq 200
@@ -53,14 +53,16 @@ describe Application do
     end
   end
 
-  describe "/signup" do
-    it "GET /signup" do
+  context "route: GET /signup" do
+    it "returns signup page" do
         response = get("/signup")
 
         expect(response.status).to eq(200)
     end
+  end
 
-    it "POST /signup" do
+  context "route: POST /signup" do
+    it "signs up new user" do
       response = post("/signup")
       expect(response.status).to eq(200)
 
@@ -74,7 +76,7 @@ describe Application do
     end
   end
   
-  context "POST /login" do
+  context "route: POST /login" do
     it "logs registered user in" do
       response = post("/login", email: "joe@example.com", password: "password123")
       expect(response.status).to eq 200
@@ -103,7 +105,7 @@ describe Application do
     end
   end
 
-  context "GET /createlisting" do
+  context "route: GET /createlisting" do
     it 'returns the create listing page with input form' do
       response = post("/login", email: "joe@example.com", password: "password123")
       response = get("/createlisting")
@@ -114,7 +116,7 @@ describe Application do
     end
   end
 
-  context "POST /createlisting" do
+  context "route: POST /createlisting" do
     it 'creates a listing if the listing does not already exist' do
       response = post("/login", email: "joe@example.com", password: "password123")
       response = post("/createlisting", name: "Lovely place", description: "Has a roof", price_per_night: 68, owner_id: 3)
@@ -131,7 +133,7 @@ describe Application do
     end
   end
 
-  context "GET /makebooking" do
+  context "route: GET /makebooking" do
     it 'Returns the make booking page' do
       response = post("/login", email: "joe@example.com", password: "password123")
       response = get("/makebooking")
@@ -140,7 +142,7 @@ describe Application do
     end
   end
 
-  context "GET /logout" do
+  context "route: GET /logout" do
     it "logs user out of session and redirects to /" do
       response = get("/logout")
       expect(response.status).to eq 302
@@ -150,7 +152,7 @@ describe Application do
     end
   end
   
-  context "GET /dashboard" do
+  context "route: GET /dashboard" do
     it "returns dashboard when logged in" do
       post("/login", email: "massivelykinjang@example.com", password: "d@d@!123")
       response = get("/dashboard")

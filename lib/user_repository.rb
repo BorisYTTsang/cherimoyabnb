@@ -43,6 +43,23 @@ class UserRepository
     return create_user_object_from_table(result)[0]
   end
 
+  # At least 8 characters, a symbol, a digit(integer), lowercase and uppercase, no spaces
+  def password_valid?(password)
+    if password.length >= 8 && !(password =~ /\W/).nil? && !(password =~ /\d/).nil? && !(password =~ /[A-Z]/).nil? && !(password =~ /[a-z]/).nil? && !password.include?(' ')
+      return true
+    else
+      return false
+    end
+  end
+
+  def js_html_injection?(string)
+    if string.include?("<script>") || string.include?("</script>")
+      return true
+    else
+      return false
+    end
+  end
+
   private
 
   def create_user_object_from_table(result)
