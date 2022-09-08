@@ -1,0 +1,41 @@
+<html>
+
+
+  <body>
+    <div>
+      <h3>The details of this request are as follows:</h3>
+      <h2>Name of property:</h2>
+      <h2><%=@space.name%></h2>
+      <h2>Start date of booking request:</h2>
+      <h2><%=@request.date_from%></h2>
+      <h2>End date of booking request:</h2>
+      <h2><%=@request.date_to%></h2>
+      <h2>The booking is from the user:</h2>
+      <h2><%=@booker.name%></h2>
+    </div>
+    <div>
+      <form action='/makebooking' method='/post'>
+        <input type="hidden" value="<%=@request.id%>">
+        <input type="submit" value="Accept request">
+      </form>
+      <form action='/deleterequest' method='/post'>
+        <input type="hidden" value="<%=@request.id%>">
+        <input type="submit" value="Reject request">
+      </form>
+    </div>
+    <div>
+      <%if @success == true%>
+        <h1>The booking has been successfully confirmed.</h1><br>
+        <a href='/dashboard'>Return to the dashboard</a>
+      <%elsif @success == false%>
+        <h1>There was an error with the booking, some or all of these dates are already booked.</h1><br>
+        <a href='/dashboard'>Return to the dashboard</a>
+      <%elsif @success == ''%>
+        <h1>The request was rejected and it has been removed.</h1><br>
+        <a href='/dashboard'>Return to the dashboard</a>
+      <%end%>
+    </div>
+  </body>
+
+
+</html>

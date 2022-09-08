@@ -5,17 +5,19 @@ class Application < Sinatra::Base
   booking_repo = BookingRepository.new
 
 
-  get '/manage-request' do
+  get '/managerequest' do
     space_id = params[:space_id]
-    request_id = params[:space_id]
+    request_id = params[:request_id]
 
     @space = space_repo.find(space_id)
     @request = request_repo.find(request_id)
     @user = user_repo.find(@request.owner_id)
+    @booker = user_repo.find(@request.booker_id)
     return erb(:managerequest)
   end
     
-  post 'make-booking' do
+  post '/make-booking' do
+    @success = ''
     space_id = params[:space_id]
     request_id = params[:space_id]
 
@@ -35,7 +37,5 @@ class Application < Sinatra::Base
       @success = false
     end
     return erb(:makebooking)
-
-    return erb(:managerequest)
   end
 end

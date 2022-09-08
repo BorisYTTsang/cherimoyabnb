@@ -64,12 +64,12 @@
             <%@owner_requests.each do |request|%>
 
               <div class="row inner">
-                <input type="hidden" id="space_id" value='<%=request.space_id%>' />
-                <input type="hidden" id="request_id" value='<%=request.id%>' />
-                <a href = "javascript:;" onclick = "this.href='/manage-request?space_id=' + document.getElementById('space_id').value + '&request_id=' + document.getElementById('request_id').value " style = "color: black; text-decoration: none">
-                <span class="link"></span>
                 <h1>Request for Property id:<%=request.space_id%><br>From: <%=request.date_from%><br>To:<%=request.date_to%></h1>
-                </a>
+                <form action='/managerequest' method='GET'>
+                  <input type="hidden" id="space_id" name='space_id' value='<%=request.space_id%>' />
+                  <input type="hidden" id="request_id" name='request_id' value='<%=request.id%>' />
+                  <input type="submit" value="Manage request">
+                </form>
               </div>
 
             <%end%>
