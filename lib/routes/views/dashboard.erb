@@ -20,15 +20,16 @@
   <input type="submit" value="Filter">
 </form></div>
       <p> </p>
-    <%@spaces.map do |space|%>
+    <% @spaces.map do |space| %>
       <div class="space_wrapper">
       <a href="/makebooking">
       <span class="link"></span>
-        <p class="space_name"><%=space.name%></p>
-        <p class="space_name">Price per night: £<%=space.price_per_night%></p>
-        <!-- <a href="/makebooking">Book</a></a> -->
+        <p class="space_name"><%= space.name %></p>
+        <p class="space_name">Price per night: £<%= space.price_per_night %></p>
+        <!-- <a href="/makebooking">Book</a> -->
+      </a>
       </div>
-    <%end%>
+    <% end %>
   <div class="pages_scroller"><h4 style="text-align: center;">Page 1 / 1</h4></div>
   </body>
 </html>
