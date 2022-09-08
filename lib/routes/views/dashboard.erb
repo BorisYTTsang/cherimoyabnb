@@ -2,46 +2,23 @@
   <head>
     <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
-    <style>
-      .nav{
-            display: flex;
-            justify-content: space-evenly;
-            margin: 50px 50px;
-            text-align: center;
-        }
-        body{
-            font-family: sans-serif;
-            font-size: 22px;
-        }
-        
-        a{
-            text-decoration: none!important;
-            color: black;
-        
-        }
-        
-        a:hover{
-            transition: ease-in-out;
-            color: green;
-        }
-        
-    </style>
   </head>
   <body class="dashboard">
     <nav class="nav">
-            <a class="listingNav" href="/createlisting">Listings</a>
-            <a class="bookingNav" href="/makebooking?space_id=1">My Bookings</a>
-            <a class="requestNav" href="/requests">Requests</a>
-            <a class="signupNav" href="/logout">Log out</a>
+            <a class="listingNav" href="/createlisting"><p>Listings</p></a>
+            <a class="bookingNav" href="/makebooking?space_id=1"><p>My Bookings</p></a>
+            <a class="requestNav" href="/requests"><p>Requests</p></a>
+            <a class="signupNav" href="/logout"><p>Log out</p></a>
     </nav>
     <hr>
+    <div class="left">
         <h1>Welcome back to CherimoyaBnB, <%= @user_name %>!</h1>
        
-        <div class="filter"><form action="/dashboard" method="POST">Available from:<input type="text" name="available_from">
+        <div class="filter"><p>Filter spaces:</p><form action="/dashboard" method="POST">Available from:<input type="text" name="available_from">
             Available to:<input type="text" name="available_to">
             Maximum price per night:<input type="text" name="max_price">
             <input type="submit" value="Filter">
-    </form></div>
+        </form></div>
         <p> </p>
         <%if not @spaces.nil?%>
             <% @spaces.map do |space| %>
@@ -73,5 +50,7 @@
             <%end%>
         <%end%>
     <div class="pages_scroller"><h4 style="text-align: center;">Page 1 / 1</h4></div>
+    </div>
+    <div class="right"></div>
   </body>
 </html>

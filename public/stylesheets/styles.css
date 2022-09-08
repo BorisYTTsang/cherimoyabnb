@@ -1,3 +1,20 @@
+nav{
+  display: flex;
+  height: 0px;
+  justify-content: space-evenly;
+  margin: 50px 50px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.left {
+  width: 73%; float:left
+}
+
+.right {
+  width: 27%; float:right
+}
+
 /* Style credential (sign-up, log-in) input fields */
 input.credentials {
   width: 100%;
@@ -63,6 +80,11 @@ body.credentials {
 /* Body styling for dashboard and other pages */
 body.dashboard {
   background-color: #f1f1f1;
+  /* background: url('/images/cherimoya.png'), #f1f1f1; */
+  /* background-size: 600px; */
+  /* background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: right center; */
 }
 
 /* Styling for h1 text */
@@ -92,6 +114,7 @@ p.error {
   margin-top: 6px;
   margin-bottom: 16px;
   background: url('/images/example-house.jpeg');
+  background-color: #f1f1f1;
   background-repeat: no-repeat;
   background-size: 600px;
   background-position: 100% 50%;
@@ -173,7 +196,23 @@ p.error {
 }
 
 /* These four are for removing formatting (i.e underlines) from hyperlinked text */
-a:link {
+
+/* body{
+font-family: sans-serif;
+font-size: 22px;
+} */
+
+a{
+  text-decoration: none!important;
+  color: black;
+}
+
+a:hover{
+  transition: ease-in-out;
+  color: green;
+}
+
+/* a:link {
   text-decoration: none;
 }
 a:visited {
@@ -184,4 +223,4 @@ a:hover {
 }
 a:active {
   text-decoration: none;
-}
+} */
