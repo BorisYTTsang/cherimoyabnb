@@ -207,6 +207,8 @@
     <%if @request_sent%>
       <h1>Thank you for your booking request, the property owner will accept or reject your request ASAP.</h1><br>
       <a href='/dashboard'>Return to the dashboard</a>
+    <%elsif @request_sent == false%>
+      <h1>Unfortunately some of the dates you have selected are already booked, please try again.</h1>
     <%end%>
   </body>
 
