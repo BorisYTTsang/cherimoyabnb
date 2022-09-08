@@ -1,16 +1,280 @@
 <html>
   <head>
     <title>Welcome to CherimoyaBnB</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <style>
+
+      <link rel="stylesheet" type="text/css" href="style.css" />
+
+      .nav{
+        display: flex;
+        justify-content: space-evenly;
+        margin: 50px 50px;
+        text-align: center;
+      }
+
+      body{
+        font-family: sans-serif;
+        font-size: 22px;
+      }
+
+      a{
+        text-decoration: none!important;
+        color: black;
+
+       }
+      a:hover{
+        transition: ease-in-out;
+        color: green;
+       }
+
+      .date_button {
+        background-color: white;
+        border-style: none;
+        padding-right:10px;
+        width: 20px;
+      }
+
+      .selected_from {
+        background-color: #ff9999;
+      }
+
+      .selected_to {
+        background-color: #ff9999;
+      }
+
+      .not_in_month{
+        display:none;
+      }
+    </style>
   </head>
 
   <body>
+    <nav class="nav">
+      <a class="dashboardNav" href="/dashboard">Dashboard</a>
+      <a class="listingNav" href="/createlisting">Listings</a>
+      <a class="requestNav" href="/requests">Requests</a>
+      <a class="signupNav" href="/logout">Log out</a>
+    </nav>
     <h1>Submit a new booking request for <%=@space.name%></h1>
-    <form action="/createlisting" method="POST"><br>
-      <input type='text' name='date_from'>
-      <input type='text' name='date_to'>
-      <input type='submit' value='Submit booking request'>
-    </form>
+
+    <div>From:</div>
+    <label for="month_select_from">Month:</label>
+
+    <select name="month_from" id="month_select_from">
+      <option value="1" >January</option>
+      <option value="2" >February</option>
+      <option value="3" >March</option>
+      <option value="4" >April</option>
+      <option value="5" >May</option>
+      <option value="6" >June</option>
+      <option value="7" >July</option>
+      <option value="8" >August</option>
+      <option value="9" >September</option>
+      <option value="10" >October</option>
+      <option value="11" >November</option>
+      <option value="12" >December</option>
+    </select>
+    <label for="year_select_from">Year:</label>
+
+    <select name="year_from" id="year_select_from">
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+    </select>
+    <div>
+      <div id="test">Select dates</div>
+      <div id="first_week">
+        <button type="button" class = "date_button" onclick="change_range(1,'from')" id = "day_1_from">1</button>
+        <button type="button" class = "date_button" onclick="change_range(2,'from')" id = "day_2_from">2</button>
+        <button type="button" class = "date_button" onclick="change_range(3,'from')" id = "day_3_from">3</button>
+        <button type="button" class = "date_button" onclick="change_range(4,'from')" id = "day_4_from">4</button>
+        <button type="button" class = "date_button" onclick="change_range(5,'from')" id = "day_5_from">5</button>
+        <button type="button" class = "date_button" onclick="change_range(6,'from')" id = "day_6_from">6</button>
+        <button type="button" class = "date_button" onclick="change_range(7,'from')" id = "day_7_from">7</button>
+      </div>
+      <div id="second_week">
+        <button type="button" class = "date_button" onclick="change_range(8,'from')" id = "day_8_from">8</button>
+        <button type="button" class = "date_button" onclick="change_range(9,'from')" id = "day_9_from">9</button>
+        <button type="button" class = "date_button" onclick="change_range(10,'from')" id = "day_10_from">10</button>
+        <button type="button" class = "date_button" onclick="change_range(11,'from')" id = "day_11_from">11</button>
+        <button type="button" class = "date_button" onclick="change_range(12,'from')" id = "day_12_from">12</button>
+        <button type="button" class = "date_button" onclick="change_range(13,'from')" id = "day_13_from">13</button>
+        <button type="button" class = "date_button" onclick="change_range(14,'from')" id = "day_14_from">14</button>
+      </div>
+      <div id="third_week">
+        <button type="button" class = "date_button" onclick="change_range(15,'from')" id = "day_15_from">15</button>
+        <button type="button" class = "date_button" onclick="change_range(16,'from')" id = "day_16_from">16</button>
+        <button type="button" class = "date_button" onclick="change_range(17,'from')" id = "day_17_from">17</button>
+        <button type="button" class = "date_button" onclick="change_range(18,'from')" id = "day_18_from">18</button>
+        <button type="button" class = "date_button" onclick="change_range(19,'from')" id = "day_19_from">19</button>
+        <button type="button" class = "date_button" onclick="change_range(20,'from')" id = "day_20_from">20</button>
+        <button type="button" class = "date_button" onclick="change_range(21,'from')" id = "day_21_from">21</button>
+      </div>
+      <div id="fourth_week">
+        <button type="button" class = "date_button" onclick="change_range(22,'from')" id = "day_22_from">22</button>
+        <button type="button" class = "date_button" onclick="change_range(23,'from')" id = "day_23_from">23</button>
+        <button type="button" class = "date_button" onclick="change_range(24,'from')" id = "day_24_from">24</button>
+        <button type="button" class = "date_button" onclick="change_range(25,'from')" id = "day_25_from">25</button>
+        <button type="button" class = "date_button" onclick="change_range(26,'from')" id = "day_26_from">26</button>
+        <button type="button" class = "date_button" onclick="change_range(27,'from')" id = "day_27_from">27</button>
+        <button type="button" class = "date_button" onclick="change_range(28,'from')" id = "day_28_from">28</button>
+      </div>
+      <div id="fifth_week">
+        <button type="button" class = "date_button" onclick="change_range(29,'from')" id = "day_29_from">29</button>
+        <button type="button" class = "date_button" onclick="change_range(30,'from')" id = "day_30_from">30</button>
+        <button type="button" class = "date_button" onclick="change_range(31,'from')" id = "day_31_from">31</button>
+      </div>
+    </div>
+    <div> <p> </p></div>
+    <div>To:</div>
+    <label for="month_select_to">Month:</label>
+
+    <select name="month_to" id="month_select_to">
+      <option value="1" >January</option>
+      <option value="2" >February</option>
+      <option value="3" >March</option>
+      <option value="4" >April</option>
+      <option value="5" >May</option>
+      <option value="6" >June</option>
+      <option value="7" >July</option>
+      <option value="8" >August</option>
+      <option value="9" >September</option>
+      <option value="10" >October</option>
+      <option value="11" >November</option>
+      <option value="12" >December</option>
+    </select>
+    <label for="year_select_to">Year:</label>
+
+    <select name="year_to" id="year_select_to">
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+      <option value="2024">2024</option>
+    </select>
+
+    <div id="test">Select dates</div>
+      <div id="first_week">
+        <button type="button" class = "date_button" onclick="change_range(1,'to')" id = "day_1_to">1</button>
+        <button type="button" class = "date_button" onclick="change_range(2,'to')" id = "day_2_to">2</button>
+        <button type="button" class = "date_button" onclick="change_range(3,'to')" id = "day_3_to">3</button>
+        <button type="button" class = "date_button" onclick="change_range(4,'to')" id = "day_4_to">4</button>
+        <button type="button" class = "date_button" onclick="change_range(5,'to')" id = "day_5_to">5</button>
+        <button type="button" class = "date_button" onclick="change_range(6,'to')" id = "day_6_to">6</button>
+        <button type="button" class = "date_button" onclick="change_range(7,'to')" id = "day_7_to">7</button>
+      </div>
+      <div id="second_week">
+        <button type="button" class = "date_button" onclick="change_range(8,'to')" id = "day_8_to">8</button>
+        <button type="button" class = "date_button" onclick="change_range(9,'to')" id = "day_9_to">9</button>
+        <button type="button" class = "date_button" onclick="change_range(10,'to')" id = "day_10_to">10</button>
+        <button type="button" class = "date_button" onclick="change_range(11,'to')" id = "day_11_to">11</button>
+        <button type="button" class = "date_button" onclick="change_range(12,'to')" id = "day_12_to">12</button>
+        <button type="button" class = "date_button" onclick="change_range(13,'to')" id = "day_13_to">13</button>
+        <button type="button" class = "date_button" onclick="change_range(14,'to')" id = "day_14_to">14</button>
+      </div>
+      <div id="third_week">
+        <button type="button" class = "date_button" onclick="change_range(15,'to')" id = "day_15_to">15</button>
+        <button type="button" class = "date_button" onclick="change_range(16,'to')" id = "day_16_to">16</button>
+        <button type="button" class = "date_button" onclick="change_range(17,'to')" id = "day_17_to">17</button>
+        <button type="button" class = "date_button" onclick="change_range(18,'to')" id = "day_18_to">18</button>
+        <button type="button" class = "date_button" onclick="change_range(19,'to')" id = "day_19_to">19</button>
+        <button type="button" class = "date_button" onclick="change_range(20,'to')" id = "day_20_to">20</button>
+        <button type="button" class = "date_button" onclick="change_range(21,'to')" id = "day_21_to">21</button>
+      </div>
+      <div id="fourth_week">
+        <button type="button" class = "date_button" onclick="change_range(22,'to')" id = "day_22_to">22</button>
+        <button type="button" class = "date_button" onclick="change_range(23,'to')" id = "day_23_to">23</button>
+        <button type="button" class = "date_button" onclick="change_range(24,'to')" id = "day_24_to">24</button>
+        <button type="button" class = "date_button" onclick="change_range(25,'to')" id = "day_25_to">25</button>
+        <button type="button" class = "date_button" onclick="change_range(26,'to')" id = "day_26_to">26</button>
+        <button type="button" class = "date_button" onclick="change_range(27,'to')" id = "day_27_to">27</button>
+        <button type="button" class = "date_button" onclick="change_range(28,'to')" id = "day_28_to">28</button>
+      </div>
+      <div id="fifth_week">
+        <button type="button" class = "date_button" onclick="change_range(29,'to')" id = "day_29_to">29</button>
+        <button type="button" class = "date_button" onclick="change_range(30,'to')" id = "day_30_to">30</button>
+        <button type="button" class = "date_button" onclick="change_range(31,'to')" id = "day_31_to">31</button>
+      </div>
+
+    <form action="/make-request" method="POST">
+      <input type="hidden" id="date_from" value = "0">
+      <input type="hidden" name="month_from" id ="month_from" value = "jan">
+      <input type="hidden" name="year_from" id ="year_from" value = "2022">
+      <input type="hidden" id="date_to" value = "0">
+      <input type="hidden" name="month_to" id ="month_to" value = "jan">
+      <input type="hidden" name="year_to" id ="year_to" value = "2022">
+      <input type='hidden' name='space_id' value=<%=@space.id%>>
+    <input type="submit" value="Book">
+
+    <%if @request_sent%>
+      <h1>Thank you for your booking request, the property owner will accept or reject your request ASAP.</h1><br>
+      <a href='/dashboard'>Return to the dashboard</a>
+    <%end%>
   </body>
 
 </html>
+
+<script>
+  var month_from = document.getElementById("month_select_from");
+  var year_from = document.getElementById("year_select_from");
+
+
+  var month_to = document.getElementById("month_select_to");
+  var year_to = document.getElementById("year_select_to");
+
+  month_from.onchange = function(){
+    document.getElementById("month_from").value = document.getElementById("month_select_from").value
+    change_days(document.getElementById("month_select_from").value,"from")
+  };
+
+  year_from.onchange = function(){
+    document.getElementById("year_from").value = document.getElementById("year_select_from").value
+  };
+
+  month_to.onchange = function(){
+    document.getElementById("month_to").value = document.getElementById("month_select_to").value
+    change_days(document.getElementById("month_select_to").value,"to")
+  };
+
+  year_to.onchange = function(){
+    document.getElementById("year_to").value = document.getElementById("year_select_to").value
+  };
+
+
+  function change_range(nr,end) {
+    var day = window[`day_${nr}_${end}`]
+    if(end == "from"){
+      if (day.classList.contains("selected_from")) {
+        day.classList.remove("selected_from")
+        document.getElementById("date_from").value = 0
+      } else if(document.getElementsByClassName("selected_from").length == 0){
+        day.classList.add("selected_from")
+        document.getElementById("date_from").value = nr
+      }
+    } else if(end == "to"){
+      if (day.classList.contains("selected_to")) {
+        day.classList.remove("selected_to")
+        document.getElementById("date_to").value = 0
+      } else if(document.getElementsByClassName("selected_to").length == 0){
+        day.classList.add("selected_to")
+        document.getElementById("date_to").value = nr
+      }
+    }
+  }
+
+  function change_days(month,end) {
+    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+      window[`day_29_${end}`].classList.remove("not_in_month")
+      window[`day_30_${end}`].classList.remove("not_in_month")
+      window[`day_31_${end}`].classList.remove("not_in_month")
+
+    }else if (month == 2){
+      window[`day_29_${end}`].classList.add("not_in_month")
+      window[`day_30_${end}`].classList.add("not_in_month")
+      window[`day_31_${end}`].classList.add("not_in_month")
+    }else if (month == 4 || month == 6 || month == 9 || month == 11){
+      window[`day_29_${end}`].classList.remove("not_in_month")
+      window[`day_30_${end}`].classList.remove("not_in_month")
+      window[`day_31_${end}`].classList.add("not_in_month")
+    }
+
+  }
+</script>

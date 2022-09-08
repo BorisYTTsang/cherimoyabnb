@@ -92,5 +92,7 @@ CREATE TABLE "public"."requests" (
       references users(id)
       on delete cascade,
     "booked" text,
+    "date_from" date,
+    "date_to" date,
     PRIMARY KEY ("id")
 );

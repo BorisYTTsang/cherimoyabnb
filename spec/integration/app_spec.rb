@@ -5,16 +5,17 @@ require "rack/test"
 require 'test/unit'
 require_relative "../../app"
 
-def reset_users_table
-  seed_sql = File.read("spec/seeds/seeds_users.sql")
-  connection = PG.connect({ host: "127.0.0.1", dbname: "cherimoyabnb_test" })
-  connection.exec(seed_sql)
-end
+def reset_all
+  userseed_sql = File.read('spec/seeds/users_seed.sql')
+  spaceseed_sql = File.read('spec/seeds/spaces_seed.sql')
+  requestseed_sql = File.read('spec/seeds/requests_seed.sql')
+  bookingseed_sql = File.read('spec/seeds/bookings_seed.sql')
 
-def reset_spaces_table
-  seed_sql = File.read("spec/seeds/seeds_tables.sql")
-  connection = PG.connect({ host: "127.0.0.1", dbname: "cherimoyabnb_test" })
-  connection.exec(seed_sql)
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
+  connection.exec(userseed_sql)
+  connection.exec(spaceseed_sql)
+  connection.exec(requestseed_sql)
+  connection.exec(bookingseed_sql)
 end
 
 describe Application do
@@ -26,8 +27,7 @@ describe Application do
   let(:app) { Application.new }
 
   before(:each) do
-    reset_users_table
-    reset_spaces_table
+    reset_all
   end
 
   context "route: GET /" do
@@ -185,6 +185,15 @@ describe Application do
     end
   end
 
+  context "route: POST /make-request" do
+    it 'Returns the makebooking page after a successful booking request' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = post("/make-request", space_id: 1)
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Thank you for your booking request'
+    end
+  end
+
   context "route: GET /logout" do
     it "logs user out of session and redirects to /" do
       response = get("/logout")
@@ -219,8 +228,8 @@ describe Application do
   end
 
   context "route: POST /makebooking" do
-    it 'Returns the makebooking page after a booking' do
-      response = post("/makebooking", space_id: 1, unavailable_from: '2022-01-01', unavailable_to: '2022-01-02', booker_id: 3)
+    xit 'Returns the makebooking page after a booking' do
+      response = post("/make-request", space_id: 1, unavailable_from: '2022-01-01', unavailable_to: '2022-01-02', booker_id: 3)
       expect(response.status).to eq 200
       expect(response.body).to include 'Submit a new booking request'
     end
@@ -238,9 +247,17 @@ describe Application do
 
   context "route: GET /requests" do
     it 'Returns the requests page' do
+      response = post("/login", email: "joe@example.com", password: "password123")
       response = get('/requests')
       expect(response.status).to eq 200
       expect(response.body).to include "Requests I've received"
+    end
+
+    it 'Returns the requests page for Joe, showing a received request' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get('/requests')
+      expect(response.status).to eq 200
+      expect(response.body).to include "2022-11-01"
     end
   end
 end
