@@ -195,11 +195,11 @@
       </div>
 
     <form action="/makerequest" method="POST">
-      <input type="hidden" id="date_from" value = "0">
-      <input type="hidden" name="month_from" id ="month_from" value = "jan">
+      <input type="hidden" id="date_from" name="date_from" value = "0">
+      <input type="hidden" name="month_from" id ="month_from" value = "1">
       <input type="hidden" name="year_from" id ="year_from" value = "2022">
-      <input type="hidden" id="date_to" value = "0">
-      <input type="hidden" name="month_to" id ="month_to" value = "jan">
+      <input type="hidden" id="date_to" name="date_to" value = "0">
+      <input type="hidden" name="month_to" id ="month_to" value = "1">
       <input type="hidden" name="year_to" id ="year_to" value = "2022">
       <input type='hidden' name='space_id' value=<%=@space.id%>>
     <input type="submit" value="Book">
