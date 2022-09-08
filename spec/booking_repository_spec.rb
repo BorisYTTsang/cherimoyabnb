@@ -7,10 +7,10 @@ def reset_all
   bookingseed_sql = File.read('spec/seeds/bookings_seed.sql')
 
   connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
-  connection.exec(users_seed.sql)
-  connection.exec(spaces_seed.sql)
-  connection.exec(requests_seed.sql)
-  connection.exec(bookings_seed.sql)
+  connection.exec(userseed_sql)
+  connection.exec(spaceseed_sql)
+  connection.exec(requestseed_sql)
+  connection.exec(bookingseed_sql)
 end
 
 RSpec.describe BookingRepository do

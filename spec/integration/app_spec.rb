@@ -76,12 +76,6 @@ describe Application do
       expect(users[-1].password).to eq("meE£ep31")
     end
 
-    it "gives invalid credential error on signup page if email already exists" do
-      response = post("/signup", name: "meep1", email: "joe@example.com", password: "1@aAsdlfkjh")
-      expect(response.status).to eq 200
-      expect(response.body).to include("That email address already exists.")
-    end
-
     it "throws error with message if password with spaces gets past html/js checks" do
       expect do
         (post("/signup", name: "meep1", email: "meep2", password: "UNION SELECT 1,2,3;"))
