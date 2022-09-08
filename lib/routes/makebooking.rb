@@ -10,8 +10,12 @@ class Application < Sinatra::Base
 
   post "/makebooking" do
       repo = BookingRepository.new
+      space_repo = SpaceRepository.new
+
+      @space = space_repo.find(params[:space_id])
+
       new_booking = Booking.new
-      new_booking.space_id = session[:space_id]
+      new_booking.space_id = params[:space_id]
       new_booking.unavailable_from = params[:date_from]
       new_booking.unavailable_to = params[:date_to]
       new_booking.reason = 'booking'
