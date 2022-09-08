@@ -13,20 +13,44 @@
 
      <!-- <p>Available:</p> -->
       <div class="filter"><form action="/dashboard" method="POST">
-  Available from:<input type="text" name="available_from">
-          Available to:<input type="text" name="available_to">
-    Maximum price per night:<input type="text" name="max_price">
+        Available from:<input type="text" name="available_from">
+        Available to:<input type="text" name="available_to">
+        Maximum price per night:<input type="text" name="max_price">
 
   <input type="submit" value="Filter">
 </form></div>
       <p> </p>
-    <% @spaces.map do |space| %>
-      <div class="space_wrapper">
-      <a href="/makebooking">
-      <span class="link"></span>
-        <p class="space_name"><%= space.name %></p>
-        <p class="space_name">Price per night: £<%= space.price_per_night %></p>
-        <!-- <a href="/makebooking">Book</a> -->
+      <%if not @spaces.nil?%>
+        <% @spaces.map do |space| %>
+          <div class="space_wrapper">
+          <span class="link"></span>
+            <p class="space_name"><%= space.name %></p>
+            <p class="space_name">Price per night: £<%= space.price_per_night %></p>
+            <form action="/makebooking" method="GET">
+                <input type='hidden' name='space_id' value='<%=space.id%>'/>
+                <input type='submit' value='Book now'/>
+            </form>
+          </div>
+        <%end%>
+      <%end%>
+
+      <%if not @filtered_spaces.nil?%>
+        <%@filtered_spaces.map do |space|%>
+          <div class="space_wrapper">
+          <span class="link"></span>
+              <p class="space_name"><%= space.name %></p>
+              <p class="space_name">Price per night: £<%= space.price_per_night %></p>
+
+              <form action="/makebooking" method="GET">
+                <input type='hidden' name='space_id' value='<%=space.id%>'/>
+                <input type='submit' value='Book now'/>
+              </form>
+
+          </div>
+        <%end%>
+      <%end%>
+
+
       </a>
       </div>
     <% end %>

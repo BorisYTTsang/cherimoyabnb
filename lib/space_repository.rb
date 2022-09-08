@@ -63,8 +63,8 @@ class SpaceRepository
         return result_set1
     end
 
-    def filter(min_date,max_date,max_price)
-        all_spaces = self.all 
+    def filter(min_date, max_date, max_price)
+        all_spaces = all 
         valid_spaces = all_spaces.select{|space| space.price_per_night.to_i < max_price.to_i}
 
         spaces_to_show = []
