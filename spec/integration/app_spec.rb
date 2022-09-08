@@ -63,17 +63,41 @@ describe Application do
 
   context "route: POST /signup" do
     it "signs up new user and returns signup success page" do
-      response = post("/signup")
-      expect(response.status).to eq(200)
-
-      response = post("/signup",name:"meep1",email:"meep2",password:"meep3")
-    
+      
       repo = UserRepository.new
+      # p repo.find_by_email("joe@example.com")
+      response = post("/signup", name: "meep1", email: "meep2", password: "meE£ep31")
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Account successfully created!')
+    
       users = repo.all
       expect(users[-1].name).to eq("meep1")
       expect(users[-1].email).to eq("meep2")
-      expect(users[-1].password).to eq("meep3")
-      expect(response.body).to include('Account successfully created!')
+      expect(users[-1].password).to eq("meE£ep31")
+    end
+
+    it "throws error with message if password with spaces gets past html/js checks" do
+      expect do
+        (post("/signup", name: "meep1", email: "meep2", password: "UNION SELECT 1,2,3;"))
+      end.to raise_error "Invalid password detected!"
+    end
+
+    it "throws error with message if name with javascript gets past html/js checks" do
+      expect do
+        (post("/signup", name: "<script>window.alert(\"sometext\");</script>", email: "meep2", password: "meE£ep31"))
+      end.to raise_error "Javascript detected!"
+    end
+
+    it "throws error with message if email with javascript gets past html/js checks" do
+      expect do
+        (post("/signup", name: "meep1", email: "<script>window.alert(\"sometext\");</script>", password: "meE£ep31"))
+      end.to raise_error "Javascript detected!"
+    end
+
+    it "throws error with message if password with javascript gets past html/js checks" do
+      expect do
+        (post("/signup", name: "meep1", email: "meep2", password: "<script>window.alert(\"sometext\");</script>"))
+      end.to raise_error "Javascript detected!"
     end
   end
   
@@ -87,22 +111,34 @@ describe Application do
       expect(response.body).to include('<h1>Login Success!</h1>')
     end
 
-    it "directs to login failure page when email is not registered" do
+    it "redirects back to login page with invalid credentials message when email is not registered" do
       response = post("/login", email: "cyan@example.com", password: "password123")
       expect(response.status).to eq 200
-      expect(response.body).to include('<h1>Login Failure!</h1>')
+      expect(response.body).to include('Invalid email address or password')
     end
 
-    it "directs to login failure page when password is incorrect" do
+    it "redirects back to login page with invalid credentials message when password is incorrect" do
       response = post("/login", email: "joe@example.com", password: "password12")
       expect(response.status).to eq 200
-      expect(response.body).to include('<h1>Login Failure!</h1>')
+      expect(response.body).to include('Invalid email address or password')
     end
 
-    it "directs to login failure page when login fields left empty" do
+    it "redirects back to login page with invalid credentials message when login fields left empty" do
       response = post("/login")
       expect(response.status).to eq 200
-      expect(response.body).to include('<h1>Login Failure!</h1>')
+      expect(response.body).to include('Invalid email address or password')
+    end
+
+    it "throws error with message when name parameter with javascript received" do
+      expect do
+      (post("/login", email: "<script>window.alert(\"sometext\");</script>", password: "password123"))
+      end.to raise_error "Javascript detected!"
+    end
+
+    it "throws error with message when password parameter with javascript received" do
+      expect do
+      (post("/login", email: "cyan@example.com", password: "<script>window.alert(\"sometext\");</script>"))
+      end.to raise_error "Javascript detected!"
     end
   end
 
