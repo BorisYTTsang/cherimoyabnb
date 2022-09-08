@@ -76,6 +76,10 @@ p.space_name {
   font-family: 'Haettenschweiler', 'Arial Narrow Bold', 'sans-serif';
 }
 
+p.error {
+  color: rgb(206, 0, 0);
+}
+
 /* Container for each space on dashboard */
 .space_wrapper {
   border: 1px solid rgb(174, 174, 174);

@@ -26,9 +26,11 @@ class UserRepository
   end
 
   def create(user)
-    sql = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3);'
-    params = [user.name, user.email, user.password]
-    DatabaseConnection.exec_params(sql, params)
+    if find_by_email(user.email).nil?
+      sql = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3);'
+      params = [user.name, user.email, user.password]
+      DatabaseConnection.exec_params(sql, params)
+    end
 
     return nil
   end
@@ -52,11 +54,12 @@ class UserRepository
     end
   end
 
-  def js_html_injection?(string)
+  # Returns true if javascript injection is detected in user-originating input (string)
+  def script_free?(string)
     if string.include?("<script>") || string.include?("</script>")
-      return true
-    else
       return false
+    else
+      return true
     end
   end
 

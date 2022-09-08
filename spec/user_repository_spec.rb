@@ -24,7 +24,6 @@ RSpec.describe UserRepository do
     describe '# all' do
         it 'Get all users and checks for id one and two' do
             repo = UserRepository.new
-
             users = repo.all
 
             expect(users.length).to eq 6
@@ -43,9 +42,7 @@ RSpec.describe UserRepository do
 
     describe '# find' do
         it 'returns user with id one' do
-
             repo = UserRepository.new
-
             user = repo.find(1)
 
             expect(user.id).to eq 1
@@ -55,7 +52,6 @@ RSpec.describe UserRepository do
         end
         it 'returns user with id 5' do
             repo = UserRepository.new
-
             user = repo.find(5)
 
             expect(user.id).to eq 5
@@ -68,7 +64,6 @@ RSpec.describe UserRepository do
     describe '#find_by_name' do
         it 'Finds by username Joe' do
             repo = UserRepository.new
-
             user = repo.find_by_name('Joe')
 
             expect(user.id).to eq 1
@@ -78,13 +73,9 @@ RSpec.describe UserRepository do
         end
     end
 
-
-
     describe '#create' do
         it 'creates a new user' do
-
             repo = UserRepository.new
-
 
             new_user = User.new
             new_user.name = 'John'
@@ -98,6 +89,24 @@ RSpec.describe UserRepository do
             expect(all_users.last.name).to eq 'John'
             expect(all_users.last.email).to eq 'john@example.com'
             expect(all_users.last.password).to eq 'password1'
+        end
+
+        it 'doesn\'t add new user if email already exists and returns error message' do
+            repo = UserRepository.new
+
+            new_user = User.new
+            new_user.name = 'Helga'
+            new_user.email = 'joe@example.com'
+            new_user.password = 'password1'
+
+            repo.create(new_user)
+
+            all_users = repo.all
+
+            expect(all_users.size).to eq 6
+            expect(all_users.last.name).to eq 'Cyr'
+            expect(all_users.last.email).to eq 'Kyriakos.legend765@example.com'
+            expect(all_users.last.password).to eq '@reyoucyrious$$'
         end
     end 
 
@@ -116,10 +125,10 @@ RSpec.describe UserRepository do
         end
     end 
 
-    describe '#js_html_injection?' do
-        it 'returns true when there are script tags in text' do
+    describe '#script_free?' do
+        it 'returns false when there are <script> tags in text' do
             repo = UserRepository.new
-            expect(repo.js_html_injection?('<script>This is javascript!</script>')).to eq true
+            expect(repo.script_free?('<script>This is javascript!</script>')).to eq false
         end
     end
 
