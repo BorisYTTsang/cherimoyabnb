@@ -11,6 +11,6 @@ class Application < Sinatra::Base
         new_user.email = params[:email]
         new_user.password = params[:password]
         repo.create(new_user)
-        return erb(:login)
+        return erb(:signup_success)
     end
 end

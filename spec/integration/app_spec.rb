@@ -62,7 +62,7 @@ describe Application do
   end
 
   context "route: POST /signup" do
-    it "signs up new user" do
+    it "signs up new user and returns signup success page" do
       response = post("/signup")
       expect(response.status).to eq(200)
 
@@ -73,6 +73,7 @@ describe Application do
       expect(users[-1].name).to eq("meep1")
       expect(users[-1].email).to eq("meep2")
       expect(users[-1].password).to eq("meep3")
+      expect(response.body).to include('Account successfully created!')
     end
   end
   
