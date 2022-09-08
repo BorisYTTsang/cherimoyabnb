@@ -2,8 +2,6 @@ class Application < Sinatra::Base
 
     get "/login" do
       # If invalid credentials entered, @invalid is set to true at bottom before redirected here
-      @error_message = nil if @invalid == true
-      @invalid = false
       return erb(:login)
     end
 
@@ -23,9 +21,8 @@ class Application < Sinatra::Base
         session[:user_name] = user.name
         return erb(:login_success)
       else
-        # @invalid = true
-        # @error_message = "Invalid email address of password"
-        redirect "/login"
+        @error_message = "Invalid email address or password, please try again."
+        return erb(:login)
       end
     end
 end
