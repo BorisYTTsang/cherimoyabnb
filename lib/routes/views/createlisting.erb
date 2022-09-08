@@ -1,25 +1,27 @@
 <html>
   <head>
     <title>Welcome to CherimoyaBnB</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="stylesheets/styles.css" />
   </head>
 
-  <body>
+  <body class="dashboard">
     <h1>Create a new listing</h1>
     <form action="/createlisting" method="POST"><br>
       <label>Name of property:</label><br>
       <input type="text" name="name" pattern="[A-Za-z]+" maxlength="30" autocomplete='off' require><br><br>
 
       <label>Description of the property:</label><br>
-      <textarea type="text" name="name" pattern="[A-Za-z0-9\ .,-:!']+" maxlength="100" autocomplete='off' require><br><br>
-
+      <textarea type="text" name="name" pattern="[A-Za-z0-9\ .,-:!']+" maxlength="100" autocomplete='off' require>
+      </textarea><br><br>
       <label>Price per night: </label><br>
       <input type="number" name="price_per_night" maxlength="8" autocomplete='off' placeholder='£0' require><br><br>
 
-      <input type="hidden" name="owner_id" value=<%=@user.id%>><br><br>
+      <input type="hidden" name="owner_id" value=<%=@user.id%>><br>
 
       <input type="submit" value="Create your listing!">
     </form>
+    <h4><a href="/dashboard">Back</a></h4>
   </body>
 
 </html>

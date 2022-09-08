@@ -1,13 +1,15 @@
 <html>
   <head>
+    <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
   </head>
 
   <body class="dashboard">
+  <div class="logo">
   <img class="dashboard" src="/images/cherimoya.png">
+  </div>
     <h1>Welcome back to CherimoyaBnB, <%= @user_name %>!</h1>
-    <h1>Dashboard</h1>
-    <p><a href="/logout">Log out</a> | <a href="/requests">Requests</a> | <a href="/createlisting">Create a listing</a> </p>
+    <p>&ensp;<a href="/logout">Log out</a> &ensp;|&ensp; <a href="/requests">Requests</a> &ensp;|&ensp; <a href="/createlisting">Create a listing</a> </p>
 
      <!-- <p>Available:</p> -->
       <div class="filter"><form action="/dashboard" method="POST">
@@ -19,10 +21,14 @@
 </form></div>
       <p> </p>
     <%@spaces.map do |space|%>
-      <div><%=space.name%>
-          <p>Price per night:<%=space.price_per_night%></p>
-          <a href="/makebooking">Book</a></div>
+      <div class="space_wrapper">
+      <a href="/makebooking">
+      <span class="link"></span>
+        <p class="space_name"><%=space.name%></p>
+        <p class="space_name">Price per night: £<%=space.price_per_night%></p>
+        <!-- <a href="/makebooking">Book</a></a> -->
+      </div>
     <%end%>
-
+  <div class="pages_scroller"><h4 style="text-align: center;">Page 1 / 1</h4></div>
   </body>
 </html>
