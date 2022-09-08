@@ -56,6 +56,7 @@
       <a class="signupNav" href="/logout">Log out</a>
     </nav>
     <h1>Submit a new booking request for <%=@space.name%></h1>
+<<<<<<< HEAD
 
     <div>From:</div>
     <label for="month_select_from">Month:</label>
@@ -201,6 +202,13 @@
       <input type="hidden" id="date_to" value = "0">
       <input type="hidden" name="month_to" id ="month_to" value = "jan">
       <input type="hidden" name="year_to" id ="year_to" value = "2022">
+=======
+    <form action="/makerequest" method="POST"><br>
+      <label>Date from</label>
+      <input type='text' name='date_from'><br>
+      <label>Date to</label>
+      <input type='text' name='date_to'><br>
+>>>>>>> a163330 (Request manager page and confirmbooking button now working)
       <input type='hidden' name='space_id' value=<%=@space.id%>>
     <input type="submit" value="Book">
 
