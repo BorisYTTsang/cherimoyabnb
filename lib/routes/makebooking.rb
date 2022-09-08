@@ -18,12 +18,16 @@ class Application < Sinatra::Base
     date_to = params[:date_to]
     space_id = params[:space_id]
 
+    #Add date validity check
+
     @space = space_repo1.find(params[:space_id]) #takes the space_id from a hidden value in the listing link
 
     request = Request.new
     request.space_id = @space.id
     request.owner_id = @space.owner_id
     request.booker_id = session[:user_id]
+    request.date_from = date_from
+    request.date_to = date_to
     request.booked = 'false'
     request_repo.create(request)
 

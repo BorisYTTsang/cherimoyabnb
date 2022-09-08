@@ -5,16 +5,17 @@ require "rack/test"
 require 'test/unit'
 require_relative "../../app"
 
-def reset_users_table
-  seed_sql = File.read("spec/seeds/seeds_users.sql")
-  connection = PG.connect({ host: "127.0.0.1", dbname: "cherimoyabnb_test" })
-  connection.exec(seed_sql)
-end
+def reset_all
+  userseed_sql = File.read('spec/seeds/users_seed.sql')
+  spaceseed_sql = File.read('spec/seeds/spaces_seed.sql')
+  requestseed_sql = File.read('spec/seeds/requests_seed.sql')
+  bookingseed_sql = File.read('spec/seeds/bookings_seed.sql')
 
-def reset_spaces_table
-  seed_sql = File.read("spec/seeds/seeds_tables.sql")
-  connection = PG.connect({ host: "127.0.0.1", dbname: "cherimoyabnb_test" })
-  connection.exec(seed_sql)
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
+  connection.exec(userseed_sql)
+  connection.exec(spaceseed_sql)
+  connection.exec(requestseed_sql)
+  connection.exec(bookingseed_sql)
 end
 
 describe Application do
@@ -26,8 +27,7 @@ describe Application do
   let(:app) { Application.new }
 
   before(:each) do
-    reset_users_table
-    reset_spaces_table
+    reset_all
   end
 
   context "route: GET /" do

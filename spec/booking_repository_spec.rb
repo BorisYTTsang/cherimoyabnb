@@ -1,14 +1,22 @@
 require 'booking_repository'
 
-def reset_bookings_table
-    seed_sql = File.read('spec/seeds/bookings_seed.sql')
-    connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
-    connection.exec(seed_sql)
+def reset_all
+  userseed_sql = File.read('spec/seeds/users_seed.sql')
+  spaceseed_sql = File.read('spec/seeds/spaces_seed.sql')
+  requestseed_sql = File.read('spec/seeds/requests_seed.sql')
+  bookingseed_sql = File.read('spec/seeds/bookings_seed.sql')
+
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'cherimoyabnb_test' })
+  connection.exec(userseed_sql)
+  connection.exec(spaceseed_sql)
+  connection.exec(requestseed_sql)
+  connection.exec(bookingseed_sql)
 end
-  
+
 RSpec.describe BookingRepository do
+
     before(:each) do 
-      reset_bookings_table
+      reset_all
     end
 
     describe '#GET' do

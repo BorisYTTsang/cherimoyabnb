@@ -34,8 +34,8 @@ class RequestRepository
     end
 
     def create(request)
-        sql = 'INSERT INTO requests (space_id, owner_id, booker_id, booked) VALUES ($1,$2,$3,$4);'
-        result_set = DatabaseConnection.exec_params(sql, [request.space_id, request.owner_id, request.booker_id, request.booked])
+        sql = 'INSERT INTO requests (space_id, owner_id, booker_id, booked, date_from, date_to) VALUES ($1,$2,$3,$4,$5,$6);'
+        result_set = DatabaseConnection.exec_params(sql, [request.space_id, request.owner_id, request.booker_id, request.booked, request.date_from, request.date_to])
 
         return nil
     end
