@@ -6,11 +6,19 @@
 
   <body>
     <h1>Submit a new booking request for <%=@space.name%></h1>
-    <form action="/createlisting" method="POST"><br>
-      <input type='text' name='date_from'>
-      <input type='text' name='date_to'>
+    <form action="/make-request" method="POST"><br>
+      <label>Date from</label>
+      <input type='text' name='date_from'><br>
+      <label>Date to</label>
+      <input type='text' name='date_to'><br>
+      <input type='hidden' name='space_id' value=<%=@space.id%>>
       <input type='submit' value='Submit booking request'>
     </form>
+
+    <%if @request_sent%>
+      <h1>Thank you for your booking request, the property owner will accept or reject your request ASAP.</h1><br>
+      <a href='/dashboard'>Return to the dashboard</a>
+    <%end%>
   </body>
 
 </html>

@@ -14,6 +14,8 @@ class RequestRepository
             request.owner_id = record['owner_id']
             request.booker_id = record['booker_id']
             request.booked = record['booked']
+            request.date_from = record['date_from']
+            request.date_to = record['date_to']
 
             requests << request
         end
@@ -47,6 +49,8 @@ class RequestRepository
           request.owner_id = record['owner_id']
           request.booker_id = record['booker_id']
           request.booked = record['booked']
+          request.date_from = record['date_from']
+          request.date_to = record['date_to']
           requests << request
         end
         return requests

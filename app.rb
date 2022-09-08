@@ -13,11 +13,12 @@ require_relative 'lib/user_repository'
 require_relative 'lib/routes/login'
 require_relative 'lib/routes/signup' 
 require_relative 'lib/routes/createlisting' 
-require_relative 'lib/routes/makebooking.rb'
+require_relative 'lib/routes/makebooking'
 
 require_relative 'lib/routes/dashboard' 
 require_relative 'lib/routes/logout' 
-require_relative 'lib/routes/requests.rb'
+require_relative 'lib/routes/requests'
+
 
 DatabaseConnection.connect
 
@@ -32,6 +33,11 @@ class Application < Sinatra::Base
     also_reload 'lib/user_repository'
     
   end
+
+  user_repo = UserRepository.new
+  space_repo = SpaceRepository.new
+  request_repo = RequestRepository.new
+
   
   # This is for changing the /views folder location from default to /lib/routes/views
   set :root,  File.dirname(__FILE__)
