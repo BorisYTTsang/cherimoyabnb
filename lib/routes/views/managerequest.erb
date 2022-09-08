@@ -3,21 +3,23 @@
     <div>
       <h3>The details of this request are as follows:</h3>
       <h2>Name of property:</h2>
-      
+      <h2><%=@space.name%></h2>
       <h2>Start date of booking request:</h2>
-
+      <h2><%=@selectedrequest.date_from%></h2>
       <h2>End date of booking request:</h2>
-
+      <h2><%=@selectedrequest.date_to%></h2>
       <h2>The booking is from the user:</h2>
-
+      <h2><%=@booker.name%></h2>
     </div>
     <div>
-      <form action='/makebooking' method='/post'>
-        <input type="hidden" value="">
+      <form action='/confirmbooking' method='POST'>
+        <input type="hidden" name='request_id' value="<%=@selectedrequest.id%>">
+        <input type="hidden" name='space_id' value="<%=@space.id%>">
         <input type="submit" value="Accept request">
       </form>
-      <form action='/deleterequest' method='/post'>
-        <input type="hidden" value="">
+      <form action='/deleterequest' method='POST'>
+        <input type="hidden" name='request_id' value="<%=@selectedrequest.id%>">
+        <input type="hidden" name='space_id' value="<%=@space.id%>">
         <input type="submit" value="Reject request">
       </form>
     </div>
