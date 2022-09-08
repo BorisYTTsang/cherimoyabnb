@@ -1,4 +1,4 @@
-/* Style credential input fields */
+/* Style credential (sign-up, log-in) input fields */
 input.credentials {
   width: 100%;
   padding: 12px;
@@ -9,13 +9,18 @@ input.credentials {
   margin-bottom: 16px;
 }
 
-/* Style the submit button */
+/* Style form submit buttons */
 input[type=submit] {
   background-color: #5fd2ae;
   color: white;
 }
 
-/* Cherimoya image */
+/* Styling for input containers */
+.container {
+  background-color: #f1f1f1;
+}
+
+/* Sign-Up page Cherimoya image */
 .signup-header-img {
   width: 100%;
   height: 80px;
@@ -26,18 +31,18 @@ input[type=submit] {
   background-position: 0% 50%;
 }
 
-/* Triple L's image */
+/* Log-In page Triple L's image */
 .login-header-img {
   width: 100%;
   height: 80px;
   object-fit: scale-down;
-  background: url('/images/login-logo2.png');
+  background: url('/images/login-logo.png');
   background-repeat: no-repeat;
   background-size: 135.75px;
   background-position: -1.75% 50%;
 }
 
-/* Dashboard cherimoya sizing */
+/* Dashboard Cherimoya icon sizing */
 img.dashboard {
   width: 80px;
   height: 80px;
@@ -48,30 +53,27 @@ img.dashboard {
   height: 70px;
 }
 
-/* Body for login and signup pages */
+/* Body styling for login and signup pages */
 body.credentials {
   background-color: #f1f1f1;
   /* padding: 50px; */
   padding-top: 2%;
 }
 
-/* Body for dashboard and other pages */
+/* Body styling for dashboard and other pages */
 body.dashboard {
   background-color: #f1f1f1;
 }
 
+/* Styling for h1 text */
 h1 {
   font-family:'Trebuchet MS', 'sans-serif';
   overflow-wrap: break-word;
 }
 
+/* Styling for p space_name class */
 p.space_name {
   font-family: 'Haettenschweiler', 'Arial Narrow Bold', 'sans-serif';
-}
-
-/* Style the container for inputs */
-.container {
-  background-color: #f1f1f1;
 }
 
 /* Container for each space on dashboard */

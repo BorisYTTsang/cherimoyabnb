@@ -1,7 +1,7 @@
 class Application < Sinatra::Base
 
     get "/signup" do
-        return erb(:signup2)
+        return erb(:signup)
     end
 
     post "/signup" do
@@ -11,6 +11,6 @@ class Application < Sinatra::Base
         new_user.email = params[:email]
         new_user.password = params[:password]
         repo.create(new_user)
-        return erb(:login2)
+        return erb(:login)
     end
 end
