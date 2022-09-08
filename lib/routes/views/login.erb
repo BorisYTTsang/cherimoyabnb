@@ -7,7 +7,10 @@
       <p>Email</p>
         <input type="text" name="email" required/>
       <p>Password</p>
-  <input type="text" name="password" required/>
+  <!-- <input type="text" name="password" required/> -->
+  <input type="text" name="password" required placeholder="Enter Name"
+  oninvalid="this.setCustomValidity('Enter User Name Here')"
+  oninput="this.setCustomValidity('')"/>>
       <p> </p>
       <input type="submit" value="Log in">
     </form>

@@ -1,13 +1,16 @@
 <html>
-  <head></head>
-  <body>
-    <h1>Welcome, <%= @user_name %>!</h1>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+  </head>
+
+  <body class="dashboard">
+  <img class="dashboard" src="/images/cherimoya.png">
+    <h1>Welcome back to CherimoyaBnB, <%= @user_name %>!</h1>
     <h1>Dashboard</h1>
     <p><a href="/logout">Log out</a> | <a href="/requests">Requests</a> | <a href="/createlisting">Create a listing</a> </p>
 
-      <p>Available:
-      </p>
-      <div>Filter:<form action="/dashboard" method="POST">
+     <!-- <p>Available:</p> -->
+      <div class="filter"><form action="/dashboard" method="POST">
   Available from:<input type="text" name="available_from">
           Available to:<input type="text" name="available_to">
     Maximum price per night:<input type="text" name="max_price">

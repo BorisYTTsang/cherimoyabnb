@@ -1,7 +1,7 @@
 class Application < Sinatra::Base
 
     get "/signup" do
-        return erb(:signup)
+        return erb(:signup2)
 
     end
 

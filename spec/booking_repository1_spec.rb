@@ -11,7 +11,7 @@ RSpec.describe BookingRepository do
       reset_bookings_table
     end
 
-    describe '# GET' do
+    describe '#GET' do
         it 'gets all bookings' do
           repo = BookingRepository.new
           bookings = repo.all

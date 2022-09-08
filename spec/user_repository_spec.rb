@@ -112,4 +112,59 @@ RSpec.describe UserRepository do
             expect(repo.find_by_email('justin@example.com')).to eq nil
         end
     end 
+
+    describe '#js_html_injection?' do
+        it 'returns true when there are script tags in text' do
+            repo = UserRepository.new
+            expect(repo.js_html_injection?('<script>This is javascript!</script>')).to eq true
+        end
+    end
+
+
+    describe '#password_valid?' do
+        it 'returns true when password is longer than 8 characters and contains one lowercase, one uppercase, one integer and one symbol' do
+            repo = UserRepository.new
+            expect(repo.password_valid?("£$TlsdJ4gg")).to eq true
+        end
+
+        it 'returns true when password is longer than 8 characters and contains one lowercase, one uppercase, one integer and one symbol' do
+            repo = UserRepository.new
+            expect(repo.password_valid?("F743hsf&")).to eq true
+        end
+
+        context "when password does not contain a capital letter" do
+            it 'returns false' do
+                repo = UserRepository.new
+                expect(repo.password_valid?("dsaf3@sd")).to eq false
+            end
+        end
+
+        context "when password is less than 8 characters" do
+            it 'returns false' do
+                repo = UserRepository.new
+                expect(repo.password_valid?("dS3@s")).to eq false
+            end
+        end
+        
+        context "when password does not contain a lowercase letter" do
+            it 'returns false' do
+                repo = UserRepository.new
+                expect(repo.password_valid?("DF@£GHJ$2")).to eq false
+            end
+        end
+        
+        context "when the password does not contain an integer" do
+            it 'returns false' do
+                repo = UserRepository.new
+                expect(repo.password_valid?("paswo@£&%fh")).to eq false
+            end
+        end
+        
+        context "when password contains a space" do
+            it 'returns false' do
+                repo = UserRepository.new
+                expect(repo.password_valid?("YasQ33 N£$")).to eq false
+            end
+        end
+    end 
 end

@@ -1,7 +1,7 @@
 class Application < Sinatra::Base
 
     get "/login" do
-        return erb(:login)
+        return erb(:login2)
     end
 
     post "/login" do
