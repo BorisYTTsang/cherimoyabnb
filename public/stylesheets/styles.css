@@ -87,11 +87,6 @@ body.credentials {
 /* Body styling for dashboard and other pages */
 body.dashboard {
   background-color: #f1f1f1;
-  /* background: url('/images/cherimoya.png'), #f1f1f1; */
-  /* background-size: 600px; */
-  /* background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: right center; */
 }
 
 /* Styling for h1 text */
