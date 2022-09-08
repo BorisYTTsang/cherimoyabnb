@@ -5,9 +5,11 @@
   </head>
 
   <body>
-    <h1>Submit a new booking request</h1>
+    <h1>Submit a new booking request for <%=@space.name%></h1>
     <form action="/createlisting" method="POST"><br>
-
+      <input type='text' name='date_from'>
+      <input type='text' name='date_to'>
+      <input type='submit' value='Submit booking request'>
     </form>
   </body>
 

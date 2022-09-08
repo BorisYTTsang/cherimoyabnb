@@ -49,7 +49,7 @@ describe Application do
     it "goes to login page" do
       response = get("/login")
       expect(response.status).to eq 200
-      expect(response.body).to include('<h1>Login</h1>')
+      expect(response.body).to include('<div class="login-header-img"></div>')
     end
   end
 
@@ -137,9 +137,15 @@ describe Application do
   context "route: GET /makebooking" do
     it 'Returns the make booking page' do
       response = post("/login", email: "joe@example.com", password: "password123")
-      response = get("/makebooking")
+      response = get("/makebooking", space_id: 1)
       expect(response.status).to eq 200
       expect(response.body).to include 'Submit a new booking request'
+    end
+    it 'Returns a booking page for a specific property' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get("/makebooking", space_id: 1)
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Beautiful Seaside Cottage in Hastings'
     end
   end
 
@@ -158,7 +164,7 @@ describe Application do
       post("/login", email: "massivelykinjang@example.com", password: "d@d@!123")
       response = get("/dashboard")
       expect(response.status).to eq 200
-      expect(response.body).to include('<h1>Dashboard</h1>')
+      expect(response.body).to include('<body class="dashboard">')
     end
 
     it "redirects to /login when not logged in" do
@@ -167,7 +173,7 @@ describe Application do
       expect(response.header['Location']).to include('/login')
     end
   end
-  context "POST /dashboard" do
+  context "route: POST /dashboard" do
     it "Returns a filtered list of properties when dates and price entered" do
       post("/login", email: "massivelykinjang@example.com", password: "d@d@!123")
       response = post("/dashboard", available_from: "2022-01-01", available_to: "2022-01-02", max_price: "70")
@@ -176,7 +182,7 @@ describe Application do
     end
   end
 
-  context "POST /makebooking" do
+  context "route: POST /makebooking" do
     it 'Returns the makebooking page after a booking' do
       response = post("/makebooking", space_id: 1, unavailable_from: '2022-01-01', unavailable_to: '2022-01-02', booker_id: 3)
       expect(response.status).to eq 200
@@ -194,11 +200,11 @@ describe Application do
     end
   end
 
-  context "GET /requests" do
+  context "route: GET /requests" do
     it 'Returns the requests page' do
       response = get('/requests')
       expect(response.status).to eq 200
-      expect(response.body).to include "Requests I've made"
+      expect(response.body).to include "Requests I've received"
     end
   end
 end
