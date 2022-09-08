@@ -23,7 +23,7 @@
       <%if not @spaces.nil?%>
         <% @spaces.map do |space| %>
           <div class="space_wrapper">
-          <span class="link"></span>
+          <!-- <span class="link"></span> -->
             <p class="space_name"><%= space.name %></p>
             <p class="space_name">Price per night: £<%= space.price_per_night %></p>
             <form action="/makebooking" method="GET">
