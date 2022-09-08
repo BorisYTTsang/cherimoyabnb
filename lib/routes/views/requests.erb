@@ -65,6 +65,11 @@
 
               <div class="row inner">
                 <h1>Request for Property id:<%=request.space_id%><br>From: <%=request.date_from%><br>To:<%=request.date_to%></h1>
+                <form action='/managerequest' method='GET'>
+                  <input type="hidden" id="space_id" name='space_id' value='<%=request.space_id%>' />
+                  <input type="hidden" id="request_id" name='request_id' value='<%=request.id%>' />
+                  <input type="submit" value="Manage request">
+                </form>
               </div>
 
             <%end%>

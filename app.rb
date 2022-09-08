@@ -17,7 +17,11 @@ require_relative 'lib/routes/makebooking.rb'
 
 require_relative 'lib/routes/dashboard' 
 require_relative 'lib/routes/logout' 
-require_relative 'lib/routes/requests.rb'
+require_relative 'lib/routes/requests'
+require_relative 'lib/routes/managerequest'
+
+
+
 
 DatabaseConnection.connect
 
