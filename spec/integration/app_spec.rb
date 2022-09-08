@@ -191,10 +191,10 @@ describe Application do
     end
   end
 
-  context "route: POST /make-request" do
+  context "route: POST /makerequest" do
     it 'Returns the makebooking page after a successful booking request' do
       response = post("/login", email: "joe@example.com", password: "password123")
-      response = post("/make-request", space_id: 1)
+      response = post("/makerequest", space_id: 1)
       expect(response.status).to eq 200
       expect(response.body).to include 'Thank you for your booking request'
     end
@@ -264,6 +264,25 @@ describe Application do
       response = get('/requests')
       expect(response.status).to eq 200
       expect(response.body).to include "2022-11-01"
+    end
+  end
+
+  context "route: GET /managerequest" do
+    it 'returns the request manager page' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get('/managerequest', space_id: 1, request_id: 1)
+
+      expect(response.status).to eq 200
+      expect(response.body).to include "Start date"
+    end
+  end
+  context "route: POST /confirmbooking" do
+    it 'returns the request manager page with success statement if booking successful' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get('/managerequest', space_id: 1, request_id: 1)
+      response = post('/confirmbooking', space_id: 1, request_id: 1)
+      expect(response.status).to eq 200
+      expect(response.body).to include 'confirmed'
     end
   end
 end
