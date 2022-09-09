@@ -1,3 +1,44 @@
+.nav{
+  display: flex;
+  /* float: left; */
+  height: 80px;
+  width: 100%;
+  padding-left: -10px;
+  /* padding-top: ; */
+  justify-content: space-evenly;
+  /* margin: 50px 50px; */
+  text-align: center;
+  /* overflow:hidden; */
+  background-color: #f1f1f1;
+  opacity: 100;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  border: 1px solid rgb(177, 177, 177);
+  border-radius: 4px;
+  /* top: 0; Position the navbar at the top of the page */
+  /* width: 100%; Full width */
+}
+
+.nav p {
+  /* padding-top: -3px; */
+  font-size: 28px;
+  font-weight: 500;
+  font-family:'Trebuchet MS', 'sans-serif';
+  background-color: #f1f1f1;
+  background-position-y: 0%;
+}
+
+.left {
+  margin-top: 30px;
+  width: 73%; float:left
+}
+
+.right {
+  margin-top: 30px;
+  width: 27%; float:right
+}
+
 /* Style credential (sign-up, log-in) input fields */
 input.credentials {
   width: 100%;
@@ -43,14 +84,17 @@ input[type=submit] {
 }
 
 /* Dashboard Cherimoya icon sizing */
-img.dashboard {
+img.logo {
   width: 80px;
-  height: 80px;
+  /* height: 80px; */
 }
 
 /* Container for dashboard cherimoya (to crop) */
 .logo {
   height: 70px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 /* Body styling for login and signup pages */
@@ -92,6 +136,7 @@ p.error {
   margin-top: 6px;
   margin-bottom: 16px;
   background: url('/images/example-house.jpeg');
+  background-color: #f1f1f1;
   background-repeat: no-repeat;
   background-size: 600px;
   background-position: 100% 50%;
@@ -101,6 +146,16 @@ p.error {
 
 /* Makes spaces on dashboard clickable */
 .link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+/* Makes spaces on dashboard clickable */
+.link_full {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -173,7 +228,23 @@ p.error {
 }
 
 /* These four are for removing formatting (i.e underlines) from hyperlinked text */
-a:link {
+
+/* body{
+font-family: sans-serif;
+font-size: 22px;
+} */
+
+a{
+  text-decoration: none!important;
+  color: black;
+}
+
+a:hover{
+  transition: ease-in-out;
+  color: green;
+}
+
+/* a:link {
   text-decoration: none;
 }
 a:visited {
@@ -184,4 +255,4 @@ a:hover {
 }
 a:active {
   text-decoration: none;
-}
+} */

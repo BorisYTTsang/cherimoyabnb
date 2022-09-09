@@ -1,9 +1,14 @@
 <html>
   <head>
-    <title>Welcome to CherimoyaBnB</title>
-    <style>
+    <title>Submit Booking: CherimoyaBnB</title>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
 
-      <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- Chinelo's Styling -->
+
+    <!-- <style>
+
 
       .nav{
         display: flex;
@@ -16,6 +21,8 @@
         font-family: sans-serif;
         font-size: 22px;
       }
+        background-color: f1f1f1;
+    }
 
       a{
         text-decoration: none!important;
@@ -45,17 +52,27 @@
       .not_in_month{
         display:none;
       }
-    </style>
+    </style> -->
+
+    <!-- End of Chinelo's Styling -->
+    
   </head>
 
-  <body>
-    <nav class="nav">
-      <a class="dashboardNav" href="/dashboard">Dashboard</a>
-      <a class="listingNav" href="/createlisting">Listings</a>
-      <a class="requestNav" href="/requests">Requests</a>
-      <a class="signupNav" href="/logout">Log out</a>
-    </nav>
-    <h1>Submit a new booking request for <%=@space.name%></h1>
+  <body class="dashboard">
+    <div class="nav">
+      <a class="dashboardNav" href="/dashboard"><p>Dashboard</p></a>
+      <a class="listingNav" href="/createlisting"><p>Listings</p></a>
+      <p style="color: green;">My Bookings</p>
+      <a class="requestNav" href="/requests"><p>Requests</p></a>
+      <a class="signupNav" href="/logout"><p>Log out</p></a>
+    </div>
+    <hr>
+    <div class="logo">
+      <!-- <img class=“logo” src='/images/cherimoya.png'> -->
+      <a href="/about"><img style="width: 80px;" src='/images/cherimoya.png'></a>
+    </div><br><br><br><br>
+    <div style="padding-top: 4px;">
+    <h1>Submit booking request for <%=@space.name%></h1>
 
     <div>From:</div>
     <label for="month_select_from">Month:</label>
@@ -202,7 +219,7 @@
       <input type="hidden" name="month_to" id ="month_to" value = "1">
       <input type="hidden" name="year_to" id ="year_to" value = "2022">
       <input type='hidden' name='space_id' value=<%=@space.id%>>
-    <input type="submit" value="Book">
+    <br><input type="submit" value="Book">
 
     <%if @request_sent%>
       <h1>Thank you for your booking request, the property owner will accept or reject your request ASAP.</h1><br>
@@ -210,6 +227,7 @@
     <%elsif @request_sent == false%>
       <h1>Unfortunately some of the dates you have selected are already booked, please try again.</h1>
     <%end%>
+    </div>
   </body>
 
 </html>

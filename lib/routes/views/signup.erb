@@ -119,6 +119,8 @@ myInput.onkeyup = function() {
   }
 }
 </script>
-
+<% unless @error_message_signup.nil? %>
+  <p class="error"><%= @error_message_signup %></p>
+<% end %>
 </body>
 </html>
