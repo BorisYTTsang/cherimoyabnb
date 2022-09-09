@@ -62,12 +62,14 @@
         <h1>Welcome back to CherimoyaBnB, <%= @user_name %>!</h1>
        
         <div class="filter">
-            <form action="/dashboard" method="POST">
+            <form action="/dashboard" method="GET">
                 Available from:<input type="text" name="available_from">
                 Available to:<input type="text" name="available_to">
                 Maximum price per night:<input type="text" name="max_price">
                 <input type="submit" value="Filter">
-            </form></div>
+            </form>
+        </div>
+
         <%if not @spaces.nil?%>
             <% @spaces.map do |space| %>
             <div class="space_wrapper">
@@ -84,17 +86,17 @@
 
         <%if not @filtered_spaces.nil?%>
             <%@filtered_spaces.map do |space|%>
-            <div class="space_wrapper">
-            <span class="link"></span>
-                <p class="space_name"><%= space.name %></p>
-                <p class="space_name">Price per night: £<%= space.price_per_night %></p>
+                <div class="space_wrapper">
+                <span class="link"></span>
+                    <p class="space_name"><%= space.name %></p>
+                    <p class="space_name">Price per night: £<%= space.price_per_night %></p>
 
-                <form action="/makebooking" method="GET">
-                    <input type='hidden' name='space_id' value='<%=space.id%>'/>
-                    <input type='submit' value='Book now'/>
-                </form>
+                    <form action="/makebooking" method="GET">
+                        <input type='hidden' name='space_id' value='<%=space.id%>'/>
+                        <input type='submit' value='Book now'/>
+                    </form>
 
-            </div>
+                </div>
             <%end%>
         <%end%>
     <div class="pages_scroller"><h4 style="text-align: center;">Page 1 / 1</h4></div>
