@@ -47,6 +47,26 @@ describe SpaceRepository do
           expect(finder.id).to eq('3')
       end 
     end
+
+    describe '#find_by_owner' do
+        it 'finds 5 spaces by owner id 3' do
+          spaces_repo = SpaceRepository.new
+          finder = spaces_repo.find_by_owner('3')
+          expect(finder.size).to eq 5
+      end 
+
+        it 'finds no spaces by owner id 4' do
+          spaces_repo = SpaceRepository.new
+          finder = spaces_repo.find_by_owner('4')
+          expect(finder.size).to eq 0
+      end 
+
+        it 'finds 2 space by owner id 1' do
+          spaces_repo = SpaceRepository.new
+          finder = spaces_repo.find_by_owner('1')
+          expect(finder.size).to eq 2
+      end 
+    end
     
     describe '#create' do
         it 'creates a new space' do

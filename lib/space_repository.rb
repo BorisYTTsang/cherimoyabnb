@@ -43,6 +43,16 @@ class SpaceRepository
         return spaces[0]
     end
 
+    def find_by_owner(owner_id)
+        sql = 'SELECT * FROM spaces WHERE owner_id = $1;'
+        params = [owner_id]
+        result_set = DatabaseConnection.exec_params(sql, params)
+        
+        spaces = create_space_object_from_table(result_set)
+
+        return spaces
+    end
+
     def create(space)
 
         sql = 'INSERT INTO spaces (name, description, price_per_night, owner_id) VALUES ($1,$2,$3,$4);'

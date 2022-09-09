@@ -159,6 +159,21 @@ describe Application do
     end
   end
 
+  context "route: GET /mylistings" do
+    it 'returns login page when not logged in' do
+      response = get("/mylistings")
+      expect(response.status).to eq 302
+      expect(response.header["Location"]).to include('/login')
+    end
+
+    it 'returns my listings page when logged in' do
+      post("/login", email: "joe@example.com", password: "password123")
+      response = get("/mylistings")
+      expect(response.status).to eq 200
+      expect(response.body).to include('Here are your listings:')
+    end
+  end
+
   context "route: POST /createlisting" do
     it 'creates a listing if the listing does not already exist' do
       response = post("/login", email: "joe@example.com", password: "password123")
