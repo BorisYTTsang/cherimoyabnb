@@ -36,15 +36,24 @@
             transition: ease-in-out;
             color: green;
         }
+        footer{
+            margin: 200px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 5px;
+            text-align: center;
+        }
         
     </style>
   </head>
   <body class="dashboard">
     <nav class="nav">
-            <a class="listingNav" href="/createlisting">Listings</a>
-            <a class="bookingNav" href="/makebooking?space_id=1">My Bookings</a>
-            <a class="requestNav" href="/requests">Requests</a>
-            <a class="signupNav" href="/logout">Log out</a>
+
+            <a href="#footer"><img style="width: 80px;" src='/images/cherimoya.png'></a>
+            <a class="listingNav" href="/createlisting"><p>Listings</a>
+            <a class="bookingNav" href="/makebooking?space_id=1"><p>My Bookings</p></a>
+            <a class="requestNav" href="/requests"><p>Requests</p></a>
+            <a class="signupNav" href="/logout"><p>Log out</p></a>
     </nav>
 
     <!-- !! The above may conflict !! -->
@@ -62,7 +71,7 @@
         <%if not @spaces.nil?%>
             <% @spaces.map do |space| %>
             <div class="space_wrapper">
-                <!-- <span class="link"></span> -->
+                <span class="link"></span>
                     <p class="space_name"><%= space.name %></p>
                     <p class="space_name">Price per night: £<%= space.price_per_night %></p>
                     <form action="/makebooking" method="GET">
@@ -91,5 +100,16 @@
     <div class="pages_scroller"><h4 style="text-align: center;">Page 1 / 1</h4></div>
     </div>
     <div class="right"></div>
+    <footer id="footer">
+        <p>About</p>
+        <img style="width: 800px; height: 700px; margin-top: 10px; margin-left: 120px; opacity: 70%; z-index: 3;" src="/images/cherimoya.png">
+        <div style="padding-top: 45px;">
+          <a href="/"><span class="link_full"></span></a>
+          <p style="font-size: 18px; font-family: 'Trebuchet MS'; margin-top: -35px;">
+          CherimoyaBnB was brought to you by Antonio, Boris, Chinelo and Nick, the MVPs of the Cherimoya group! :)<br><br>
+          Makers July '22 Apprentices
+          </p>
+        </div>
+    </footer>
   </body>
 </html>

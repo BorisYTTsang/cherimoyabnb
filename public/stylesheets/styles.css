@@ -1,9 +1,9 @@
 .nav{
   display: flex;
   /* float: left; */
-  height: 80px;
+  /* height: 80px;
   width: 100%;
-  padding-left: -10px;
+  padding-left: -10px; */
   /* padding-top: ; */
   justify-content: space-evenly;
   /* margin: 50px 50px; */
@@ -11,10 +11,8 @@
   /* overflow:hidden; */
   background-color: #f1f1f1;
   opacity: 100;
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  border: 1px solid rgb(177, 177, 177);
+  /* z-index: 1; */
+  /* border: 1px solid rgb(177, 177, 177); */
   border-radius: 4px;
   /* top: 0; Position the navbar at the top of the page */
   /* width: 100%; Full width */

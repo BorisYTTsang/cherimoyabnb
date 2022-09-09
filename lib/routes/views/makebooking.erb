@@ -15,8 +15,6 @@
         font-size: 22px;
         background-color: f1f1f1;
       }
-        background-color: f1f1f1;
-    }
 
       a{
         text-decoration: none!important;
@@ -25,7 +23,7 @@
        }
       a:hover{
         transition: ease-in-out;
-        color: green;
+        color: 5FD1AE;
        }
 
       .date_button {
@@ -46,27 +44,32 @@
       .not_in_month{
         display:none;
       }
-    </style> -->
+      footer{
+        margin: 200px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        border-radius: 5px;
+        text-align: center;
+      }
+    </style> 
 
-    <!-- End of Chinelo's Styling -->
-    
   </head>
 
   <body class="dashboard">
     <div class="nav">
+      <a href="#footer"><img style="width: 80px;" src='/images/cherimoya.png'></a>
       <a class="dashboardNav" href="/dashboard"><p>Dashboard</p></a>
       <a class="listingNav" href="/createlisting"><p>Listings</p></a>
-      <p style="color: green;">My Bookings</p>
+      <p style="color: 5FD1AE;">My Bookings</p>
       <a class="requestNav" href="/requests"><p>Requests</p></a>
       <a class="signupNav" href="/logout"><p>Log out</p></a>
     </div>
     <hr>
     <div class="logo">
       <!-- <img class=“logo” src='/images/cherimoya.png'> -->
-      <a href="/about"><img style="width: 80px;" src='/images/cherimoya.png'></a>
+      <!-- <a href="/about"><img style="width: 80px;" src='/images/cherimoya.png'></a> -->
     </div><br><br><br><br>
     <div style="padding-top: 4px;">
-    <hr>
     <h1>Submit booking request for <%=@space.name%></h1>
 
     <div>From:</div>
@@ -221,73 +224,83 @@
       <a href='/dashboard'>Return to the dashboard</a>
     <%end%>
     </div>
+    <footer id="footer">
+      <p>About</p>
+      <img style="width: 800px; height: 700px; margin-top: 10px; margin-left: 120px; opacity: 70%; z-index: 3;" src="/images/cherimoya.png">
+      <div style="padding-top: 45px;">
+        <a href="/"><span class="link_full"></span></a>
+        <p style="font-size: 18px; font-family: 'Trebuchet MS'; margin-top: -35px;">
+        CherimoyaBnB was brought to you by Antonio, Boris, Chinelo and Nick, the MVPs of the Cherimoya group! :)<br><br>
+        Makers July '22 Apprentices
+        </p>
+      </div>
+  </footer>
+  <script>
+    var month_from = document.getElementById("month_select_from");
+    var year_from = document.getElementById("year_select_from");
+  
+  
+    var month_to = document.getElementById("month_select_to");
+    var year_to = document.getElementById("year_select_to");
+  
+    month_from.onchange = function(){
+      document.getElementById("month_from").value = document.getElementById("month_select_from").value
+      change_days(document.getElementById("month_select_from").value,"from")
+    };
+  
+    year_from.onchange = function(){
+      document.getElementById("year_from").value = document.getElementById("year_select_from").value
+    };
+  
+    month_to.onchange = function(){
+      document.getElementById("month_to").value = document.getElementById("month_select_to").value
+      change_days(document.getElementById("month_select_to").value,"to")
+    };
+  
+    year_to.onchange = function(){
+      document.getElementById("year_to").value = document.getElementById("year_select_to").value
+    };
+  
+  
+    function change_range(nr,end) {
+      var day = window[`day_${nr}_${end}`]
+      if(end == "from"){
+        if (day.classList.contains("selected_from")) {
+          day.classList.remove("selected_from")
+          document.getElementById("date_from").value = 0
+        } else if(document.getElementsByClassName("selected_from").length == 0){
+          day.classList.add("selected_from")
+          document.getElementById("date_from").value = nr
+        }
+      } else if(end == "to"){
+        if (day.classList.contains("selected_to")) {
+          day.classList.remove("selected_to")
+          document.getElementById("date_to").value = 0
+        } else if(document.getElementsByClassName("selected_to").length == 0){
+          day.classList.add("selected_to")
+          document.getElementById("date_to").value = nr
+        }
+      }
+    }
+  
+    function change_days(month,end) {
+      if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+        window[`day_29_${end}`].classList.remove("not_in_month")
+        window[`day_30_${end}`].classList.remove("not_in_month")
+        window[`day_31_${end}`].classList.remove("not_in_month")
+  
+      }else if (month == 2){
+        window[`day_29_${end}`].classList.add("not_in_month")
+        window[`day_30_${end}`].classList.add("not_in_month")
+        window[`day_31_${end}`].classList.add("not_in_month")
+      }else if (month == 4 || month == 6 || month == 9 || month == 11){
+        window[`day_29_${end}`].classList.remove("not_in_month")
+        window[`day_30_${end}`].classList.remove("not_in_month")
+        window[`day_31_${end}`].classList.add("not_in_month")
+      }
+  
+    }
+  </script>
   </body>
 
 </html>
-
-<script>
-  var month_from = document.getElementById("month_select_from");
-  var year_from = document.getElementById("year_select_from");
-
-
-  var month_to = document.getElementById("month_select_to");
-  var year_to = document.getElementById("year_select_to");
-
-  month_from.onchange = function(){
-    document.getElementById("month_from").value = document.getElementById("month_select_from").value
-    change_days(document.getElementById("month_select_from").value,"from")
-  };
-
-  year_from.onchange = function(){
-    document.getElementById("year_from").value = document.getElementById("year_select_from").value
-  };
-
-  month_to.onchange = function(){
-    document.getElementById("month_to").value = document.getElementById("month_select_to").value
-    change_days(document.getElementById("month_select_to").value,"to")
-  };
-
-  year_to.onchange = function(){
-    document.getElementById("year_to").value = document.getElementById("year_select_to").value
-  };
-
-
-  function change_range(nr,end) {
-    var day = window[`day_${nr}_${end}`]
-    if(end == "from"){
-      if (day.classList.contains("selected_from")) {
-        day.classList.remove("selected_from")
-        document.getElementById("date_from").value = 0
-      } else if(document.getElementsByClassName("selected_from").length == 0){
-        day.classList.add("selected_from")
-        document.getElementById("date_from").value = nr
-      }
-    } else if(end == "to"){
-      if (day.classList.contains("selected_to")) {
-        day.classList.remove("selected_to")
-        document.getElementById("date_to").value = 0
-      } else if(document.getElementsByClassName("selected_to").length == 0){
-        day.classList.add("selected_to")
-        document.getElementById("date_to").value = nr
-      }
-    }
-  }
-
-  function change_days(month,end) {
-    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-      window[`day_29_${end}`].classList.remove("not_in_month")
-      window[`day_30_${end}`].classList.remove("not_in_month")
-      window[`day_31_${end}`].classList.remove("not_in_month")
-
-    }else if (month == 2){
-      window[`day_29_${end}`].classList.add("not_in_month")
-      window[`day_30_${end}`].classList.add("not_in_month")
-      window[`day_31_${end}`].classList.add("not_in_month")
-    }else if (month == 4 || month == 6 || month == 9 || month == 11){
-      window[`day_29_${end}`].classList.remove("not_in_month")
-      window[`day_30_${end}`].classList.remove("not_in_month")
-      window[`day_31_${end}`].classList.add("not_in_month")
-    }
-
-  }
-</script>
