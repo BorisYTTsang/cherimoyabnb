@@ -1,7 +1,9 @@
 <html>
   <head>
     <title>Welcome to CherimoyaBnB</title>
-    <style>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css" />
+    <!-- <style>
 
       <link rel="stylesheet" type="text/css" href="style.css" />
 
@@ -45,16 +47,16 @@
       .not_in_month{
         display:none;
       }
-    </style>
+    </style> -->
   </head>
 
-  <body>
-    <nav class="nav">
-      <a class="dashboardNav" href="/dashboard">Dashboard</a>
-      <a class="listingNav" href="/createlisting">Listings</a>
-      <a class="requestNav" href="/requests">Requests</a>
-      <a class="signupNav" href="/logout">Log out</a>
-    </nav>
+  <body class="dashboard">
+    <div class="nav">
+      <a class="dashboardNav" href="/dashboard"><p>Dashboard</p></a>
+      <a class="listingNav" href="/createlisting"><p>Listings</p></a>
+      <a class="requestNav" href="/requests"><p>Requests</p></a>
+      <a class="signupNav" href="/logout"><p>Log out</p></a>
+    </div>
     <h1>Submit a new booking request for <%=@space.name%></h1>
 
     <div>From:</div>

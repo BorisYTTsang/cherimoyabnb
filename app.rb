@@ -59,6 +59,10 @@ class Application < Sinatra::Base
     end
   end
 
+  get "/about" do
+    return erb(:about)
+  end
+
   # subsequent routes can be found in /lib/routes files
 
 end
