@@ -85,4 +85,21 @@ RSpec.describe RequestRepository do
         end
     end
 
+    describe '#delete' do
+        it 'Removes the request with id of 1' do
+
+            repo = RequestRepository.new
+
+            repo.delete(1)
+            requests = repo.all
+            expect(requests.length).to eq 6
+
+            expect(requests[0].id).to eq 2
+            expect(requests[0].space_id).to eq '8'
+            expect(requests[0].owner_id).to eq '3'
+            expect(requests[0].booker_id).to eq '2'
+            expect(requests[0].booked).to eq 'false'
+
+        end
+    end
 end

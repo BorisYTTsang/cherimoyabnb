@@ -60,6 +60,15 @@ class RequestRepository
         return nil
     end
 
+    def delete(id)
+        sql = 'DELETE FROM requests WHERE id = $1'
+        params = [id]
+        DatabaseConnection.exec_params(sql, params)
+        return nil
+    end
+
+    private
+
     def create_request_object_from_table(result)
         requests = []
         result.each do |record|
@@ -75,4 +84,5 @@ class RequestRepository
         end
         return requests
       end
+
 end
