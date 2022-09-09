@@ -35,7 +35,6 @@ class Application < Sinatra::Base
 
     if booking_repo.create(new_booking)
       @success = true
-      request_repo.delete(request_id)
       return erb(:managerequest)
     else
       @success = false
@@ -43,17 +42,4 @@ class Application < Sinatra::Base
     end
   end
 
-  post '/rejectbooking' do
-    space_id = params[:space_id]
-    request_id = params[:request_id]
-
-    @space = space_repo.find(space_id)
-    @selectedrequest = request_repo.find(request_id)
-    @user = user_repo.find(@selectedrequest.owner_id)
-    @booker = user_repo.find(@selectedrequest.booker_id)
-
-    request_repo.delete(request_id)
-    @success = 'rejected'
-    return erb(:managerequest)
-  end
 end

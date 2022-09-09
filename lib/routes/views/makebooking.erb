@@ -1,15 +1,8 @@
 <html>
   <head>
-    <title>Submit Booking: CherimoyaBnB</title>
-    <link rel="shortcut icon" href="/images/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
-    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
-
-    <!-- Chinelo's Styling -->
-
-    <!-- <style>
-
-
+    <title>Welcome to CherimoyaBnB</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <style>
       .nav{
         display: flex;
         justify-content: space-evenly;
@@ -20,6 +13,7 @@
       body{
         font-family: sans-serif;
         font-size: 22px;
+        background-color: f1f1f1;
       }
         background-color: f1f1f1;
     }
@@ -72,6 +66,7 @@
       <a href="/about"><img style="width: 80px;" src='/images/cherimoya.png'></a>
     </div><br><br><br><br>
     <div style="padding-top: 4px;">
+    <hr>
     <h1>Submit booking request for <%=@space.name%></h1>
 
     <div>From:</div>
@@ -224,8 +219,6 @@
     <%if @request_sent%>
       <h1>Thank you for your booking request, the property owner will accept or reject your request ASAP.</h1><br>
       <a href='/dashboard'>Return to the dashboard</a>
-    <%elsif @request_sent == false%>
-      <h1>Unfortunately some of the dates you have selected are already booked, please try again.</h1>
     <%end%>
     </div>
   </body>
