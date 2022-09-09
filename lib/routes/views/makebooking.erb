@@ -203,12 +203,18 @@
         <button type="button" class = "date_button" onclick="change_range(31,'to')" id = "day_31_to">31</button>
       </div>
 
+<<<<<<< HEAD
     <form action="/make-request" method="POST">
       <input type="hidden" id="date_from" value = "0">
       <input type="hidden" name="month_from" id ="month_from" value = "jan">
+=======
+    <form action="/makerequest" method="POST">
+      <input type="hidden" id="date_from" name="date_from" value = "0">
+      <input type="hidden" name="month_from" id ="month_from" value = "1">
+>>>>>>> d94b3aa1aff8acd0b8cbc27f3ea49ccb6ac4da22
       <input type="hidden" name="year_from" id ="year_from" value = "2022">
-      <input type="hidden" id="date_to" value = "0">
-      <input type="hidden" name="month_to" id ="month_to" value = "jan">
+      <input type="hidden" id="date_to" name="date_to" value = "0">
+      <input type="hidden" name="month_to" id ="month_to" value = "1">
       <input type="hidden" name="year_to" id ="year_to" value = "2022">
       <input type='hidden' name='space_id' value=<%=@space.id%>>
     <br><input type="submit" value="Book">
@@ -216,6 +222,8 @@
     <%if @request_sent%>
       <h1>Thank you for your booking request, the property owner will accept or reject your request ASAP.</h1><br>
       <a href='/dashboard'>Return to the dashboard</a>
+    <%elsif @request_sent == false%>
+      <h1>Unfortunately some of the dates you have selected are already booked, please try again.</h1>
     <%end%>
     </div>
   </body>

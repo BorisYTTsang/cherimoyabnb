@@ -194,7 +194,7 @@ describe Application do
   context "route: POST /makerequest" do
     it 'Returns the makebooking page after a successful booking request' do
       response = post("/login", email: "joe@example.com", password: "password123")
-      response = post("/makerequest", space_id: 1)
+      response = post("/makerequest", space_id: 1, date_from: "01", month_from: "01", year_from: "2025", date_to: "01", month_to: "02", year_to: "2025" )
       expect(response.status).to eq 200
       expect(response.body).to include 'Thank you for your booking request'
     end
@@ -283,6 +283,20 @@ describe Application do
       response = post('/confirmbooking', space_id: 1, request_id: 1)
       expect(response.status).to eq 200
       expect(response.body).to include 'confirmed'
+    end
+    xit 'returns the request manager page with failure statement if booking fails' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = post("/makerequest", space_id: 1, date_from: "10", month_from: "09", year_from: "2022", date_to: "19", month_to: "09", year_to: "2022" )
+      response = post('/confirmbooking', space_id: 1, request_id: 9)
+      expect(response.status).to eq 200
+      expect(response.body).to include 'rejected'
+    end
+    it 'returns rejection statement if the request is rejected' do
+      response = post("/login", email: "joe@example.com", password: "password123")
+      response = get('/managerequest', space_id: 1, request_id: 1)
+      response = post('/rejectbooking', space_id: 1, request_id: 1)
+      expect(response.status).to eq 200
+      expect(response.body).to include 'rejected'
     end
   end
 end

@@ -17,7 +17,7 @@
         <input type="hidden" name='space_id' value="<%=@space.id%>">
         <input type="submit" value="Accept request">
       </form>
-      <form action='/deleterequest' method='POST'>
+      <form action='/rejectbooking' method='POST'>
         <input type="hidden" name='request_id' value="<%=@selectedrequest.id%>">
         <input type="hidden" name='space_id' value="<%=@space.id%>">
         <input type="submit" value="Reject request">
@@ -30,7 +30,7 @@
       <%elsif @success == false%>
         <h1>There was an error with the booking, some or all of these dates are already booked.</h1><br>
         <a href='/dashboard'>Return to the dashboard</a>
-      <%elsif @success == ''%>
+      <%elsif @success == 'rejected'%>
         <h1>The request was rejected and it has been removed.</h1><br>
         <a href='/dashboard'>Return to the dashboard</a>
       <%end%>
