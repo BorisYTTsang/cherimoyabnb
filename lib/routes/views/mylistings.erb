@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <title>My Listings: CherimoyaBnB</title>
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+    <style>
+      .nav{
+            display: flex;
+            justify-content: space-evenly;
+            margin: 50px 50px;
+            text-align: center;
+        }
+        h1{
+            text-align: center;
+        }
+        .filter{
+            margin: auto;
+            padding: 10px;
+        }
+        .space_wrapper{
+            margin: auto;
+            padding: 10px;
+        }
+        body{
+            font-family: sans-serif;
+            font-size: 22px;
+        }
+        
+        a{
+            text-decoration: none!important;
+            color: black;
+        
+        }
+        
+        a:hover{
+            transition: ease-in-out;
+            color: #5FD1AE;
+        }
+        footer{
+            margin: 200px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+  </head>
+  <body class="dashboard">
+    <nav class="nav">
+      <a href="#footer"><img style="width: 80px;" src='/images/cherimoya.png'></a>
+      <a class="listingNav" href="/dashboard"><p>Dashboard</a>
+      <a class="bookingNav" href="/makebooking?space_id=1"><p>My Bookings</p></a>
+      <a class="requestNav" href="/requests"><p>Requests</p></a>
+      <a class="signupNav" href="/logout"><p>Log out</p></a>
+    </nav>
+    <hr>
+        <h1>Here are your listings:</h1>
+
+          <% @my_listings.map do |space| %>
+            <div class="space_wrapper">
+                <span class="link"></span>
+                <p class="space_name"><%= space.name %></p>
+                <p class="space_name">Price per night: £<%= space.price_per_night %></p>
+                <form action="/mylistings/delete" method="POST">
+                    <input type='hidden' name='space_id' value='<%=space.id%>'/>
+                    <input type='submit' value='Delete'/>
+                </form>
+            </div>
+        <%end%><br>
+        <div style='text-align:center;'>
+          <form action="/createlisting" method="GET">
+            <input type='submit' value='Create a listing'/>
+          </form>
+        </div>
+    <footer id="footer">
+        <p>About</p>
+        <img style="width: 800px; height: 700px; margin-top: 10px; margin-left: 120px; opacity: 70%; z-index: 3;" src="/images/cherimoya.png">
+        <div style="padding-top: 45px;">
+          <a href="/"><span class="link_full"></span></a>
+          <p style="font-size: 18px; font-family: 'Trebuchet MS'; margin-top: -35px;">
+          CherimoyaBnB was brought to you by Antonio, Boris, Chinelo and Nick, the MVPs of the Cherimoya group! :)<br><br>
+          Makers July '22 Apprentices
+          </p>
+        </div>
+    </footer>
+  </body>
+</html>
