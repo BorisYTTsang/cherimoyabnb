@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Welcome to CherimoyaBnB</title>
+    <title>Your Dashboard: CherimoyaBnB</title>
     <link rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
   </head>
@@ -24,10 +24,10 @@
     <h1>Welcome back to CherimoyaBnB, <%= @user_name %>!</h1>
     <!-- <input type="text" name="available_from"> -->
     <!-- <input type="text" name="available_to"> -->
-    <div class="filter"><p>Filter spaces:</p><form action="/dashboard" method="POST">Available from:<input type="date" name="available_from" onfocus="this.showPicker()">
+    <div class="filter"><p style="color: rgb(255, 255, 255); margin: 1px;">Filter spaces:</p><form action="/dashboard" method="POST">Available from:<input type="date" name="available_from" onfocus="this.showPicker()">
         Available to:<input type="date" name="available_to" onfocus="this.showPicker()">
         Maximum price per night £<input type="text" name="max_price">
-        <input type="submit" value="Filter">
+        <input type="submit" value="Filter">&ensp;<form action="/dashboard" method="GET"><input type="submit" value="Reset"></form>
     </form></div>
     <p> </p>
 
