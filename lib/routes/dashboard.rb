@@ -24,8 +24,7 @@ class Application < Sinatra::Base
     
     @filtered_spaces = space_repo.filter(available_from, available_to, max_price)
 
-    redirect "/dashboard"
-    # return erb(:dashboard)
+    return erb(:dashboard)
   end
   
 end

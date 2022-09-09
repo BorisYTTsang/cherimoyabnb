@@ -181,7 +181,7 @@ describe Application do
       response = post("/login", email: "joe@example.com", password: "password123")
       response = get("/makebooking", space_id: 1)
       expect(response.status).to eq 200
-      expect(response.body).to include 'Submit a new booking request'
+      expect(response.body).to include '<div id="first_week">'
     end
     it 'Returns a booking page for a specific property' do
       response = post("/login", email: "joe@example.com", password: "password123")

@@ -36,7 +36,9 @@
                 Available to:<input type="text" name="available_to">
                 Maximum price per night:<input type="text" name="max_price">
                 <input type="submit" value="Filter">
-            </form></div>
+            </form>
+        </div>
+
         <%if not @spaces.nil?%>
             <% @spaces.map do |space| %>
             <div class="space_wrapper">
@@ -48,7 +50,7 @@
                         <input type='submit' value='Book now'/>
                     </form>
             </div>
-        <%end%>
+            <%end%>
         <%end%>
 
         <%if not @filtered_spaces.nil?%>
