@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Welcome to CherimoyaBnB</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
     <style>
       .nav{
         display: flex;
@@ -23,7 +23,7 @@
        }
       a:hover{
         transition: ease-in-out;
-        color: 5FD1AE;
+        color: #5FD1AE;
        }
 
       .date_button {
@@ -43,6 +43,12 @@
 
       .not_in_month{
         display:none;
+      }
+      .calendar{
+        margin: auto;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
       }
       footer{
         margin: 200px;
@@ -72,152 +78,158 @@
     <div style="padding-top: 4px;">
     <h1>Submit booking request for <%=@space.name%></h1>
 
-    <div>From:</div>
-    <label for="month_select_from">Month:</label>
+    <div class="calendar">
+      <div class="from_calendar">
+        <p>From:</p>
+        <label for="month_select_from">Month:</label>
 
-    <select name="month_from" id="month_select_from">
-      <option value="1" >January</option>
-      <option value="2" >February</option>
-      <option value="3" >March</option>
-      <option value="4" >April</option>
-      <option value="5" >May</option>
-      <option value="6" >June</option>
-      <option value="7" >July</option>
-      <option value="8" >August</option>
-      <option value="9" >September</option>
-      <option value="10" >October</option>
-      <option value="11" >November</option>
-      <option value="12" >December</option>
-    </select>
-    <label for="year_select_from">Year:</label>
+        <select name="month_from" id="month_select_from">
+          <option value="1" >January</option>
+          <option value="2" >February</option>
+          <option value="3" >March</option>
+          <option value="4" >April</option>
+          <option value="5" >May</option>
+          <option value="6" >June</option>
+          <option value="7" >July</option>
+          <option value="8" >August</option>
+          <option value="9" >September</option>
+          <option value="10" >October</option>
+          <option value="11" >November</option>
+          <option value="12" >December</option>
+        </select>
+        <label for="year_select_from">Year:</label>
 
-    <select name="year_from" id="year_select_from">
-      <option value="2022">2022</option>
-      <option value="2023">2023</option>
-      <option value="2024">2024</option>
-    </select>
-    <div>
-      <div id="test">Select dates</div>
-      <div id="first_week">
-        <button type="button" class = "date_button" onclick="change_range(1,'from')" id = "day_1_from">1</button>
-        <button type="button" class = "date_button" onclick="change_range(2,'from')" id = "day_2_from">2</button>
-        <button type="button" class = "date_button" onclick="change_range(3,'from')" id = "day_3_from">3</button>
-        <button type="button" class = "date_button" onclick="change_range(4,'from')" id = "day_4_from">4</button>
-        <button type="button" class = "date_button" onclick="change_range(5,'from')" id = "day_5_from">5</button>
-        <button type="button" class = "date_button" onclick="change_range(6,'from')" id = "day_6_from">6</button>
-        <button type="button" class = "date_button" onclick="change_range(7,'from')" id = "day_7_from">7</button>
-      </div>
-      <div id="second_week">
-        <button type="button" class = "date_button" onclick="change_range(8,'from')" id = "day_8_from">8</button>
-        <button type="button" class = "date_button" onclick="change_range(9,'from')" id = "day_9_from">9</button>
-        <button type="button" class = "date_button" onclick="change_range(10,'from')" id = "day_10_from">10</button>
-        <button type="button" class = "date_button" onclick="change_range(11,'from')" id = "day_11_from">11</button>
-        <button type="button" class = "date_button" onclick="change_range(12,'from')" id = "day_12_from">12</button>
-        <button type="button" class = "date_button" onclick="change_range(13,'from')" id = "day_13_from">13</button>
-        <button type="button" class = "date_button" onclick="change_range(14,'from')" id = "day_14_from">14</button>
-      </div>
-      <div id="third_week">
-        <button type="button" class = "date_button" onclick="change_range(15,'from')" id = "day_15_from">15</button>
-        <button type="button" class = "date_button" onclick="change_range(16,'from')" id = "day_16_from">16</button>
-        <button type="button" class = "date_button" onclick="change_range(17,'from')" id = "day_17_from">17</button>
-        <button type="button" class = "date_button" onclick="change_range(18,'from')" id = "day_18_from">18</button>
-        <button type="button" class = "date_button" onclick="change_range(19,'from')" id = "day_19_from">19</button>
-        <button type="button" class = "date_button" onclick="change_range(20,'from')" id = "day_20_from">20</button>
-        <button type="button" class = "date_button" onclick="change_range(21,'from')" id = "day_21_from">21</button>
-      </div>
-      <div id="fourth_week">
-        <button type="button" class = "date_button" onclick="change_range(22,'from')" id = "day_22_from">22</button>
-        <button type="button" class = "date_button" onclick="change_range(23,'from')" id = "day_23_from">23</button>
-        <button type="button" class = "date_button" onclick="change_range(24,'from')" id = "day_24_from">24</button>
-        <button type="button" class = "date_button" onclick="change_range(25,'from')" id = "day_25_from">25</button>
-        <button type="button" class = "date_button" onclick="change_range(26,'from')" id = "day_26_from">26</button>
-        <button type="button" class = "date_button" onclick="change_range(27,'from')" id = "day_27_from">27</button>
-        <button type="button" class = "date_button" onclick="change_range(28,'from')" id = "day_28_from">28</button>
-      </div>
-      <div id="fifth_week">
-        <button type="button" class = "date_button" onclick="change_range(29,'from')" id = "day_29_from">29</button>
-        <button type="button" class = "date_button" onclick="change_range(30,'from')" id = "day_30_from">30</button>
-        <button type="button" class = "date_button" onclick="change_range(31,'from')" id = "day_31_from">31</button>
-      </div>
+        <select name="year_from" id="year_select_from">
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+        </select>
+        <div>
+          <div id="test">Select dates</div>
+          <div id="first_week">
+            <button type="button" class = "date_button" onclick="change_range(1,'from')" id = "day_1_from">1</button>
+            <button type="button" class = "date_button" onclick="change_range(2,'from')" id = "day_2_from">2</button>
+            <button type="button" class = "date_button" onclick="change_range(3,'from')" id = "day_3_from">3</button>
+            <button type="button" class = "date_button" onclick="change_range(4,'from')" id = "day_4_from">4</button>
+            <button type="button" class = "date_button" onclick="change_range(5,'from')" id = "day_5_from">5</button>
+            <button type="button" class = "date_button" onclick="change_range(6,'from')" id = "day_6_from">6</button>
+            <button type="button" class = "date_button" onclick="change_range(7,'from')" id = "day_7_from">7</button>
+          </div>
+          <div id="second_week">
+            <button type="button" class = "date_button" onclick="change_range(8,'from')" id = "day_8_from">8</button>
+            <button type="button" class = "date_button" onclick="change_range(9,'from')" id = "day_9_from">9</button>
+            <button type="button" class = "date_button" onclick="change_range(10,'from')" id = "day_10_from">10</button>
+            <button type="button" class = "date_button" onclick="change_range(11,'from')" id = "day_11_from">11</button>
+            <button type="button" class = "date_button" onclick="change_range(12,'from')" id = "day_12_from">12</button>
+            <button type="button" class = "date_button" onclick="change_range(13,'from')" id = "day_13_from">13</button>
+            <button type="button" class = "date_button" onclick="change_range(14,'from')" id = "day_14_from">14</button>
+          </div>
+          <div id="third_week">
+            <button type="button" class = "date_button" onclick="change_range(15,'from')" id = "day_15_from">15</button>
+            <button type="button" class = "date_button" onclick="change_range(16,'from')" id = "day_16_from">16</button>
+            <button type="button" class = "date_button" onclick="change_range(17,'from')" id = "day_17_from">17</button>
+            <button type="button" class = "date_button" onclick="change_range(18,'from')" id = "day_18_from">18</button>
+            <button type="button" class = "date_button" onclick="change_range(19,'from')" id = "day_19_from">19</button>
+            <button type="button" class = "date_button" onclick="change_range(20,'from')" id = "day_20_from">20</button>
+            <button type="button" class = "date_button" onclick="change_range(21,'from')" id = "day_21_from">21</button>
+          </div>
+          <div id="fourth_week">
+            <button type="button" class = "date_button" onclick="change_range(22,'from')" id = "day_22_from">22</button>
+            <button type="button" class = "date_button" onclick="change_range(23,'from')" id = "day_23_from">23</button>
+            <button type="button" class = "date_button" onclick="change_range(24,'from')" id = "day_24_from">24</button>
+            <button type="button" class = "date_button" onclick="change_range(25,'from')" id = "day_25_from">25</button>
+            <button type="button" class = "date_button" onclick="change_range(26,'from')" id = "day_26_from">26</button>
+            <button type="button" class = "date_button" onclick="change_range(27,'from')" id = "day_27_from">27</button>
+            <button type="button" class = "date_button" onclick="change_range(28,'from')" id = "day_28_from">28</button>
+          </div>
+          <div id="fifth_week">
+            <button type="button" class = "date_button" onclick="change_range(29,'from')" id = "day_29_from">29</button>
+            <button type="button" class = "date_button" onclick="change_range(30,'from')" id = "day_30_from">30</button>
+            <button type="button" class = "date_button" onclick="change_range(31,'from')" id = "day_31_from">31</button>
+          </div>
+        </div>
+        <div> <p> </p></div>
     </div>
-    <div> <p> </p></div>
-    <div>To:</div>
-    <label for="month_select_to">Month:</label>
+    <div class="to_calendar">
+        <p>To:</p>
+        <label for="month_select_to">Month:</label>
 
-    <select name="month_to" id="month_select_to">
-      <option value="1" >January</option>
-      <option value="2" >February</option>
-      <option value="3" >March</option>
-      <option value="4" >April</option>
-      <option value="5" >May</option>
-      <option value="6" >June</option>
-      <option value="7" >July</option>
-      <option value="8" >August</option>
-      <option value="9" >September</option>
-      <option value="10" >October</option>
-      <option value="11" >November</option>
-      <option value="12" >December</option>
-    </select>
-    <label for="year_select_to">Year:</label>
+        <select name="month_to" id="month_select_to">
+          <option value="1" >January</option>
+          <option value="2" >February</option>
+          <option value="3" >March</option>
+          <option value="4" >April</option>
+          <option value="5" >May</option>
+          <option value="6" >June</option>
+          <option value="7" >July</option>
+          <option value="8" >August</option>
+          <option value="9" >September</option>
+          <option value="10" >October</option>
+          <option value="11" >November</option>
+          <option value="12" >December</option>
+        </select>
+        <label for="year_select_to">Year:</label>
 
-    <select name="year_to" id="year_select_to">
-      <option value="2022">2022</option>
-      <option value="2023">2023</option>
-      <option value="2024">2024</option>
-    </select>
+        <select name="year_to" id="year_select_to">
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+        </select>
 
-    <div id="test">Select dates</div>
-      <div id="first_week">
-        <button type="button" class = "date_button" onclick="change_range(1,'to')" id = "day_1_to">1</button>
-        <button type="button" class = "date_button" onclick="change_range(2,'to')" id = "day_2_to">2</button>
-        <button type="button" class = "date_button" onclick="change_range(3,'to')" id = "day_3_to">3</button>
-        <button type="button" class = "date_button" onclick="change_range(4,'to')" id = "day_4_to">4</button>
-        <button type="button" class = "date_button" onclick="change_range(5,'to')" id = "day_5_to">5</button>
-        <button type="button" class = "date_button" onclick="change_range(6,'to')" id = "day_6_to">6</button>
-        <button type="button" class = "date_button" onclick="change_range(7,'to')" id = "day_7_to">7</button>
-      </div>
-      <div id="second_week">
-        <button type="button" class = "date_button" onclick="change_range(8,'to')" id = "day_8_to">8</button>
-        <button type="button" class = "date_button" onclick="change_range(9,'to')" id = "day_9_to">9</button>
-        <button type="button" class = "date_button" onclick="change_range(10,'to')" id = "day_10_to">10</button>
-        <button type="button" class = "date_button" onclick="change_range(11,'to')" id = "day_11_to">11</button>
-        <button type="button" class = "date_button" onclick="change_range(12,'to')" id = "day_12_to">12</button>
-        <button type="button" class = "date_button" onclick="change_range(13,'to')" id = "day_13_to">13</button>
-        <button type="button" class = "date_button" onclick="change_range(14,'to')" id = "day_14_to">14</button>
-      </div>
-      <div id="third_week">
-        <button type="button" class = "date_button" onclick="change_range(15,'to')" id = "day_15_to">15</button>
-        <button type="button" class = "date_button" onclick="change_range(16,'to')" id = "day_16_to">16</button>
-        <button type="button" class = "date_button" onclick="change_range(17,'to')" id = "day_17_to">17</button>
-        <button type="button" class = "date_button" onclick="change_range(18,'to')" id = "day_18_to">18</button>
-        <button type="button" class = "date_button" onclick="change_range(19,'to')" id = "day_19_to">19</button>
-        <button type="button" class = "date_button" onclick="change_range(20,'to')" id = "day_20_to">20</button>
-        <button type="button" class = "date_button" onclick="change_range(21,'to')" id = "day_21_to">21</button>
-      </div>
-      <div id="fourth_week">
-        <button type="button" class = "date_button" onclick="change_range(22,'to')" id = "day_22_to">22</button> 
-        <button type="button" class = "date_button" onclick="change_range(23,'to')" id = "day_23_to">23</button>
-        <button type="button" class = "date_button" onclick="change_range(24,'to')" id = "day_24_to">24</button>
-        <button type="button" class = "date_button" onclick="change_range(25,'to')" id = "day_25_to">25</button>
-        <button type="button" class = "date_button" onclick="change_range(26,'to')" id = "day_26_to">26</button>
-        <button type="button" class = "date_button" onclick="change_range(27,'to')" id = "day_27_to">27</button>
-        <button type="button" class = "date_button" onclick="change_range(28,'to')" id = "day_28_to">28</button>
-      </div>
-      <div id="fifth_week">
-        <button type="button" class = "date_button" onclick="change_range(29,'to')" id = "day_29_to">29</button>
-        <button type="button" class = "date_button" onclick="change_range(30,'to')" id = "day_30_to">30</button>
-        <button type="button" class = "date_button" onclick="change_range(31,'to')" id = "day_31_to">31</button>
-      </div>
+        <div id="test">Select dates</div>
+          <div id="first_week">
+            <button type="button" class = "date_button" onclick="change_range(1,'to')" id = "day_1_to">1</button>
+            <button type="button" class = "date_button" onclick="change_range(2,'to')" id = "day_2_to">2</button>
+            <button type="button" class = "date_button" onclick="change_range(3,'to')" id = "day_3_to">3</button>
+            <button type="button" class = "date_button" onclick="change_range(4,'to')" id = "day_4_to">4</button>
+            <button type="button" class = "date_button" onclick="change_range(5,'to')" id = "day_5_to">5</button>
+            <button type="button" class = "date_button" onclick="change_range(6,'to')" id = "day_6_to">6</button>
+            <button type="button" class = "date_button" onclick="change_range(7,'to')" id = "day_7_to">7</button>
+          </div>
+          <div id="second_week">
+            <button type="button" class = "date_button" onclick="change_range(8,'to')" id = "day_8_to">8</button>
+            <button type="button" class = "date_button" onclick="change_range(9,'to')" id = "day_9_to">9</button>
+            <button type="button" class = "date_button" onclick="change_range(10,'to')" id = "day_10_to">10</button>
+            <button type="button" class = "date_button" onclick="change_range(11,'to')" id = "day_11_to">11</button>
+            <button type="button" class = "date_button" onclick="change_range(12,'to')" id = "day_12_to">12</button>
+            <button type="button" class = "date_button" onclick="change_range(13,'to')" id = "day_13_to">13</button>
+            <button type="button" class = "date_button" onclick="change_range(14,'to')" id = "day_14_to">14</button>
+          </div>
+          <div id="third_week">
+            <button type="button" class = "date_button" onclick="change_range(15,'to')" id = "day_15_to">15</button>
+            <button type="button" class = "date_button" onclick="change_range(16,'to')" id = "day_16_to">16</button>
+            <button type="button" class = "date_button" onclick="change_range(17,'to')" id = "day_17_to">17</button>
+            <button type="button" class = "date_button" onclick="change_range(18,'to')" id = "day_18_to">18</button>
+            <button type="button" class = "date_button" onclick="change_range(19,'to')" id = "day_19_to">19</button>
+            <button type="button" class = "date_button" onclick="change_range(20,'to')" id = "day_20_to">20</button>
+            <button type="button" class = "date_button" onclick="change_range(21,'to')" id = "day_21_to">21</button>
+          </div>
+          <div id="fourth_week">
+            <button type="button" class = "date_button" onclick="change_range(22,'to')" id = "day_22_to">22</button> 
+            <button type="button" class = "date_button" onclick="change_range(23,'to')" id = "day_23_to">23</button>
+            <button type="button" class = "date_button" onclick="change_range(24,'to')" id = "day_24_to">24</button>
+            <button type="button" class = "date_button" onclick="change_range(25,'to')" id = "day_25_to">25</button>
+            <button type="button" class = "date_button" onclick="change_range(26,'to')" id = "day_26_to">26</button>
+            <button type="button" class = "date_button" onclick="change_range(27,'to')" id = "day_27_to">27</button>
+            <button type="button" class = "date_button" onclick="change_range(28,'to')" id = "day_28_to">28</button>
+          </div>
+          <div id="fifth_week">
+            <button type="button" class = "date_button" onclick="change_range(29,'to')" id = "day_29_to">29</button>
+            <button type="button" class = "date_button" onclick="change_range(30,'to')" id = "day_30_to">30</button>
+            <button type="button" class = "date_button" onclick="change_range(31,'to')" id = "day_31_to">31</button>
+          </div>
 
-    <form action="/makerequest" method="POST">
-      <input type="hidden" id="date_from" name="date_from" value = "0">
-      <input type="hidden" name="month_from" id ="month_from" value = "1">
-      <input type="hidden" name="year_from" id ="year_from" value = "2022">
-      <input type="hidden" id="date_to" name="date_to" value = "0">
-      <input type="hidden" name="month_to" id ="month_to" value = "1">
-      <input type="hidden" name="year_to" id ="year_to" value = "2022">
-      <input type='hidden' name='space_id' value=<%=@space.id%>>
+        <form action="/makerequest" method="POST">
+          <input type="hidden" id="date_from" name="date_from" value = "0">
+          <input type="hidden" name="month_from" id ="month_from" value = "1">
+          <input type="hidden" name="year_from" id ="year_from" value = "2022">
+          <input type="hidden" id="date_to" name="date_to" value = "0">
+          <input type="hidden" name="month_to" id ="month_to" value = "1">
+          <input type="hidden" name="year_to" id ="year_to" value = "2022">
+          <input type='hidden' name='space_id' value=<%=@space.id%>>
+    </div>
     <br><input type="submit" value="Book">
+  </div>
 
     <%if @request_sent%>
       <h1>Thank you for your booking request, the property owner will accept or reject your request ASAP.</h1><br>
