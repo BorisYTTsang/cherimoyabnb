@@ -1,11 +1,11 @@
 # cherimoyaBnB
 ## Cherimoya Group Makersbnb Week 7 Project
 
-A functional AirBnB analogue site created using Ruby, PostgreSQL and Heroku.
+A functional AirBnB analogue site created using Ruby, PostgreSQL and Heroku. 
 
 <details>
   <summary>User Stories</summary>
-  
+
   ### User Stories
 - As a user, I want to be able to have a home page
 - As a user, I want to be able to make (one or more) reservations
